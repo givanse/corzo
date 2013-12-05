@@ -4,6 +4,7 @@ ruby '1.9.3'
 
 group :development, :test do
   gem 'rspec-rails', '2.13.1'
+  gem 'spork-rails', '~> 4.0.0'
   # Use debugger
   gem 'columnize', '~> 0.3.6'
   gem 'debugger', group: [:development, :test]

@@ -25,4 +25,9 @@ Unit testing
 http://ruby.railstutorial.org/chapters/static-pages#top
 https://www.ruby-toolbox.com/categories/testing_frameworks
 
+Spork
+http://ruby.railstutorial.org/chapters/static-pages#top
+time bundle exec rspec
+bundle exec spork
+time bundle exec rspec --drb
 
