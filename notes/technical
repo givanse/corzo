@@ -9,7 +9,7 @@ $ createuser -U postgres -d -e -E -l -P -r -s rails;
 $ createdb -U ivan -O rails corzo_development
 $ psql -U rails corzo_development
 
-Authentication
+Authentication, Devise
 https://www.ruby-toolbox.com/categories/rails_authentication
 http://guides.railsgirls.com/devise/
 https://github.com/plataformatec/devise
@@ -21,5 +21,8 @@ gem update --system
 http://stackoverflow.com/a/4706700/7852
 bundle exec rake db:create
 
+Unit testing
+http://ruby.railstutorial.org/chapters/static-pages#top
+https://www.ruby-toolbox.com/categories/testing_frameworks
 
 

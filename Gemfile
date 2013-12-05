@@ -2,15 +2,26 @@ source 'https://rubygems.org'
 
 ruby '1.9.3'
 
-gem 'rails_12factor'
+group :development, :test do
+  gem 'rspec-rails', '2.13.1'
+  # Use debugger
+  gem 'columnize', '~> 0.3.6'
+  gem 'debugger', group: [:development, :test]
+end
 
-gem 'devise'
+group :test do
+  gem 'selenium-webdriver', '2.35.1'
+  gem 'capybara', '~> 2.2.0'
+end
+
+group :production do
+  # Use postgresql as the database for Active Record
+  gem 'pg', '0.15.1'
+  gem 'rails_12factor'
+end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
-
-# Use postgresql as the database for Active Record
-gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -41,6 +52,7 @@ end
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'devise'
 
 # Use unicorn as the app server
 gem 'unicorn'
@@ -48,10 +60,5 @@ gem 'unicorn'
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
-# Use debugger
-gem 'columnize', '~> 0.3.6'
-gem 'debugger', group: [:development, :test]
-
 gem 'orm_adapter'
-
 
