@@ -1,0 +1,25 @@
+
+Rails
+http://guides.railsgirls.com/install/#setup_for_linux
+
+PostgresSQL
+$ sudo apt-get install postgresql
+http://stackoverflow.com/a/12670521/7852
+$ createuser -U postgres -d -e -E -l -P -r -s rails;
+$ createdb -U ivan -O rails corzo_development
+$ psql -U rails corzo_development
+
+Authentication
+https://www.ruby-toolbox.com/categories/rails_authentication
+http://guides.railsgirls.com/devise/
+https://github.com/plataformatec/devise
+
+Devise screwup
+http://stackoverflow.com/a/16718421/7852
+gem update bundler
+gem update --system
+http://stackoverflow.com/a/4706700/7852
+bundle exec rake db:create
+
+
+
