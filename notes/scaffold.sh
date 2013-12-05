@@ -1,9 +1,8 @@
+#!/bin/bash
 
+set -e
 
-rails destroy scaffold sysadmin
-rails generate scaffold sysadmin name:string email:string password:string
-
-====
+rake db:drop
 
 rails generate devise user 
 rake db:migrate
@@ -14,12 +13,16 @@ rails generate migration add_name_to_users name:string
 rails generate migration add_phone_number_to_users phone_number:integer
 rake db:migrate
 
-# Manually add to
-# app/models/role.rb
-#   has_many :users
-# app/models/user.rb
-#   belongs_to :role
 
 rake db:seed
 
 rails generate scaffold_controller user id role_id name phone_number email encrypted_password reset_password_token reset_password_sent_at remember_created_at sign_in_count current_sign_in_at last_sign_in_at current_sign_in_ip last_sign_in_ip created_at updated_at
+
+# Relationships, manually add:
+#   app/models/role.rb
+#     has_many :users
+#   app/models/user.rb
+#     belongs_to :role
+
+exit
+#EOF
