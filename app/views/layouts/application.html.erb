@@ -2,13 +2,27 @@
 <html>
 <head>
   <title>Corzo</title>
+  <link rel="stylesheet" href="http://railsgirls.com/assets/bootstrap.css">
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<%= 
+  # Devise 
+  # Ensure you have flash messages in app/views/layouts/application.html.erb.
+%>
+<% if notice %>
+  <p class="alert alert-notice"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-error"><%= alert %></p>
+<% end %>
+
+<div class="container">
+  <%= yield %>
+</div>
 
 </body>
 </html>

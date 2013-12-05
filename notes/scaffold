@@ -1,14 +1,10 @@
 
 
 rails destroy scaffold sysadmin
-
 rails generate scaffold sysadmin name:string email:string password:string
 
 ====
 
-rails generate devise sysadmin
-
+rails generate devise user 
 rake db:migrate
-
-rails generate devise operator
 
