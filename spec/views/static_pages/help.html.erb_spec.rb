@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe "static_pages/help.html.erb" do
-  pending "add some examples to (or delete) #{__FILE__}"
-end
+ 
+  it "should have the content 'Help'" do                                       
+    visit '/static_pages/help'                                                 
+    expect(page).to have_content('Help')                                       
+  end                                                                          
+end                                                                            
