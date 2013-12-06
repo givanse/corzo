@@ -1,16 +1,12 @@
 require 'spec_helper'
 
-describe "static_pages/home.html.erb" do
- 
-  it "should have the content 'Sample App'" do                                 
-    visit root_path 
-    expect(page).to have_content('Sample App')                                 
-  end                                                                          
+describe 'static_pages/home.html.erb' do
+  subject { page }
 
-  it "should have the title 'Home'" do
-    visit root_path
-    expect(page).to have_title('Home')
-  end
+  before { visit root_path }
+
+  it { should have_content('Sample App') }
+
+  it { should have_title('Home') }
 
 end                                                                            
-                                                                                 
