@@ -19,6 +19,8 @@ group :production do
   gem 'rails_12factor'
 end
 
+gem 'bootstrap-sass', '~> 3.0.3.0'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '0.15.1'
 

@@ -25,5 +25,9 @@ module Corzo
     # forcing your application to not access the DB 
     # or load models when precompiling your assets.
     config.assets.initialize_on_precompile = false
+
+    # Bootstrap
+    # Make bootstrap-sass compatible withe asset pipeline
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
   end
 end
