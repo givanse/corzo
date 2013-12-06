@@ -1,7 +1,7 @@
 Corzo::Application.routes.draw do
-  get "static_pages/home"
-  get "static_pages/help"
-  get "static_pages/about"
+  #match '/', to: 'static_pages#home', via: 'get'
+  match '/help', to: 'static_pages#help', via: 'get'
+  match '/about', to: 'static_pages#about', via: 'get'
   resources :users
   resources :roles
 
@@ -14,7 +14,8 @@ Corzo::Application.routes.draw do
 
   # Devise
   # Ensure you have defined root_url to *something* in your config/routes.rb
-  root :to => 'welcome#index'
+  #root :to => 'static_pages#home'
+  root 'static_pages#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
