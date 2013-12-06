@@ -9,6 +9,8 @@
 </head>
 <body>
 
+<%= render 'layouts/header' %>
+
 <% if notice %>
   <p class="alert alert-notice"><%= notice %></p>
 <% end %>
@@ -29,6 +31,8 @@
 <div class="container">
   <%= yield %>
 </div>
+
+<%= render 'layouts/footer' %>
 
 </body>
 </html>
