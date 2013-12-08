@@ -19,9 +19,12 @@ rails generate devise user
 rake db:migrate
 
 rails generate scaffold role name:string{24}
+
 rails generate migration add_role_id_to_users role_id:integer
 rails generate migration add_name_to_users name:string
 rails generate migration add_phone_number_to_users phone_number:integer
+# Manually add as accessible fields in the User model
+
 rake db:migrate
 
 # populate
