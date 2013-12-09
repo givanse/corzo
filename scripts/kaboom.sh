@@ -2,7 +2,8 @@
 
 set -e
 
-# Shutdown app
+# Shutdown app / server
+# Delete all the migrations
 
 ########### Clean ##########
 rake db:drop
@@ -12,8 +13,6 @@ rails destroy active_admin:install
 rails destroy active_admin:resource product
 
 rails destroy devise user 
-
-rake db:migrate VERSION=0
 
 ########### Build ##########
 
@@ -48,11 +47,14 @@ rails generate active_admin:resource Service
 # populate
 rake db:seed
 
-echo 'Relationships, manually add:
+echo 'Next steps:
+1.- Relationships, manually add:
   app/models/role.rb
     has_many :users
   app/models/user.rb
-    belongs_to :role'
+    belongs_to :role
+2.- cp config/initializers/active_admin.rb.bck config/initializers/active_admin.rb
+'
 
 exit
 #EOF
