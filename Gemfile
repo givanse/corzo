@@ -21,6 +21,9 @@ end
 
 gem 'bootstrap-sass', '~> 3.0.3.0'
 
+gem 'activeadmin', github: 'gregbell/active_admin'
+gem 'ransack'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '0.15.1'
 

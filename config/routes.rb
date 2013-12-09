@@ -1,4 +1,5 @@
 Corzo::Application.routes.draw do
+  ActiveAdmin.routes(self)
   resources :roles
 
   devise_for :users
