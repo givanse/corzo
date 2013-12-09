@@ -18,8 +18,8 @@ module Corzo
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.load_path += Dir[Rails.root.join('config/locales/', '*.{rb,yml}').to_s]
-    config.i18n.locale = :es 
-    config.i18n.default_locale = :es
+    config.i18n.locale = 'es_MX' 
+    config.i18n.default_locale = 'es_MX'
 
     # Devise
     # If you are deploying on Heroku with Rails 3.2 only, you may want to
