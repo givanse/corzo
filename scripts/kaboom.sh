@@ -15,9 +15,6 @@ rails destroy devise user
 
 rake db:migrate VERSION=0
 
-#rails destroy scaffold_controller user
-#rails destroy scaffold role
-
 ########### Build ##########
 
 rails generate devise user 

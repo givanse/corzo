@@ -1,7 +1,5 @@
 Corzo::Application.routes.draw do
   ActiveAdmin.routes(self)
-  resources :roles
-
   devise_for :users
   #match '/', to: 'static_pages#home', via: 'get'
   match '/help', to: 'static_pages#help', via: 'get'
