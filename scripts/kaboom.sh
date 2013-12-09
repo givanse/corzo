@@ -58,7 +58,23 @@ echo 'Next steps:
   app/models/role.rb
     has_many :users
   app/models/user.rb
-    belongs_to :role'
+    belongs_to :role
+
+  app/models/user.rb
+    has_one :driver
+  app/models/driver.rb
+    belongs_to :user
+
+  app/models/driver_status.rb
+    has_many :drivers
+  app/models/driver.rb
+    belongs_to :driver_status
+
+  app/models/driver.rb
+    has_one :vehicle
+  app/models/vehicle.rb
+    belongs_to :driver
+'
 
 exit
 #EOF
