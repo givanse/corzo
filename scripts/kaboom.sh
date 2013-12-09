@@ -2,12 +2,12 @@
 
 set -e
 
+# The script assumes that is executed from the root folder. #
+
 # Shutdown app / server
-echo '
-Remminder, possibly do:
-  rm app/admin/*
-  rm db/migrate/*
-' 
+
+rm app/admin/*
+rm db/migrate/*
 
 ########### Clean ##########
 rake db:drop
@@ -32,7 +32,7 @@ rails generate model driver_status name:string{12}
 rails generate model driver license:string cellphone:string{16} driver_status_id:integer user_id:integer
 rails generate model vehicle plate:string model:string year:integer{4} driver_id:integer 
 # if bash shell, use dots for precision, http://stackoverflow.com/a/14369874/7852
-rails generate model service address:string suburb:string phone_number:integer latitude:decimal{9.6} longitude:decimal{9.6} schedule_at:datetime 
+rails generate model service address:string suburb:string phone_number:string{16} latitude:decimal{9.6} longitude:decimal{9.6} schedule_at:datetime 
 rake db:migrate
 
 # Add Active_Admin
@@ -51,14 +51,14 @@ rails generate active_admin:resource Service
 # populate
 #rake db:seed
 
+cp -v config/initializers/active_admin.rb.bck config/initializers/active_admin.rb
+
 echo 'Next steps:
 1.- Relationships, manually add:
   app/models/role.rb
     has_many :users
   app/models/user.rb
-    belongs_to :role
-2.- cp config/initializers/active_admin.rb.bck config/initializers/active_admin.rb
-'
+    belongs_to :role'
 
 exit
 #EOF
