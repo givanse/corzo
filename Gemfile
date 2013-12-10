@@ -24,6 +24,10 @@ gem 'bootstrap-sass', '~> 3.0.3.0'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'ransack'
 
+# Needed this fix:
+# https://github.com/svenfuchs/i18n/pull/229
+gem 'i18n', github: 'svenfuchs/i18n'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '0.15.1'
 

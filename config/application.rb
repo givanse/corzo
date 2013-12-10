@@ -16,8 +16,10 @@ module Corzo
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
+    I18n.enforce_available_locales = true
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.load_path += Dir[Rails.root.join('config/locales/', '*.{rb,yml}').to_s]
+    config.i18n.available_locales = ['es_MX', :en] 
     config.i18n.locale = 'es_MX' 
     config.i18n.default_locale = 'es_MX'
 
@@ -31,6 +33,5 @@ module Corzo
     # Make bootstrap-sass compatible withe asset pipeline
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
 
-    #I18n.enforce_available_locales = true
   end
 end

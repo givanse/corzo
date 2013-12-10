@@ -16,6 +16,12 @@ GIT
       ransack (~> 1.0)
       sass-rails
 
+GIT
+  remote: git://github.com/svenfuchs/i18n.git
+  revision: 12aa0f0d0fc1822d6825d81bb9cdfdc4eb325dfd
+  specs:
+    i18n (0.6.9)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -92,7 +98,6 @@ GEM
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
     hike (1.2.3)
-    i18n (0.6.9)
     inherited_resources (1.4.1)
       has_scope (~> 0.6.0.rc)
       responders (~> 1.0.0.rc)
@@ -227,6 +232,7 @@ DEPENDENCIES
   columnize (~> 0.3.6)
   debugger
   devise
+  i18n!
   jbuilder (~> 1.2)
   jquery-rails
   orm_adapter
