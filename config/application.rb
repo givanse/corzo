@@ -16,12 +16,21 @@ module Corzo
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     # config.time_zone = 'Central Time (US & Canada)'
 
+    # all translations from config/locales/*.rb,yml are auto loaded.
+    # https://github.com/gregbell/active_admin/issues/334
     I18n.enforce_available_locales = true
-    # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    config.i18n.load_path += Dir[Rails.root.join('config/locales/', '*.{rb,yml}').to_s]
-    config.i18n.available_locales = ['es_MX', :en] 
-    config.i18n.locale = 'es_MX' 
-    config.i18n.default_locale = 'es_MX'
+    config.before_configuration do
+      I18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
+      I18n.locale = 'es_MX'
+      I18n.default_locale = 'es_MX'
+      config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
+      config.i18n.locale = 'es_MX'
+      # bypasses rails bug with i18n in production
+      I18n.reload!
+      config.i18n.reload!
+    end
+    config.i18n.locale = 'es_MX'
+    config.i18n.default_locale = 'es_MX' 
 
     # Devise
     # If you are deploying on Heroku with Rails 3.2 only, you may want to
