@@ -29,6 +29,7 @@ module Corzo
       I18n.reload!
       config.i18n.reload!
     end
+
     config.i18n.locale = 'es_MX'
     config.i18n.default_locale = 'es_MX' 
 
