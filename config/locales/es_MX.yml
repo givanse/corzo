@@ -132,9 +132,22 @@ es_MX:
         driver_id: Conductor
         created_at: Registrado 
         updated_at: Actualizado
+
+    # activerecord.errors.models
+    errors:
+      models: 
+        user:
+          attributes:
+            password_confirmation:
+              confirmation: "fallo"
+            password:
+              blank: "vacío"
+              too_short: "debe contener al menos 8 caracteres"
+
   time:
     formats:
       long: '%d / %m / %Y - %H:%M'
+
  
 # Devise locale
 # https://gist.github.com/albertopadilla/1330091
@@ -158,6 +171,9 @@ es_MX:
       invalid_token: 'Ficha de autenticación invalida.'
       timeout: 'Tu sesión ha expirado, por favor ingresa nuevamente para continuar.'
       inactive: 'Tu cuenta aún no ha sido activada.'
+      # devise.failure.user
+      user:
+        not_found_in_database: 'Correo o contraseña inválidos.' 
     sessions:
       signed_in: 'Ingreso exitoso.'
       signed_out: 'Has salido del sistema.'
