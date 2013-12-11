@@ -41,7 +41,7 @@ rails generate model Role name:string{24} --skip
 rails generate model DriverStatus name:string{12} --skip
 rails generate model Driver license:string cellphone:string{16} driver_status:references user:references --skip
 rails generate model Vehicle plate:string model:string year:integer{4} driver:references --skip
-rails generate model Service address:string suburb:string phone_number:string{16} latitude:decimal{9.6} longitude:decimal{9.6} schedule_at:datetime --skip
+rails generate model Service address:string suburb:string references:string phone_number:string{16} latitude:decimal{9.6} longitude:decimal{9.6} schedule_at:datetime --skip
 rake db:migrate
 
 # Add Active_Admin
@@ -57,14 +57,14 @@ rails generate active_admin:resource Vehicle
 rails generate active_admin:resource Service 
 # Enable strong parameters in app/admin/* 
 
-# Populate
-echo 'Almost done, populate the DB.'
-rake db:seed
-
 # Edit file config/initializers/active_admin.rb 
 # http://stackoverflow.com/a/14651686/7852
 # restore config file
 cp -v config/initializers/active_admin.rb.bck config/initializers/active_admin.rb
+
+# Populate
+echo 'Almost done, populate the DB.'
+rake db:seed
 
 echo 'Next steps:
 1.- Relationships, manually add:

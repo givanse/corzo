@@ -48,17 +48,28 @@ d3 = Driver.create(license: '21222324', cellphone: '33 0000 1111', driver_status
 # For: Eca Do Queirós
 Service.create(address: 'Eca Do Queiros 5210', 
                suburb: 'Jardines Universidad', 
+               references: 'reja blanca, hay un arbol de naranjas',
                phone_number: '4444 9999', 
                latitude: 20.69131, longitude: -103.421765, 
                schedule_at: DateTime.new(2013, 12, 30, 18, 30))
 Service.create(address: 'Paseo de las Azucenas 318', 
-               suburb: 'Prados Tepeyac', phone_number: '4444 9999', 
+               suburb: 'Prados Tepeyac', 
+               references: 'al lado de un Oxxo',
+               phone_number: '4444 9999', 
                latitude: 20.655326, longitude: -103.410482, 
                schedule_at: DateTime.new(2013, 11, 15, 15, 30))
 Service.create(address: 'Delgadillo Araujo 158', 
-               suburb: 'San Andres', phone_number: '4444 9999', 
+               suburb: 'San Andres', 
+               references: 'no se ve el numero porque hay enredadera',
+               phone_number: '4444 9999', 
                latitude: 20.658682, longitude: -103.30261, 
                schedule_at: DateTime.new(2013, 10, 01, 10, 00))
+Service.create(address: '', 
+               suburb: '', 
+               references: 'Plaza Galerias, en la entrada de Liverpool',
+               phone_number: '4444 9999', 
+               latitude: 20.676736, longitude: -103.430144, 
+               schedule_at: DateTime.new(2014, 8, 16, 7)) # mes, dia, hora
 
 Vehicle.create(plate: 'amj-0000',  model: 'Tsuru',  year: 2010, driver_id: d1.id)
 Vehicle.create(plate: 'amj-0001',  model: 'Tsuru',  year: 2012, driver_id: d2.id)
