@@ -1,4 +1,5 @@
 es_MX:
+  project_name: 'Corzo'
   marketing_slogan: "Corzo ayuda a los sitios de taxis a mejorar la toma de solicitudes de servicio y el despacho the vehículos."
   static_pages:
     home: 
