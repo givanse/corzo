@@ -9,13 +9,20 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Corzo</a>
+          <a class="navbar-brand" href="/"><%=t '.project_name' %></a>
         </div>
         <div class="navbar-collapse collapse">
+          <!-- Left -->
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/about"><%=t '.about' %></a></li>
+            <li class="active"><a href="/features"><%=t '.features' %></a></li>
             <li><a href="/help"><%=t '.help' %></a></li>
+            <li><a href="/contact"><%=t '.contact' %></a></li>
+            <% if !user_signed_in? %>                                                            
+              <li><a href="#"><%=t '.demo' %></a></li>
+            <% end %>
           </ul>
+
+          <!-- Right -->
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>                                                            
               <li class="active"><a href="admin"><%=t '.admin' %></a></li>

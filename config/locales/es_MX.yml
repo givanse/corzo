@@ -4,20 +4,30 @@ es_MX:
     home: 
       title: 'Inicio'
       welcome: 'Bienvenido!'
-    about: 
-      title: 'Acerca De'
+    features: 
+      title: 'Características'
     help: 
       title: 'Ayuda'
+    contact: 
+      title: 'Contacto'
   layouts:
     shared:
       header:
-        about: 'Acerca De'
+        project_name: 'Corzo'
+        features: 'Características'
         help: 'Ayuda'
+        contact: 'Contacto'
+        demo: 'Prueba Gratis'
         admin: 'Admin'
         sign_up: 'Registrate'
         log_out: 'Cerrar Sesión'
         log_in: 'Iniciar Sesión'
         logged_in: 'Conectado como'
+      footer:
+        project_name: 'Corzo'
+        features: 'Características'
+        help: 'Ayuda'
+        contact: 'Contacto'
 
   active_admin:
     dashboard: Inicio
