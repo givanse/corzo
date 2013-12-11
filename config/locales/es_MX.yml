@@ -32,9 +32,14 @@ es_MX:
         contact: 'Contacto'
 
   active_admin:
+    index_list:
+      table: "Tabla"
+      block: "Lista"
+      grid: "Cuadrícula"
+      blog: "Blog"
     dashboard: Inicio
     dashboard_welcome:
-      welcome: "Bienvenido a Active Admin. Esta es la página de inicio predeterminada."
+      welcome: "Bienvenido a Corzo Admin. Esta es la página de inicio predeterminada."
       call_to_action: "Para agregar secciones edite 'app/admin/dashboard.rb'"
     view: "Ver"
     edit: "Editar"
@@ -67,7 +72,7 @@ es_MX:
         less_than: "Menor que"
     main_content: "Por favor implemente %{model}#main_content para mostrar contenido."
     logout: "Salir"
-    powered_by: "Powered by %{active_admin} %{version}"
+    powered_by: ""
     sidebars:
       filters: "Filtros"
     pagination:

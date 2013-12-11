@@ -15,3 +15,15 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+table.index_grid td.role {
+  padding: 10px;
+}
+
+table.index_grid td.role div {
+  text-align: center;
+  height: 40px;
+  background-color: #F4F5F5; 
+  line-height: 3.2em;
+  border-radius: 6px;
+}

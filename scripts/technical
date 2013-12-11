@@ -31,3 +31,6 @@ time bundle exec rspec
 bundle exec spork
 time bundle exec rspec --drb
 
+Css
+vertical align
+http://phrogz.net/css/vertical-align/

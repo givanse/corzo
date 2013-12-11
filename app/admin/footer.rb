@@ -6,7 +6,7 @@ module ActiveAdmin
 
       def build
         super :id => "footer"
-        super :style => "text-align: right;"
+        super :style => "text-align: center;"
 
         span "Corzo #{Date.today.year}"
       end
