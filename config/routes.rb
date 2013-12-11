@@ -2,6 +2,9 @@ Corzo::Application.routes.draw do
 
   devise_for :users
   ActiveAdmin.routes(self)
+
+  get '/monitor/' => 'monitor#index'
+
   match '/features', to: 'static_pages#features', via: 'get'
   match '/help', to: 'static_pages#help', via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'

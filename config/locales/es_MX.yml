@@ -25,6 +25,13 @@ es_MX:
         edit_account: 'Editar'
         log_out: 'Salir'
         log_in: 'Iniciar Sesión'
+      header_monitor:
+        admin: 'Corzo Admin'
+        sign_up: 'Registrate'
+        show_account: 'Ver'
+        edit_account: 'Editar'
+        log_out: 'Salir'
+        log_in: 'Iniciar Sesión'
       footer:
         project_name: 'Corzo'
         features: 'Características'
