@@ -13,16 +13,16 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/about">About</a></li>
-            <li><a href="/help">Help</a></li>
+            <li class="active"><a href="/about"><%=t '.about' %></a></li>
+            <li><a href="/help"><%=t '.help' %></a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>                                                            
-              <li class="active"><a href="admin">Admin</a></li>
-              <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+              <li class="active"><a href="admin"><%=t '.admin' %></a></li>
+              <li><%= link_to t('.log_out'), destroy_user_session_path, method: :delete %></li>
             <% else %>                                                                       
-              <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-              <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>        
+              <%= link_to t('.sign_up'), new_user_registration_path, :class => 'navbar-link'  %> |
+              <%= link_to t('.log_in'), new_user_session_path, :class => 'navbar-link'  %>        
             <% end %>
           </ul>
         </div><!--/.nav-collapse -->
@@ -31,6 +31,6 @@
 
 <p class="navbar-text pull-right">                                                  
 <% if user_signed_in? %>                                                            
-  Logged in as <strong><%= current_user.email %></strong>.                       
+    <%=t '.logged_in' %> <strong><%= current_user.email %></strong>                       
 <% end %>
 </p>

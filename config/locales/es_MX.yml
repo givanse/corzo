@@ -1,4 +1,24 @@
 es_MX:
+  marketing_slogan: "Corzo ayuda a los sitios de taxis a mejorar la toma de solicitudes de servicio y el despacho the vehículos."
+  static_pages:
+    home: 
+      title: 'Inicio'
+      welcome: 'Bienvenido!'
+    about: 
+      title: 'Acerca De'
+    help: 
+      title: 'Ayuda'
+  layouts:
+    shared:
+      header:
+        about: 'Acerca De'
+        help: 'Ayuda'
+        admin: 'Admin'
+        sign_up: 'Registrate'
+        log_out: 'Cerrar Sesión'
+        log_in: 'Iniciar Sesión'
+        logged_in: 'Conectado como'
+
   active_admin:
     dashboard: Inicio
     dashboard_welcome:
