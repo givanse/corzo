@@ -14,6 +14,8 @@ ActiveAdmin.register User do
   #  permitted
   # end
 
+  menu :parent => "Agentes"
+
   filter :email
   filter :name
   filter :phone_number

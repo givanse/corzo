@@ -127,7 +127,7 @@ es_MX:
     required: "requerido"
   activerecord:
     models:
-        driver_status: Estados Cond.
+        driver_status: Estados de Conductor
         driver: Conductores
         service: Servicios
         user: Usuarios
