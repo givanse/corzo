@@ -8,8 +8,6 @@ START=`date +%s`
 
 # Shutdown app / server
 
-rm -r app/admin/
-mkdir -v app/admin
 rm -rv db/migrate/
 mkdir -v db/migrate
 
