@@ -151,6 +151,7 @@ es_MX:
       service:
         address: Dirección
         suburb: Colonia
+        references: Referencias
         phone_number: Teléfono
         schedule_at: Agendado
         longitude: Longitud
