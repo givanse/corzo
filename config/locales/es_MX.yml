@@ -21,7 +21,8 @@ es_MX:
         demo: 'Prueba Gratis'
         admin: 'Corzo Admin'
         sign_up: 'Registrate'
-        edit_account: 'Editar Cuenta'
+        show_account: 'Ver'
+        edit_account: 'Editar'
         log_out: 'Salir'
         log_in: 'Iniciar Sesión'
       footer:

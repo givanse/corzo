@@ -27,17 +27,18 @@
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>                                                            
               <li class="active"><a href="admin"><%=t '.admin' %></a></li>
-              <li><%= link_to current_user.name, admin_user_path(current_user.id) %></li>
-              <!-- account links -->
+              <!-- drop down -->
               <li class="dropdown">
                    <a class='dropdown-toggle' data-toggle='dropdown' href='#'>
-                       <b class="caret"></b>
+                       <%= current_user.name %><b class="caret"></b>
                    </a>
                    <ul class="dropdown-menu">
+                       <li><%= link_to t('.show_account'), admin_user_path(current_user.id) %></li>
                        <li><%= link_to t('.edit_account'), edit_admin_user_path(current_user.id) %></li>
-                       <li><%= link_to t('.log_out'), destroy_user_session_path, method: :delete %></li>
                    </ul>
               </li>
+              <!-- drop down -->
+              <li><%= link_to t('.log_out'), destroy_user_session_path, method: :delete %></li>
             <% else %>                                                                       
               <%= link_to t('.sign_up'), new_user_registration_path %> |
               <%= link_to t('.log_in'), new_user_session_path %>        
