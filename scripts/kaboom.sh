@@ -60,8 +60,10 @@ rails generate active_admin:resource Service
 # restore config file
 cp -v config/initializers/active_admin.rb.bck config/initializers/active_admin.rb
 
+git checkout app/admin/footer.rb
+
 # Populate
-echo 'Almost done, populate the DB.'
+echo 'Almost done, last step, populate the DB.'
 rake db:seed
 
 echo 'Next steps:

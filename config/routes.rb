@@ -1,7 +1,7 @@
 Corzo::Application.routes.draw do
 
-  ActiveAdmin.routes(self)
   devise_for :users
+  ActiveAdmin.routes(self)
   match '/features', to: 'static_pages#features', via: 'get'
   match '/help', to: 'static_pages#help', via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
