@@ -16,10 +16,12 @@
 //
 //   .status_tag { background: #6090DB; }
 
+table.index_grid td.driver_status,
 table.index_grid td.role {
   padding: 10px;
 }
 
+table.index_grid td.driver_status div,
 table.index_grid td.role div {
   text-align: center;
   height: 40px;
