@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# version 1 
+# version 3 
 
 CACHE:
 # Defines resources to be cached.
@@ -15,11 +15,7 @@ img/0taxi-48.png
 img/1taxi-48.png
 img/2taxi-48.png
 img/3taxi-48.png
-js/bootstrap.min.js
-js/html5shiv.js
-js/jquery.js  
 #js/monitor.js
-js/respond.min.js
 
 NETWORK:
 # Defines resources that will not be cached.
