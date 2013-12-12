@@ -1,10 +1,24 @@
 
-var URL_AJAX_LAT_LON = 'http://localhost/taxis/taxis/getAllLastLatLon.json'; 
-var URL_AJAX_LANDMARKS = 'http://localhost/taxis/landmarks/getEnabled.json'; 
-var URL_AJAX_UPDATE_TAXI_STATUS = 'http://localhost/taxis/taxis/updateStatus'; 
-var URL_AJAX_SERVICES_GET_FORTHCOMING = 'http://localhost/taxis/services/getForthcoming.json'; 
+var DEBUG=false;
+
+var WEBROOT = 'http://localhost:3000/';
+var URL_AJAX_LAT_LON = WEBROOT + 'vehicles/get_current_positions'; 
+var URL_AJAX_LANDMARKS = WEBROOT + 'taxis/landmarks/getEnabled.json'; 
+var URL_AJAX_UPDATE_TAXI_STATUS = WEBROOT + 'taxis/taxis/updateStatus'; 
+var URL_AJAX_SERVICES_GET_FORTHCOMING = WEBROOT + 'services/get_forthcoming'; 
 
 var URL_RESOURCE_IMG_TAXI = 'taxi-48.png';
+
+/* Configure AJAX */
+$.ajaxSetup({cache: false, 
+             dataType: 'json', 
+             error: function(jqXHR, textStatus, errorThrown) {
+                 if(DEBUG === true) {
+                    console.log('AJAX error: ' + textStatus + ', ' + errorThrown);
+                    console.log(jqXHR);
+                 }
+             }
+            });
 
 var monitor = {
 LocationControl: function(map, title, centerLocation) {
@@ -75,16 +89,15 @@ ServicesWindow: function(map) {
 
 /* Get the latest location reported by every taxi and update the map. */
 function updateTaxiLocationsOnMap(map) {
-    $.ajax({                                                                 
-            url: URL_AJAX_LAT_LON, 
-            success: function(data) {
-                for (indx in data['taxisLatLon']) {
-                    object = data['taxisLatLon'][indx];
-                    taxiObject = object.Taxi;
-                    addTaxiMarkerToMap(map, taxiObject);
-                }                                                 
-            }                                                                
-        });
+    $.ajax(URL_AJAX_LAT_LON).done(function(data) {
+        debugAJAXDone(URL_AJAX_LAT_LON, data);
+
+        for (indx in data['taxisLatLon']) {
+            object = data['taxisLatLon'][indx];
+            taxiObject = object.Taxi;
+            addTaxiMarkerToMap(map, taxiObject);
+        }                                                 
+    })
 }
 
 function addTaxiMarkerToMap(map, taxiObject) {    
@@ -155,7 +168,7 @@ function addTaxiMarkerToMap(map, taxiObject) {
 function createTaxiMarker(plate, latitude, longitude, status) {    
     /* Add taxi markers. */                                              
     var image = {                                                        
-            url: CAKEPHP_WEBROOT + 'img/' + status + URL_RESOURCE_IMG_TAXI,                                          
+            url: WEBROOT + 'img/' + status + URL_RESOURCE_IMG_TAXI,                                          
             // This marker is 20 pixels wide by 32 pixels tall.              
             size: new google.maps.Size(48, 57),                              
             // The origin for this image is 0,0.                             
@@ -253,15 +266,16 @@ function addServicesWindow(map) {
 }
 
 function updateServicesWindow(servicesWindow) {
-    $.ajax({                                                                 
-            url: URL_AJAX_SERVICES_GET_FORTHCOMING, 
-            success: function(data) {
-                var servicesControls = $('<div>').css({'position': 'absolute',
+    $.ajax(URL_AJAX_SERVICES_GET_FORTHCOMING).done(function(data) {
+
+        debugAJAXDone(URL_AJAX_SERVICES_GET_FORTHCOMING, data);
+
+        var servicesControls = $('<div>').css({'position': 'absolute',
                                                        'top': '10px'});
-                for (indx in data['services']) {
-                    var address = data['services'][indx].Service.address;
-                    var scheduled = data['services'][indx].Service.scheduled;
-                            $('<div>').append(address + '<br/>' + scheduled) 
+        for (indx in data['services']) {
+            var address = data['services'][indx].Service.address;
+            var scheduled = data['services'][indx].Service.scheduled;
+            $('<div>').append(address + '<br/>' + scheduled) 
                                       .css({
                                             'background-color': 'white', 
                                             'color': 'black', 
@@ -271,9 +285,16 @@ function updateServicesWindow(servicesWindow) {
                                             'cursor': 'pointer',
                                             'width': '140px'}) 
                                       .appendTo(servicesControls); 
-                }
-                $(servicesWindow).append(servicesControls);
-            }                                                                
-        });
+        }
+        $(servicesWindow).append(servicesControls);
+    })
 }
 
+function debugAJAXDone(url, data) {
+    if(DEBUG === true) {
+        console.log('AJAX done: ' + url);
+        console.log(data);
+    }
+}
+
+/* EOF */

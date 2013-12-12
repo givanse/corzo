@@ -3,6 +3,8 @@ Corzo::Application.routes.draw do
   devise_for :users
   ActiveAdmin.routes(self)
 
+  get '/services/get_forthcoming' => 'services#get_forthcoming'
+  get '/vehicles/get_current_positions' => 'vehicles#get_current_positions'
   get '/monitor/' => 'monitor#index'
 
   match '/features', to: 'static_pages#features', via: 'get'
