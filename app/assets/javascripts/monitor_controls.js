@@ -1,19 +1,18 @@
 
+var URL_IMG_TAXI_BASE_NAME = 'taxi-48.png';
 
-var URL_RESOURCE_IMG_TAXI = 'taxi-48.png';
+var monitor_controls = {
 
-var monitor = {
+    LocationControl: function(map, title, centerLocation) {
 
-LocationControl: function(map, title, centerLocation) {
-
-    // Setting padding to 5 px will offset the control
-    // from the edge of the map.
-    var controlDiv = $('<div>').attr('class', 'controlDiv') 
+        // Setting padding to 5 px will offset the control
+        // from the edge of the map.
+        var controlDiv = $('<div>').attr('class', 'controlDiv') 
                                .css({'padding': '5px'})
                                .get(0);                 
 
-    // Set CSS for the control border.                                           
-    var controlUI = $('<div>').attr('class', 'controlUI')
+        // Set CSS for the control border.                                           
+        var controlUI = $('<div>').attr('class', 'controlUI')
                               .css({                                             
                               'background-color': 'white',                       
                               'color': '#4c4c4c',                                   
@@ -22,16 +21,16 @@ LocationControl: function(map, title, centerLocation) {
                               .attr('title', 'Click to set the map to ' + title) 
                               .appendTo(controlDiv);
 
-    // Set CSS for the control interior.                                         
-    var controlText = $('<div>').css({                                           
+        // Set CSS for the control interior.                                         
+        var controlText = $('<div>').css({                                           
                               'font-family': 'Arial,sans-serif',                 
                               'font-size': '12px',                               
                               'padding': '0 4px 0 4px'})                         
                               .append('<strong>' + title + '</strong>')          
                               .appendTo(controlUI);
 
-    // Setup the click event listeners: simply set the map to Chicago.
-    google.maps.event.addDomListener(controlUI.get(0), 'click', function() {
+        // Setup the click event listeners: simply set the map to Chicago.
+        google.maps.event.addDomListener(controlUI.get(0), 'click', function() {
             map.setCenter(centerLocation)
             /* Eye-candy, add a marker. */
             var marker = new google.maps.Marker({                                        
@@ -41,23 +40,23 @@ LocationControl: function(map, title, centerLocation) {
             marker.setMap(map);
         });
 
-    return controlDiv;
-},
+        return controlDiv;
+    },
 
-ServicesWindow: function(map) {
-    /** 
-     * Call .get(0) or you'll get this error:
-     *     TypeError: a[w] is undefined
-     *
-     * The map does stuff with the controlDiv and expects the DOM object, not
-     * the JQuery selector. 
-     */
-    var controlDiv = $('<div>').attr('id', 'ServicesWindow')
+    buildServicesList: function() {
+        /** 
+         * Call .get(0) or you'll get this error:
+         *     TypeError: a[w] is undefined
+         *
+         * The map does stuff with the controlDiv and expects the DOM object, not
+         * the JQuery selector. 
+         */
+        var controlDiv = $('<div>').attr('id', 'ServicesWindow')
                                .attr('class', 'controlDiv')
                                .css({'padding': '5px'})
                                .get(0);
     
-    var controlUI = $('<div>').attr('id', 'ServicesWindowUI')
+        var controlUI = $('<div>').attr('id', 'ServicesWindowUI')
                               .css({
                               'background-color': 'black', 
                               'opacity': '0.20', 
@@ -66,9 +65,37 @@ ServicesWindow: function(map) {
                               'width': '150px', 
                               'height': '400px'})
                               .appendTo(controlDiv);
-    return controlDiv;
-}
-}; /* monitor namespace */
+        return controlDiv;
+    },
+
+    buildServiceForm : function() {
+        /**                                                                             
+         * Call .get(0) or you'll get this error:                                       
+         *     TypeError: a[w] is undefined                                             
+         *                                                                              
+         * The map does stuff with the controlDiv and expects the DOM object, not       
+         * the JQuery selector.                                                         
+         */                                                                          
+        var controlDiv = $('<div>').attr('id', 'ServiceForm')                        
+                                   .attr('class', 'controlDiv')                      
+                                   .css({
+                                       'padding': '5px',
+                                       'z-index': '1000000002'})                          
+                                   .get(0);                                          
+                                                                                 
+        var controlUI = $('<div>').attr('id', 'ServiceFormUI')                       
+                                  .css({                                             
+                                      'background-color': 'black',                       
+                                      'opacity': '0.20',                                 
+                                      'border-radius': '10px',                           
+                                      'text-align': 'center',                            
+                                      'width': '800px',                                  
+                                      'height': '200px'})                                
+                                  .appendTo(controlDiv);                             
+        return controlDiv;
+    }
+
+}; /* monitor_controls namespace */
 
 function addTaxiMarkerToMap(map, taxiObject) {    
     var id = taxiObject._id;
@@ -138,7 +165,7 @@ function addTaxiMarkerToMap(map, taxiObject) {
 function createTaxiMarker(plate, latitude, longitude, status) {    
     /* Add taxi markers. */                                              
     var image = {                                                        
-            url: WEBROOT + 'img/' + status + URL_RESOURCE_IMG_TAXI,                                          
+            url: WEBROOT + 'img/' + status + URL_IMG_TAXI_BASE_NAME,                                          
             // This marker is 20 pixels wide by 32 pixels tall.              
             size: new google.maps.Size(48, 57),                              
             // The origin for this image is 0,0.                             

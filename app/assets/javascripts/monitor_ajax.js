@@ -34,7 +34,7 @@ var monitor_ajax = {
         })                                                                           
     },
 
-    updateServicesWindow: function (servicesWindow) {
+    updateServicesList: function (servicesList) {
         $.ajax(URL_AJAX_SERVICES_GET_FORTHCOMING).done(function(data) {
 
             monitor_ajax.debugAJAXDone(URL_AJAX_SERVICES_GET_FORTHCOMING, data);
@@ -55,7 +55,7 @@ var monitor_ajax = {
                               'width': '140px'}) 
                           .appendTo(servicesControls); 
             }
-            $(servicesWindow).append(servicesControls);
+            $(servicesList).append(servicesControls);
         })
     },
 
@@ -75,7 +75,7 @@ var monitor_ajax = {
                     longitude = object.Landmark.longitude;
 
                     var geoLocation = new google.maps.LatLng(latitude, longitude);        
-                    var locationControl = new monitor.LocationControl(map, name, geoLocation);
+                    var locationControl = new monitor_controls.LocationControl(map, name, geoLocation);
                     map.controls[google.maps.ControlPosition.TOP_LEFT].push(locationControl);
                 }                                                 
         });

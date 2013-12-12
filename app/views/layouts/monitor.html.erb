@@ -53,17 +53,23 @@
                                                                                  
             /* Delay customizations until the map has loaded */                     
             google.maps.event.addListenerOnce(MAP, 'tilesloaded', function(evt) {
+
+                monitor_ajax.updateTaxiLocationsOnMap(MAP);
+
                 // monitor_ajax.addCustomControls(MAP);                                                          
                                                                                  
                 /* Must be called after addCustomControls() */                                   
                 addSearchBox(MAP, document.getElementById('searchBox'));                             
                
                 /* Add Services window. */ 
-                var servicesWindow = new monitor.ServicesWindow(MAP);
-                MAP.controls[google.maps.ControlPosition.LEFT_CENTER].push(servicesWindow);
-                monitor_ajax.updateServicesWindow(servicesWindow);
+                var servicesList = monitor_controls.buildServicesList();
+                MAP.controls[google.maps.ControlPosition.LEFT_TOP].push(servicesList);
+                monitor_ajax.updateServicesList(servicesList);
                                                                                  
-                monitor_ajax.updateTaxiLocationsOnMap(MAP);
+
+                /* Add Service form. */ 
+                var serviceForm = monitor_controls.buildServiceForm();
+                MAP.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(serviceForm);
             });                                                                  
         }                                                                        
                                                                                  
