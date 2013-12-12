@@ -1,0 +1,27 @@
+CACHE MANIFEST
+# version 1 
+
+CACHE:
+# Defines resources to be cached.
+https://mts0.googleapis.com
+https://mts1.googleapis.com
+https://maps.googleapis.com
+https://maps.gstatic.com
+https://csi.gstatic.com
+https://themes.googleusercontent.com/static/fonts/roboto
+https://fonts.googleapis.com/css?family=Roboto:300,400,500,700
+
+img/0taxi-48.png
+img/1taxi-48.png
+img/2taxi-48.png
+img/3taxi-48.png
+js/bootstrap.min.js
+js/html5shiv.js
+js/jquery.js  
+#js/monitor.js
+js/respond.min.js
+
+NETWORK:
+# Defines resources that will not be cached.
+js/monitor.js
+*
