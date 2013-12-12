@@ -15,4 +15,5 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
-//= require monitor
+//= require monitor_viewport
+//= require monitor_ajax

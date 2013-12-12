@@ -18,8 +18,8 @@
       echo 'debugAppCache.js' 
     -->
 
-    <%= stylesheet_link_tag    'application', 
-                              media: 'all', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag 'application', 
+                            media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
 
@@ -53,14 +53,17 @@
                                                                                  
             /* Delay customizations until the map has loaded */                     
             google.maps.event.addListenerOnce(MAP, 'tilesloaded', function(evt) {
-                // addCustomControls(MAP);                                                          
+                // monitor_ajax.addCustomControls(MAP);                                                          
                                                                                  
                 /* Must be called after addCustomControls() */                                   
                 addSearchBox(MAP, document.getElementById('searchBox'));                             
+               
+                /* Add Services window. */ 
+                var servicesWindow = new monitor.ServicesWindow(MAP);
+                MAP.controls[google.maps.ControlPosition.LEFT_CENTER].push(servicesWindow);
+                monitor_ajax.updateServicesWindow(servicesWindow);
                                                                                  
-                addServicesWindow(MAP);                                                          
-                                                                                 
-                updateTaxiLocationsOnMap(MAP);
+                monitor_ajax.updateTaxiLocationsOnMap(MAP);
             });                                                                  
         }                                                                        
                                                                                  
