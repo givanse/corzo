@@ -16,5 +16,4 @@
 //= require turbolinks
 //= require_tree .
 //= require monitor_controls
-//= require monitor_service_form
 //= require monitor_ajax
