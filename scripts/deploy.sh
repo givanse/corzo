@@ -1,14 +1,21 @@
 #/!bin/bash
 
-# This should only be used if your Heroku deploy fails without it.
-# rake assets:precompile
-
-# heroku pg:reset DATABASE
-
 git push heroku master
+
+# destroy
+
+heroku pg:reset DATABASE
+
+heroku run rake assets:clean
+
+# build
 
 heroku run rake db:migrate
 
+# This should only be used if your Heroku deploy fails without it.
+heroku run rake assets:precompile
+
+echo 'Last step, seed the DB.'
 heroku run rake db:seed
 
 #EOF

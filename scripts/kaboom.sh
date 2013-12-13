@@ -44,17 +44,19 @@ rake db:migrate
 
 # Add Active_Admin
 echo 'Install ActiveAdmin'
-rails g active_admin:install --skip-users # skips user authentication entirely
+rails generate active_admin:install --skip --skip-users # skips user authentication entirely
 rake db:migrate
 
-rails generate active_admin:resource User
-rails generate active_admin:resource Role
-rails generate active_admin:resource DriverStatus 
-rails generate active_admin:resource Driver 
-rails generate active_admin:resource Vehicle 
-rails generate active_admin:resource Service 
-# Enable strong parameters in app/admin/* 
+echo 'Register ActiveAdmin resources'
+rails generate active_admin:resource User --skip
+rails generate active_admin:resource Role --skip  
+rails generate active_admin:resource DriverStatus --skip 
+rails generate active_admin:resource Driver --skip 
+rails generate active_admin:resource Vehicle --skip 
+rails generate active_admin:resource Service --skip 
+#Enable strong parameters in app/admin/* (???) 
 
+echo 'Restore customizations'
 # Edit file config/initializers/active_admin.rb 
 # http://stackoverflow.com/a/14651686/7852
 # restore config file
@@ -90,7 +92,7 @@ echo 'Next steps:
 '
 END=`date +%s`
 ELAPSED=$(( $END - $START ))
-echo 'elapsed: '$ELAPSED
+echo 'elapsed: '$ELAPSED/60' mins.'
 
 exit
 #EOF
