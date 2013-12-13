@@ -59,7 +59,8 @@
                 // monitor_ajax.addCustomControls(MAP);                                                          
                                                                                  
                 /* Must be called after addCustomControls() */                                   
-                addSearchBox(MAP, document.getElementById('searchBox'));                             
+                addSearchBox(MAP, document.getElementById('searchBoxA'));                             
+                addSearchBox(MAP, document.getElementById('searchBoxB'));                             
                
                 /* Add Services window. */ 
                 var servicesList = monitor_controls.buildServicesList();
@@ -81,21 +82,14 @@
 
     <%= render 'layouts/shared/header_monitor' %>
 
-    <% if notice %>
-        <p class="alert alert-notice"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-        <p class="alert alert-error"><%= alert %></p>
-    <% end %>
-
     <div>                                                      
-        <div id="searchBoxPanel">                                                
-            <input id="searchBox" type="text" placeholder="Search Box">          
-        </div>                                                                   
         <div id="map-canvas"></div>                                                                   
     </div> 
     
     <% yield %>
+
+    <input id="searchBoxA" type="text" placeholder="Origen" size=40 style="display: none">          
+    <input id="searchBoxB" type="text" placeholder="Destino" size=40 style="display: none">          
 
 </body>
 </html>

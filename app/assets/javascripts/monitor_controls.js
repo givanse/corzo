@@ -106,7 +106,7 @@ var monitor_controls = {
                            .css({'z-index': '102',
                                  'position': 'absolute',          
                                  'top': '0px', 
-                                 'background-color': '#F3F3F3',
+                                 'background-color': 'rgb(217, 250, 252)',
                                  'padding': '0px 5px 5px 5px',
                                  'border-radius': '10px',
                                  'border': 'solid 1px gray',
@@ -143,15 +143,16 @@ var monitor_controls = {
         var col4 = col1.clone()
                        .appendTo(formFields);
         /* col 1 */
-        $('<p>').html('Servicio No. 0001').appendTo(col1);
-        $('<p>').html('10 / Enero / 2013').appendTo(col1);
-        $('<span>').html('No. Cliente: ').appendTo(col1);
+        $('<label>').html('Servicio No. 0001').appendTo(col1);
+        $('<br>').appendTo(col1);
+        $('<label>').html('10 / Enero / 2013').appendTo(col1);
+        $('<br>').appendTo(col1);
+        $('<label>').html('No. Cliente:').appendTo(col1);
         $('<select>').css({'width': '100px'})
                      .append($('<option>').attr('value', '').html('N/A'))
                      .append($('<option>').attr('value', '1').html('001'))
                      .append($('<option>').attr('value', '2').html('002'))
                      .appendTo(col1);
-        $('<br>').appendTo(col1);
         $('<br>').appendTo(col1);
         $('<input>').attr('value', 'nombre completo')
                     .attr('size', inputSize)
@@ -165,22 +166,23 @@ var monitor_controls = {
                     .attr('size', 12)
                     .appendTo(col2);
         $('<br>').appendTo(col2);
-        $('<input>').attr('value', 'dirección origen')
-                    .attr('size', inputSize)
-                    .appendTo(col2);
+        $('<label>').html('A:').appendTo(col2);
+        $('#searchBoxA').css({'display': 'inline'})
+                        .appendTo(col2);
         $('<br>').appendTo(col2);
+        $('<label>').html('B:').appendTo(col2);
+        $('#searchBoxB').css({'display': 'inline'})
+                        .appendTo(col2);
+        $('<br>').appendTo(col2);
+        $('<label>').html('A:').appendTo(col2);
         $('<input>').attr('value', '-32.186299')
-                    .attr('size', inputSize)
+                    .attr('size', 12)
                     .prop('readonly', true)
                     .css({'background-color': 'lightgray'})
                     .appendTo(col2);
-        $('<br>').appendTo(col2);
-        $('<input>').attr('value', 'dirección destino')
-                    .attr('size', inputSize)
-                    .appendTo(col2);
-        $('<br>').appendTo(col2);
+        $('<label>').html('B:').appendTo(col2);
         $('<input>').attr('value', '132.129303')
-                    .attr('size', inputSize)
+                    .attr('size', 12)
                     .prop('readonly', true)
                     .css({'background-color': 'lightgray'})
                     .appendTo(col2);
@@ -189,7 +191,8 @@ var monitor_controls = {
         $('<textarea>').html('referencias o comentarios')
                        .attr('cols', '24')
                        .attr('rows', '3')
-                       .css({'resize': 'none'})
+                       .css({'resize': 'none',
+                             'border': 'solid 1px lightgray'})
                        .appendTo(col3);
         $('<br>').appendTo(col3);
         $('<input>').attr('value', 'tarifa $0.00')
@@ -208,7 +211,7 @@ var monitor_controls = {
         $('<button>').html('Registrar servicio')
                      .appendTo(col4);
         $('<br>').appendTo(col4);
-        $('<button>').html('Registrar y copiar')
+        $('<button>').html('Registrar otro igual')
                      .appendTo(col4);
         $('<br>').appendTo(col4);
         $('<button>').html('Limpiar campos')
