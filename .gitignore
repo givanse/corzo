@@ -17,3 +17,4 @@
 
 .env
 .secret
+app/assets/javascripts/jquery-2.0.3.js
