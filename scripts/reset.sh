@@ -99,5 +99,7 @@ END=`date +%s`
 ELAPSED=$(( $END - $START ))
 echo 'elapsed: '$ELAPSED/60' mins.'
 
+echo 'Do not forget to update symbolic links in the assets folder.'
+
 exit
 #EOF
