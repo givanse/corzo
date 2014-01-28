@@ -13,7 +13,7 @@ mkdir -v db/migrate
 
 ########### Clean ##########
 rake db:drop
-createdb -U ivan -O rails corzo_development
+createdb -U ivan -O ivan corzo_development
 
 rails destroy active_admin:install
 rails destroy active_admin:resource product
@@ -90,6 +90,11 @@ echo 'Next steps:
   app/models/vehicle.rb
     belongs_to :driver
 '
+
+echo "RACK_ENV=development" >>.env
+echo "PORT=3000" >> .env
+gem install foreman
+
 END=`date +%s`
 ELAPSED=$(( $END - $START ))
 echo 'elapsed: '$ELAPSED/60' mins.'
