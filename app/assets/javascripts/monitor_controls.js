@@ -44,6 +44,13 @@ var monitor_controls = {
     },
 
     buildScheduledServicesPanel: function() {
+        var minimizeButton = $("#ssp #ssp-ui #ssp-controls img").click(
+            function() {
+                var display = $("#ssp #ssp-ui #ssp-list").css("display");
+                var displayValue = (display == "none") ? "block" : "none" ;
+                $("#ssp #ssp-ui #ssp-list").css("display", displayValue);
+            });
+
         /** 
          * Call .get(0) or you'll get this error:
          *     TypeError: a[w] is undefined

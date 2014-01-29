@@ -62,13 +62,13 @@
                 addSearchBox(MAP, document.getElementById('searchBoxB'));                             
                
                 /* Add scheduled services panel. */ 
-                var servicesList = monitor_controls.buildScheduledServicesPanel();
-                MAP.controls[google.maps.ControlPosition.LEFT_CENTER].push(servicesList);
-                monitor_ajax.updateServicesList(servicesList);
+                var ssp = monitor_controls.buildScheduledServicesPanel();
+                MAP.controls[google.maps.ControlPosition.LEFT_CENTER].push(ssp);
+                monitor_ajax.updateScheduledServicesList("div#ssp-list");
 
                 /* Add new service form. */ 
-                var serviceForm = monitor_controls.buildNewServiceForm();
-                MAP.controls[google.maps.ControlPosition.TOP_CENTER].push(serviceForm);
+                var nsf = monitor_controls.buildNewServiceForm();
+                MAP.controls[google.maps.ControlPosition.TOP_CENTER].push(nsf);
             });                                                                  
         }                                                                        
                                                                                  
@@ -90,7 +90,12 @@
 
     <!-- ssp -->
     <div id="ssp" class="controlDiv">
-        <div id="ssp-ui"></div>
+        <div id="ssp-ui">
+           <div id="ssp-controls">
+               <img src="img/minimize_window16.png">
+           </div> 
+           <div id="ssp-list"></div> 
+        </div>
     </div>                 
 
     <!-- nsf -->

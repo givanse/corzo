@@ -34,13 +34,12 @@ var monitor_ajax = {
         })                                                                           
     },
 
-    updateServicesList: function (servicesList) {
+    updateScheduledServicesList: function (container_selector) {
         $.ajax(URL_AJAX_SERVICES_GET_FORTHCOMING).done(function(data) {
 
             monitor_ajax.debugAJAXDone(URL_AJAX_SERVICES_GET_FORTHCOMING, data);
 
-            var servicesControls = $('<div>').css({'position': 'absolute',
-                                                       'top': '10px'});
+            var servicesControls = $(container_selector);
             for (indx in data['services']) {
                 var address = data['services'][indx].Service.address;
                 var scheduled = data['services'][indx].Service.scheduled;
@@ -55,7 +54,6 @@ var monitor_ajax = {
                               'width': '140px'}) 
                           .appendTo(servicesControls); 
             }
-            $(servicesList).append(servicesControls);
         })
     },
 
