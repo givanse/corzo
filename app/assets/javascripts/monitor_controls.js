@@ -43,7 +43,7 @@ var monitor_controls = {
         return controlDiv;
     },
 
-    buildServicesList: function() {
+    buildScheduledServicesPanel: function() {
         /** 
          * Call .get(0) or you'll get this error:
          *     TypeError: a[w] is undefined
@@ -51,24 +51,18 @@ var monitor_controls = {
          * The map does stuff with the controlDiv and expects the DOM object, not
          * the JQuery selector. 
          */
-        var controlDiv = $('<div>').attr('id', 'ServicesWindow')
-                               .attr('class', 'controlDiv')
-                               .css({'padding': '5px'})
-                               .get(0);
-    
-        var controlUI = $('<div>').attr('id', 'ServicesWindowUI')
-                              .css({
-                              'background-color': 'black', 
-                              'opacity': '0.20', 
-                              'border-radius': '10px', 
-                              'text-align': 'center', 
-                              'width': '150px', 
-                              'height': '400px'})
-                              .appendTo(controlDiv);
-        return controlDiv;
+        return $("div#ssp").get(0);
     },
 
-    buildServiceForm : function() {
+    buildNewServiceForm : function() {
+
+        var minimizeButton = $("#nsf #nsf-ui #nsf-controls img").click(
+            function() {
+                var display = $("#nsf #nsf-ui .nsf-col").css("display");
+                var displayValue = (display == "none") ? "block" : "none" ;
+                $("#nsf #nsf-ui .nsf-col").css("display", displayValue);
+            });
+
         /**                                                                             
          * Call .get(0) or you'll get this error:                                       
          *     TypeError: a[w] is undefined                                             
@@ -78,149 +72,7 @@ var monitor_controls = {
          *
          * Used as a wrapper and for positioning within the map.                                             
          */                                                                          
-        var controlDiv = $('<div>').attr('id', 'ServiceForm')                        
-                                   .attr('class', 'controlDiv')                      
-                                   .css({'z-index': '100',
-                                         'width': '800px'})                                  
-                                   .get(0);                                          
-                                                                                 
-        /**
-         * Responsible for the aesthetics.
-         * Mainly the opacity effect. 
-         */
-        var controlUI = $('<div>').attr('id', 'ServiceFormUI')                       
-                                  .css({'z-index': '101',                               
-                                        'background-color': 'black',                       
-                                        'opacity': '0.20',                                 
-                                        'border-radius': '10px',                           
-                                        'margin': '-5px',                          
-                                        'text-align': 'center',                            
-                                        'height': '200px'})                                
-                                  .appendTo(controlDiv);
-
-        /**
-         * Now use another diff that will go over the container 
-         * with the opacity effect (controlUI).
-         */
-        var formLayout = $('<div>')
-                           .css({'z-index': '102',
-                                 'position': 'absolute',          
-                                 'top': '0px', 
-                                 'background-color': 'rgb(217, 250, 252)',
-                                 'padding': '0px 5px 5px 5px',
-                                 'border-radius': '10px',
-                                 'border': 'solid 1px gray',
-                                 'width': '100%'})
-                           .appendTo(controlDiv);
-
-        var minimizeButton = $('<img>').attr('src', 'img/minimize_window16.png')
-                                       .css({'cursor': 'pointer'})
-                                       .click(function() {
-                                            alert('esconder ventana');
-                                        });
-
-        /* Contains the minimize button. */
-        $('<div>').attr('class', 'window-controls')
-                  .css({//'background-color': 'yellow',
-                        'text-align': 'right'})
-                  .append(minimizeButton)
-                  .appendTo(formLayout);
-
-        /* Now we start adding the actual form elements. */
-        var formFields = $('<div>').attr('id', 'form')
-                                   .css({'overflow': 'auto'})
-                                   .appendTo(formLayout);
-
-        var inputSize = 26;
-        
-        var col1 = $('<div>').css({'float': 'left',
-                                   'padding': '5px'})
-                             .appendTo(formFields);
-        var col2 = col1.clone()
-                       .appendTo(formFields);
-        var col3 = col1.clone()
-                       .appendTo(formFields);
-        var col4 = col1.clone()
-                       .appendTo(formFields);
-        /* col 1 */
-        $('<label>').html('Servicio No. 0001').appendTo(col1);
-        $('<br>').appendTo(col1);
-        $('<label>').html('10 / Enero / 2013').appendTo(col1);
-        $('<br>').appendTo(col1);
-        $('<label>').html('No. Cliente:').appendTo(col1);
-        $('<select>').css({'width': '100px'})
-                     .append($('<option>').attr('value', '').html('N/A'))
-                     .append($('<option>').attr('value', '1').html('001'))
-                     .append($('<option>').attr('value', '2').html('002'))
-                     .appendTo(col1);
-        $('<br>').appendTo(col1);
-        $('<input>').attr('value', 'nombre completo')
-                    .attr('size', inputSize)
-                    .appendTo(col1);
-
-        /* col 2 */
-        $('<input>').attr('value', 'fecha')
-                    .attr('size', 12)
-                    .appendTo(col2);
-        $('<input>').attr('value', 'hora')
-                    .attr('size', 12)
-                    .appendTo(col2);
-        $('<br>').appendTo(col2);
-        $('<label>').html('A:').appendTo(col2);
-        $('#searchBoxA').css({'display': 'inline'})
-                        .appendTo(col2);
-        $('<br>').appendTo(col2);
-        $('<label>').html('B:').appendTo(col2);
-        $('#searchBoxB').css({'display': 'inline'})
-                        .appendTo(col2);
-        $('<br>').appendTo(col2);
-        $('<label>').html('A:').appendTo(col2);
-        $('<input>').attr('value', '-32.186299')
-                    .attr('size', 12)
-                    .prop('readonly', true)
-                    .css({'background-color': 'lightgray'})
-                    .appendTo(col2);
-        $('<label>').html('B:').appendTo(col2);
-        $('<input>').attr('value', '132.129303')
-                    .attr('size', 12)
-                    .prop('readonly', true)
-                    .css({'background-color': 'lightgray'})
-                    .appendTo(col2);
-
-        /* col 3 */
-        $('<textarea>').html('referencias o comentarios')
-                       .attr('cols', '24')
-                       .attr('rows', '3')
-                       .css({'resize': 'none',
-                             'border': 'solid 1px lightgray'})
-                       .appendTo(col3);
-        $('<br>').appendTo(col3);
-        $('<input>').attr('value', 'tarifa $0.00')
-                    .attr('size', inputSize)
-                    .appendTo(col3);
-        $('<br>').appendTo(col3);
-        $('<input>').attr('value', 'conductor asignado')
-                    .attr('size', inputSize)
-                    .appendTo(col3);
-        $('<br>').appendTo(col3);
-        $('<input>').attr('value', 'placas del vehículo')
-                    .attr('size', inputSize)
-                    .appendTo(col3);
-
-        /* col 4 */
-        $('<button>').html('Registrar servicio')
-                     .appendTo(col4);
-        $('<br>').appendTo(col4);
-        $('<button>').html('Registrar otro igual')
-                     .appendTo(col4);
-        $('<br>').appendTo(col4);
-        $('<button>').html('Limpiar campos')
-                     .appendTo(col4);
-
-        /* clear */
-        $('<div>').css({'clear': 'both'})
-                  .appendTo(formFields);
-        return controlDiv;
+        return $("div#nsf").get(0);                                          
     }
 
 }; /* monitor_controls namespace */

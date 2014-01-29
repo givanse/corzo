@@ -9,3 +9,41 @@ div#map-canvas {
     border: 1px solid black;
 }
 
+.controlDiv {
+    border: 5px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;                          
+}
+
+#ssp #ssp-ui {
+    background-color: rgba(0, 0, 0, 0.5);    
+    border-radius: 5px;                          
+    text-align: center;                            
+    width: 150px;                             
+    height: 400px;
+}
+
+#nsf {
+    z-index: 100;
+    width: 800px; 
+}
+
+#nsf #nsf-ui {
+    background-color: rgb(217, 250, 252); 
+    border-radius: 5px;                          
+    text-align: center;                           
+}
+
+#nsf #nsf-ui #nsf-controls {
+    text-align: right;
+}
+#nsf #nsf-ui #nsf-controls img {
+    cursor: pointer;
+}
+
+#nsf #nsf-ui .nsf-col {
+    float: left;
+    padding: 5px;
+    height: 200px;                                
+    text-align: left;
+}
+
