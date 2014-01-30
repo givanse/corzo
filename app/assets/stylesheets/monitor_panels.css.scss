@@ -54,7 +54,7 @@ div#map-canvas {
     margin: 0px 5px 5px 5px;
     display: table-cell;
     float: left;
-    height: 180px;
+    height: 200px;
 }
 #nsf #nsf-ui #col4 {
     width: 100%;
@@ -63,10 +63,25 @@ div#map-canvas {
     clear: left;
 }
 
+#nsf #nsf-ui .nsf-col label {
+    padding-left: 3px;
+    margin-top: 4px;
+}
+
 #nsf #nsf-ui .nsf-col input, 
 #nsf #nsf-ui .nsf-col textarea {
     padding-left: 3px;
     margin-top: 5px;
+}
+
+input#a-coords,
+input#b-coords,
+input#select-driver {
+    background-color: lightgray;
+}
+textarea#comments {
+    resize: none; 
+    border: solid 2px lightgray;
 }
 
 /* Map control's controls */
