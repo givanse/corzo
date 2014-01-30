@@ -121,8 +121,8 @@
            </div>
            <div id="col2" class="nsf-col">
                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-               <input value="fecha" size=12 type="text" name="date" id="date" />
-               <input value="hora" size=12>
+               <input id="select-date" value="fecha" size=12 type="text">
+               <input id="select-time" value="hora" size=10 type="text">
                <br>
                <br>
                <label>A:</label>
@@ -137,13 +137,12 @@
                <input value="-132.129303" size=12 style="background-color: lightgray;" readonly>
            </div>
            <div id="col3" class="nsf-col">
-               <textarea cols=24 rows=3 style="resize: none; border: solid 1px lightgray">referencias o comentarios</textarea>
+               <textarea cols=25 rows=3 style="resize: none; border: solid 1px lightgray">referencias o comentarios</textarea>
                <br>
-               <input value="tarifa $0.00" size=26>
+               <br>
+               <input id="select-rate" value="tarifa $0.00" size=26>
                <br>
                <input value="conductor asignado" size=26>
-               <br>
-               <input value="placas del vehículo" size=26>
            </div>
            <div id="col4" class="nsf-col">
                <button>Borrar</button>
@@ -154,9 +153,23 @@
     </div>                 
 
     <script type="text/javascript">                                              
-        $( "#date" ).datepicker({ option: $.datepicker.regional[ "es" ],
-                                  minDate: "-0D", 
-                                  maxDate: "+1M"});
+        $( "#select-date" ).datepicker({ option: $.datepicker.regional[ "es" ],
+                                         minDate: "-0D", 
+                                         maxDate: "+1M"});
+        $( "#select-time" ).timepicker({ scrollDefaultNow: true,
+                                         scrollDefaultTime: true,
+                                         step: 15,
+                                         timeFormat: "h:i A"})
+                           .click(function() {
+                                this.select();
+                            });
+        $( "#select-rate" ).click(function() {
+                                this.select();
+                            });
+    </script>
+
+</body>
+</html>
     </script>
 
 </body>

@@ -2,6 +2,7 @@
  *
  *= require monitor_panels
  *= require jquery-ui
+ *= require jquery.timepicker 
  *= require custom
  */
 
