@@ -41,7 +41,8 @@ module Corzo
 
     # Bootstrap
     # Make bootstrap-sass compatible withe asset pipeline
-    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+    # config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+    config.assets.precompile += %w(monitor.js monitor.css)
 
   end
 end

@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap
 //= require_tree .
-//= require monitor_controls
-//= require monitor_ajax

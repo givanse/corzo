@@ -18,8 +18,8 @@
       echo 'debugAppCache.js' 
     -->
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_include_tag 'application' %>
+    <%= stylesheet_link_tag 'monitor', media: 'all' %>
+    <%= javascript_include_tag 'monitor' %>
     <%= csrf_meta_tags %>
 
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />          
@@ -105,8 +105,11 @@
                <img src="img/minimize_window16.png">
            </div> 
            <div id="col1" class="nsf-col">
-               <label>Servicio No.</label><label id="service-no">0001</label><br>
-               <label>10 / Enero / 2013</label><br>
+               <label>Servicio No.</label><label id="service-no">0001</label>
+               <br>
+               <label>10 / Enero / 2013</label>
+               <br>
+               <br>
                <label>No. Cliente</label>
                <select style="width: 100px;">
                    <option value="">N/A</option>
@@ -117,9 +120,10 @@
                <input value="nombre completo" size=26>
            </div>
            <div id="col2" class="nsf-col">
-               <label>&nbsp;&nbsp;</label>
-               <input value="fecha" size=12>
+               <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+               <input value="fecha" size=12 type="text" name="date" id="date" />
                <input value="hora" size=12>
+               <br>
                <br>
                <label>A:</label>
                <input id="searchBoxA" type="text" placeholder="Origen" size=40>          
@@ -129,7 +133,6 @@
                <br>
                <label>A:</label>
                <input value="-32.186299" size=12 style="background-color: lightgray;" readonly>
-               <br>
                <label>B:</label>
                <input value="-132.129303" size=12 style="background-color: lightgray;" readonly>
            </div>
@@ -147,10 +150,14 @@
                <button>Guardar y Copiar</button>
                <button>Guardar</button>
            </div>
-           <div style="clear: both;"></div>
        </div> 
     </div>                 
 
+    <script type="text/javascript">                                              
+        $( "#date" ).datepicker({ option: $.datepicker.regional[ "es" ],
+                                  minDate: "-0D", 
+                                  maxDate: "+1M"});
+    </script>
 
 </body>
 </html>
