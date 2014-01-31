@@ -34,10 +34,11 @@
                                                                                  
         var MAP;                                                                 
                                                                                  
-        function initialize() {                                                  
+        function initialize_google_map() {                                                  
+
             var mapOptions = {                                                   
                 center: new google.maps.LatLng(20.674226, -103.387363),          
-                zoom: 15,                                                        
+                zoom: 11,                                                        
                 maxZoom: 18,                                                        
                 disableDefaultUI: true,                                          
                 mapTypeId: google.maps.MapTypeId.ROADMAP,                        
@@ -54,12 +55,15 @@
             google.maps.event.addListenerOnce(MAP, 'tilesloaded', function(evt) {
 
                 monitor_ajax.updateTaxiLocationsOnMap(MAP);
-
-                // monitor_ajax.addCustomControls(MAP);                                                          
                                                                                  
-                /* Must be called after addCustomControls() */                                   
-                addSearchBox(MAP, document.getElementById('searchBoxA'));                             
-                addSearchBox(MAP, document.getElementById('searchBoxB'));                             
+                monitor_controls.addSearchBox(MAP, document.getElementById("searchBoxA"));
+                monitor_controls.addSearchBox(MAP, document.getElementById("searchBoxB"));
+                /* TODO: Review why calling directly 
+                   searchBox.setBounds() wouldn't work. */
+                var initialBounds = new google.maps.LatLngBounds(                           
+                    new google.maps.LatLng(20.94605,-103.795509),                        
+                    new google.maps.LatLng(20.454036,-102.860985));                      
+                MAP.fitBounds(initialBounds);
                
                 /* Add scheduled services panel. */ 
                 var ssp = monitor_controls.buildScheduledServicesPanel();
@@ -72,7 +76,7 @@
             });                                                                  
         }                                                                        
                                                                                  
-        google.maps.event.addDomListener(window, 'load', initialize);            
+        google.maps.event.addDomListener(window, 'load', initialize_google_map);            
     </script>  
 
 </head>

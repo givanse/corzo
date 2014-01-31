@@ -61,7 +61,7 @@ var monitor_controls = {
         return $("div#ssp").get(0);
     },
 
-    buildNewServiceForm : function() {
+    buildNewServiceForm: function() {
 
         var minimizeButton = $("#nsf #nsf-ui #nsf-controls img").click(
             function() {
@@ -80,7 +80,66 @@ var monitor_controls = {
          * Used as a wrapper and for positioning within the map.                                             
          */                                                                          
         return $("div#nsf").get(0);                                          
-    }
+    },
+
+    /**
+     * Creates a search box, links it to the inputElement and adds it to the googleMap. 
+     */
+    addSearchBox: function(googleMap, inputElement) {
+
+        // Create the search box and link it to the UI element.
+        var searchBox = new google.maps.places.SearchBox(inputElement);
+
+        // [START searchbox.getPlaces]
+        // Listen for the event fired when the user selects an item from the
+        // pick list. Retrieve the matching places for that item.
+        var places_markers = [];
+        google.maps.event.addListener(searchBox, 'places_changed', function() {
+
+            for (var i = 0, marker; marker = places_markers[i]; i++) {
+                marker.setMap(null);
+            }
+
+            // For each place, get the icon, place name, and location.
+            places_markers = [];
+            var bounds = new google.maps.LatLngBounds();
+            var sb_places = searchBox.getPlaces();
+            for (var i = 0, place; place = sb_places[i]; i++) {
+
+                // Create a marker for each place.
+                var marker_image = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25)
+                };
+                var marker = new google.maps.Marker({
+                    map: googleMap,
+                    icon: marker_image,
+                    title: place.name,
+                    position: place.geometry.location
+                });
+
+                places_markers.push(marker);
+
+                bounds.extend(place.geometry.location);
+            }
+
+            googleMap.fitBounds(bounds);
+        });
+        // [END searchbox.getPlaces]
+
+        /* 
+         * Bias the SearchBox results towards places that are within the bounds 
+         * of the current map's viewport.
+         */
+        google.maps.event.addListener(googleMap, 'bounds_changed', function() {
+            var bounds = googleMap.getBounds();
+            searchBox.setBounds(bounds);
+        });
+
+    } /* addSearchBox */
 
 }; /* monitor_controls namespace */
 
@@ -147,7 +206,7 @@ function addTaxiMarkerToMap(map, taxiObject) {
                         });                                                                    
                 });
         });
-}
+} /* addTaxiMarkerToMap */
 
 function createTaxiMarker(plate, latitude, longitude, status) {    
     /* Add taxi markers. */                                              
@@ -167,58 +226,7 @@ function createTaxiMarker(plate, latitude, longitude, status) {
             icon: image                                                      
         });                                                                  
     return marker;
-}
+} /* createTaxiMarker */
 
-/* Add a search box to the map. */
-function addSearchBox(map, inputField) {
-    var markers = [];
-    // Create the search box and link it to the UI element.
-    var searchBox = new google.maps.places.SearchBox(inputField);
-
-    // [START region_getplaces]
-    // Listen for the event fired when the user selects an item from the
-    // pick list. Retrieve the matching places for that item.
-    google.maps.event.addListener(searchBox, 'places_changed', function() {
-            var places = searchBox.getPlaces();
-
-            for (var i = 0, marker; marker = markers[i]; i++) {
-                marker.setMap(null);
-            }
-
-            // For each place, get the icon, place name, and location.
-            markers = [];
-            var bounds = new google.maps.LatLngBounds();
-            for (var i = 0, place; place = places[i]; i++) {
-                var image = {
-                    url: place.icon,
-                    size: new google.maps.Size(71, 71),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(25, 25)
-                };
-
-                // Create a marker for each place.
-                var marker = new google.maps.Marker({
-                    map: map,
-                    icon: image,
-                    title: place.name,
-                    position: place.geometry.location
-                });
-
-                markers.push(marker);
-
-                bounds.extend(place.geometry.location);
-            }
-            map.fitBounds(bounds);
-        });
-    // [END region_getplaces]
-
-    // Bias the SearchBox results towards places that are within the bounds of the
-    // current map's viewport.
-    google.maps.event.addListener(map, 'bounds_changed', function() {
-            var bounds = map.getBounds();
-            searchBox.setBounds(bounds);
-        });
-}
 
 /* EOF */
