@@ -1,6 +1,11 @@
 Corzo::Application.routes.draw do
 
-  devise_for :users
+  devise_scope :user do 
+    get 'users/get_clients.json' => 'users#get_clients'
+  end
+  devise_for :users, :controllers => {:registrations => 'users/registrations'}
+  resources :users 
+
   ActiveAdmin.routes(self)
 
   get '/services/get_forthcoming' => 'services#get_forthcoming'
@@ -8,10 +13,8 @@ Corzo::Application.routes.draw do
   get '/monitor/' => 'monitor#index'
 
   match '/features', to: 'static_pages#features', via: 'get'
-  match '/help', to: 'static_pages#help', via: 'get'
-  match '/contact', to: 'static_pages#contact', via: 'get'
-
-  resources :users
+  match '/help',     to: 'static_pages#help',     via: 'get'
+  match '/contact',  to: 'static_pages#contact',  via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

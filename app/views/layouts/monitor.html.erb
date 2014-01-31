@@ -109,11 +109,9 @@
                <br>
                <label>10 / Enero / 2013</label>
                <br>
-               <label>No. Cliente</label>
-               <select style="width: 100px;">
-                   <option value="">N/A</option>
-                   <option value="1">1</option>
-                   <option value="2">2</option>
+               <label>No. Cliente: </label>
+               <select id="select-client">
+                   <option value="N/A">N/A</option>
                </select>
                <br>
                <input id="full-name" size=26>
@@ -155,6 +153,16 @@
     <script type="text/javascript">                                              
 
         function init_new_service_form() {
+
+            monitor_ajax.populateClientsList("#select-client");
+            $( "#select-client" ).change(function() {
+                var option = this.options[this.selectedIndex];
+                var client_id = option.value;
+                var client_name = option.getAttribute("name");
+                $( "#full-name" ).val(client_name)
+                                 .attr("cid", client_id);
+            });
+
             var full_name = "nombre completo";
             $( "#full-name" ).val(full_name);
             $( "#full-name" ).click(function() {

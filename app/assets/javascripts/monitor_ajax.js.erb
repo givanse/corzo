@@ -3,10 +3,14 @@ var WEBROOT = '';
 
 var DEBUG_AJAX=false;
 
-var URL_AJAX_LAT_LON = WEBROOT + 'vehicles/get_current_positions'; 
-var URL_AJAX_LANDMARKS = WEBROOT + 'taxis/landmarks/getEnabled.json'; 
-var URL_AJAX_UPDATE_TAXI_STATUS = WEBROOT + 'taxis/taxis/updateStatus'; 
-var URL_AJAX_SERVICES_GET_FORTHCOMING = WEBROOT + 'services/get_forthcoming'; 
+var URL_VEHICLES_GET_CURRENT_POSITIONS = WEBROOT + 'vehicles/get_current_positions.json'; 
+
+var URL_LANDMARKS_GET_ENABLED = WEBROOT + 'taxis/landmarks/getEnabled.json'; 
+
+var URL_SERVICES_GET_FORTHCOMING = WEBROOT + 'services/get_forthcoming.json'; 
+
+var URL_USERS_GET_CLIENTS = WEBROOT + 'users/get_clients.json'; 
+//var URL_USERS_UPDATE_DRIVER_STATUS = WEBROOT + 'users/update_driver_status'; 
 
 /* Configure AJAX */
 $.ajaxSetup({cache: false, 
@@ -21,23 +25,44 @@ $.ajaxSetup({cache: false,
 
 var monitor_ajax = {
 
+    populateClientsList: function(select_node_name) {
+        $.ajax(URL_USERS_GET_CLIENTS).done(
+            function(data) {
+
+                monitor_ajax.debugAJAXDone(URL_USERS_GET_CLIENTS, data, false);                                   
+
+                for (indx in data) {
+                    var client = data[indx];
+                    var client_option = $('<option>').val(client.id)
+                                                     .text(client.id)
+                                                     .attr('name', client.name);
+
+                    $( select_node_name ).append(client_option);
+                }
+            }
+        );
+    }, 
+
     /* Get the latest location reported by every taxi and update the map. */         
     updateTaxiLocationsOnMap: function (map) {                                         
-        $.ajax(URL_AJAX_LAT_LON).done(function(data) {                               
-            monitor_ajax.debugAJAXDone(URL_AJAX_LAT_LON, data);                                   
+        $.ajax(URL_VEHICLES_GET_CURRENT_POSITIONS).done(
+            function(data) {                               
+
+                monitor_ajax.debugAJAXDone(URL_VEHICLES_GET_CURRENT_POSITIONS, data, false);                                   
                                                                                  
-            for (indx in data['taxisLatLon']) {                                      
-                object = data['taxisLatLon'][indx];                                  
-                taxiObject = object.Taxi;                                            
-                addTaxiMarkerToMap(map, taxiObject);                                 
-            }                                                                        
-        })                                                                           
+                for (indx in data['taxisLatLon']) {                                      
+                    object = data['taxisLatLon'][indx];                                  
+                    taxiObject = object.Taxi;                                            
+                    addTaxiMarkerToMap(map, taxiObject);                                 
+                }                                                                        
+            }
+        );                                                                           
     },
 
     updateScheduledServicesList: function (container_selector) {
-        $.ajax(URL_AJAX_SERVICES_GET_FORTHCOMING).done(function(data) {
+        $.ajax(URL_SERVICES_GET_FORTHCOMING).done(function(data) {
 
-            monitor_ajax.debugAJAXDone(URL_AJAX_SERVICES_GET_FORTHCOMING, data);
+            monitor_ajax.debugAJAXDone(URL_SERVICES_GET_FORTHCOMING, data, false);
 
             var servicesControls = $(container_selector);
             for (indx in data['services']) {
@@ -61,9 +86,9 @@ var monitor_ajax = {
      * Add custom controls based on the Landmarks stored in the database.
      */
     addCustomControls: function (map) {
-        $.ajax(URL_AJAX_LANDMARKS).done( function(data) {
+        $.ajax(URL_LANDMARKS_GET_ENABLED).done( function(data) {
 
-            monitor_ajax.debugAJAXDone(URL_AJAX_LANDMARKS, data);
+            monitor_ajax.debugAJAXDone(URL_LANDMARKS_GET_ENABLED, data, false);
 
                 for (indx in data['enabledLandmarks']) {
                     object = data['enabledLandmarks'][indx];
@@ -78,8 +103,8 @@ var monitor_ajax = {
         });
     },
 
-    debugAJAXDone: function (url, data) {
-        if(DEBUG_AJAX === true) {
+    debugAJAXDone: function (url, data, isEnabled) {
+        if(isEnabled || DEBUG_AJAX === true) {
             console.log('AJAX done: ' + url);
             console.log(data);
         }

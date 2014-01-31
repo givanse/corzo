@@ -68,7 +68,12 @@ div#map-canvas {
     margin-top: 4px;
 }
 
+#nsf #nsf-ui .nsf-col select {
+    width: 116px
+}
+
 #nsf #nsf-ui .nsf-col input, 
+#nsf #nsf-ui .nsf-col select, 
 #nsf #nsf-ui .nsf-col textarea {
     padding-left: 3px;
     margin-top: 5px;
