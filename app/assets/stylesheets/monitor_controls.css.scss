@@ -1,5 +1,6 @@
 
-$control-background-color: #C2D5FF;
+$control-border-color: rgba(0, 0, 0, 0.4);
+$ui-background-color: #C2D5FF;
 
 div#map-canvas {
     position: absolute;
@@ -12,13 +13,13 @@ div#map-canvas {
 }
 
 .controlDiv {
-    border: 5px solid rgba(0, 0, 0, 0.4);
+    border: 5px solid  $control-border-color;
     border-radius: 10px;                          
     font-size: 1.3em;
 }
 
 .controlDiv .ui {
-    background-color: #C2D5FF;
+    background-color: $ui-background-color;
     border-radius: 5px;                          
 }
 
@@ -79,10 +80,15 @@ div#map-canvas {
     margin-top: 5px;
 }
 
-input#a-coords,
-input#b-coords,
 input#select-driver {
+    text-align: center;
     background-color: lightgray;
+}
+#coords-a,
+#coords-b {
+    text-align: center;
+    font-weight: normal;
+    color: #8F8F8F;
 }
 textarea#comments {
     resize: none; 
@@ -100,3 +106,19 @@ textarea#comments {
     cursor: pointer;
     padding: 2px;
 }
+
+/* Context menu */
+#context-menu hr {
+    padding: 0px;
+    margin: 2px 0px;
+    border: 1px dotted #999999;
+} 
+#context-menu button,
+#context-menu label {
+    padding: 0px 3px;
+    margin: 2px 0px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+

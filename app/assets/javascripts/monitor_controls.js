@@ -41,7 +41,7 @@ var monitor_controls = {
         });
 
         return controlDiv;
-    },
+    }, /* LocationControl */
 
     buildScheduledServicesPanel: function() {
         var minimizeButton = $("#ssp #ssp-ui #ssp-controls img").click(
@@ -59,7 +59,7 @@ var monitor_controls = {
          * the JQuery selector. 
          */
         return $("div#ssp").get(0);
-    },
+    }, /* buildScheduledServicesPanel */
 
     buildNewServiceForm: function() {
 
@@ -80,7 +80,7 @@ var monitor_controls = {
          * Used as a wrapper and for positioning within the map.                                             
          */                                                                          
         return $("div#nsf").get(0);                                          
-    },
+    }, /* buildNewServicesForm */
 
     /**
      * Creates a search box, links it to the inputElement and adds it to the googleMap. 
@@ -139,10 +139,25 @@ var monitor_controls = {
             searchBox.setBounds(bounds);
         });
 
-    } /* addSearchBox */
+    }, /* addSearchBox */
+
+    buildContextMenu: function() {
+        var contextMenu = new google.maps.InfoWindow();
+                                        
+        var menu = $("div#context-menu");
+
+        var wrapperDiv = $("<div>");
+        menu.appendTo(wrapperDiv);
+        contextMenu.setContent(wrapperDiv.html()); 
+
+        return contextMenu;
+    } /* buildContextMenu */
 
 }; /* monitor_controls namespace */
 
+/**
+ *
+ */
 function addTaxiMarkerToMap(map, taxiObject) {    
     var id = taxiObject._id;
     var plate = taxiObject.plate;
@@ -163,9 +178,8 @@ function addTaxiMarkerToMap(map, taxiObject) {
 
     // Listen for click event  
     google.maps.event.addListener(marker, 'click', function() { 
-            var utilityDiv = $('<div>');
-            var divTaxiInfo = $('<div id=\'TaxiInfo\'>').appendTo(utilityDiv);;
 
+            var divTaxiInfo = $('<div id=\'TaxiInfo\'>');
             var statusComboBox = $('<select>').attr('id', 'TaxiStatus')
                                               .attr('name', 'data[Taxi][status]')
                                               .appendTo(divTaxiInfo);
@@ -182,7 +196,9 @@ function addTaxiMarkerToMap(map, taxiObject) {
                            phone;
             divTaxiInfo.append(taxiInfo);
 
-            infoWindow.setContent(utilityDiv.html()); 
+            var wrapperDiv = $('<div>');
+            divTaxiInfo.appendTo(wrapperDiv);
+            infoWindow.setContent(wrapperDiv.html()); 
             infoWindow.setPosition(marker.position); 
             infoWindow.open(map); 
         });
@@ -208,6 +224,9 @@ function addTaxiMarkerToMap(map, taxiObject) {
         });
 } /* addTaxiMarkerToMap */
 
+/**
+ *
+ */
 function createTaxiMarker(plate, latitude, longitude, status) {    
     /* Add taxi markers. */                                              
     var image = {                                                        

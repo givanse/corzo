@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" manifest="manifest.appcache">
+
 <head>
     <meta charset="utf-8">                                                       
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />          
 
     <title><%= full_title(yield(:title)) %></title>
 
@@ -18,68 +20,16 @@
       echo 'debugAppCache.js' 
     -->
 
-    <%= stylesheet_link_tag 'monitor', media: 'all' %>
-    <%= javascript_include_tag 'monitor' %>
-    <%= csrf_meta_tags %>
-
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />          
     <script type="text/javascript"                                               
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlGDVvFbD4gIC4l6G-E6bZVQlSi2GTic&sensor=false&libraries=places">
     </script>
 
-    <script type="text/javascript">                                              
-                                                                                 
-        // Enable the visual refresh                                             
-        google.maps.visualRefresh = true;                                        
-                                                                                 
-        var MAP;                                                                 
-                                                                                 
-        function initialize_google_map() {                                                  
-
-            var mapOptions = {                                                   
-                center: new google.maps.LatLng(20.674226, -103.387363),          
-                zoom: 11,                                                        
-                maxZoom: 18,                                                        
-                disableDefaultUI: true,                                          
-                mapTypeId: google.maps.MapTypeId.ROADMAP,                        
-                zoomControl: true,                                               
-                zoomControlOptions: {                                            
-                    position: google.maps.ControlPosition.RIGHT_CENTER
-                }                                                                
-            };                                                                   
-                                                                                 
-            MAP = new google.maps.Map(document.getElementById('map-canvas'),     
-                                      mapOptions);                               
-                                                                                 
-            /* Delay customizations until the map has loaded */                     
-            google.maps.event.addListenerOnce(MAP, 'tilesloaded', function(evt) {
-
-                monitor_ajax.updateTaxiLocationsOnMap(MAP);
-                                                                                 
-                monitor_controls.addSearchBox(MAP, document.getElementById("searchBoxA"));
-                monitor_controls.addSearchBox(MAP, document.getElementById("searchBoxB"));
-                /* TODO: Review why calling directly 
-                   searchBox.setBounds() wouldn't work. */
-                var initialBounds = new google.maps.LatLngBounds(                           
-                    new google.maps.LatLng(20.94605,-103.795509),                        
-                    new google.maps.LatLng(20.454036,-102.860985));                      
-                MAP.fitBounds(initialBounds);
-               
-                /* Add scheduled services panel. */ 
-                var ssp = monitor_controls.buildScheduledServicesPanel();
-                MAP.controls[google.maps.ControlPosition.TOP_RIGHT].push(ssp);
-                monitor_ajax.updateScheduledServicesList("div#ssp-list");
-
-                /* Add new service form. */ 
-                var nsf = monitor_controls.buildNewServiceForm();
-                MAP.controls[google.maps.ControlPosition.TOP_CENTER].push(nsf);
-            });                                                                  
-        }                                                                        
-                                                                                 
-        google.maps.event.addDomListener(window, 'load', initialize_google_map);            
-    </script>  
+    <%= stylesheet_link_tag 'monitor', media: 'all' %>
+    <%= javascript_include_tag 'monitor' %>
+    <%= csrf_meta_tags %>
 
 </head>
+
 <body>
 
     <%= render 'layouts/shared/header_monitor' %>
@@ -118,33 +68,35 @@
                    <option value="N/A">N/A</option>
                </select>
                <br>
-               <input id="full-name" size=26>
+               <input id="full-name" placeholder="Nombre Completo" size=26>
            </div>
            <div id="col2" class="nsf-col">
                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-               <input id="select-date" value="fecha" size=12 type="text">
-               <input id="select-time" value="hora" size=10 type="text">
+               <input id="select-date" placeholder="Fecha" size=12 type="text">
+               &nbsp;
+               <input id="select-time" placeholder="Hora" size=10 type="text">
                <br>
                <br>
                <label>A:</label>
-               <input id="searchBoxA" type="text" placeholder="Origen" size=40>          
+               <input id="search-box-a" type="text" placeholder="Origen" size=40>          
                <br>
-               <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-               <input id="a-coords" value="-32.186299, -132.129303" size=24 readonly>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               <label id="coords-a">00.000000000000000, 00.000000000000000</label>
                <br>
                <label>B:</label>
-               <input id="searchBoxB" type="text" placeholder="Destino" size=40>          
+               <input id="search-box-b" type="text" placeholder="Destino" size=40>          
                <br>
-               <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-               <input id="b-coords" value="-132.129303, -32.186299" size=24 readonly>
+               &nbsp;&nbsp;&nbsp;&nbsp;
+               <label id="coords-b">00.000000000000000, 00.000000000000000</label>
            </div>
            <div id="col3" class="nsf-col">
-               <textarea id="comments" cols=25 rows=4></textarea>
+               <textarea id="comments" placeholder="Referencias y Comentarios" cols=25 rows=4></textarea>
                <br>
                <br>
-               <input id="select-rate" value="tarifa $0.00" size=26>
+               <label>$ </label>
+               <input id="select-rate" placeholder="00.00" value="" size=24>
                <br>
-               <input id="select-driver" value="conductor asignado" size=26 readonly>
+               <input id="select-driver" placeholder="Conductor" size=26 readonly>
            </div>
            <div id="col4" class="nsf-col">
                <button>Borrar</button>
@@ -154,59 +106,12 @@
        </div> 
     </div>                 
 
-    <script type="text/javascript">                                              
-
-        function init_new_service_form() {
-
-            monitor_ajax.populateClientsList("#select-client");
-            $( "#select-client" ).change(function() {
-                var option = this.options[this.selectedIndex];
-                var client_id = option.value;
-                var client_name = option.getAttribute("name");
-                $( "#full-name" ).val(client_name)
-                                 .attr("cid", client_id);
-            });
-
-            var full_name = "nombre completo";
-            $( "#full-name" ).val(full_name);
-            $( "#full-name" ).click(function() {
-                                 if ($(this).val() == full_name) {
-                                    this.select();
-                                 }
-                             });
-
-            $( "#select-date" ).datepicker({ option: $.datepicker.regional[ "es" ],
-                                             minDate: "-0D", 
-                                             maxDate: "+1M"});
-            $( "#select-time" ).timepicker({ scrollDefaultNow: true,
-                                             scrollDefaultTime: true,
-                                             step: 15,
-                                             timeFormat: "h:i A"})
-                               .click(function() {
-                                    this.select();
-                                });
-
-            var comments = "referencias o comentarios";
-            $( "#comments" ).val(comments);
-            $( "#comments" ).click(function() {
-                                 if ($(this).val() == comments) {
-                                    this.select();
-                                 }
-                             });
-
-            $( "#select-rate" ).click(function() {
-                                    this.select();
-                                });
-        } /* init_new_service_form */
-
-        window.addEventListener("load", function(event) {
-                init_new_service_form();
-        });
-    </script>
-
-</body>
-</html>
-    </script>
+    <!-- context menu -->
+    <div id="context-menu">
+        <button id="set-a">fijar A</button>
+        <br>
+        <button id="set-b">fijar B</button>
+    </div>
 
 </body>
 </html>
