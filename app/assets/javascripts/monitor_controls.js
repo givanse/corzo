@@ -83,59 +83,49 @@ var monitor_controls = {
     }, /* buildNewServicesForm */
 
     /**
-     * Creates a search box, links it to the inputElement and adds it to the googleMap. 
+     * Creates a search box, links it to the inputElement and adds it 
+     * to the map. 
+     * map: google.maps.Map
+     * inputElement: <input>
      */
-    addSearchBox: function(googleMap, inputElement) {
+    addSearchBox: function(map, inputElement) {
 
-        // Create the search box and link it to the UI element.
+        /* Create the search box and link it to the UI element. */
         var searchBox = new google.maps.places.SearchBox(inputElement);
 
-        // [START searchbox.getPlaces]
-        // Listen for the event fired when the user selects an item from the
-        // pick list. Retrieve the matching places for that item.
-        var places_markers = [];
+        /**
+         * Listen for the event fired when the user selects an item from the
+         * pick list. Retrieve the matching places for that item.
+         */
+        var currPlacesMarkers = [];
         google.maps.event.addListener(searchBox, 'places_changed', function() {
 
-            for (var i = 0, marker; marker = places_markers[i]; i++) {
-                marker.setMap(null);
+            /* previous searches clean up */
+            for (var i = 0, placeMarker; placeMarker = currPlacesMarkers[i]; i++) {
+                placeMarker.setMap(null); 
             }
 
             // For each place, get the icon, place name, and location.
-            places_markers = [];
-            var bounds = new google.maps.LatLngBounds();
-            var sb_places = searchBox.getPlaces();
-            for (var i = 0, place; place = sb_places[i]; i++) {
+            currPlacesMarkers = [];
+            var resultBounds = new google.maps.LatLngBounds();
+            var placeResults = searchBox.getPlaces();
+            for (var i = 0, placeResult; placeResult = placeResults[i]; i++) {
 
-                // Create a marker for each place.
-                var marker_image = {
-                    url: place.icon,
-                    size: new google.maps.Size(71, 71),
-                    origin: new google.maps.Point(0, 0),
-                    anchor: new google.maps.Point(17, 34),
-                    scaledSize: new google.maps.Size(25, 25)
-                };
-                var marker = new google.maps.Marker({
-                    map: googleMap,
-                    icon: marker_image,
-                    title: place.name,
-                    position: place.geometry.location
-                });
+                var placeMarker = monitor_markers.createPlaceResultMarker(map, placeResult);
+                currPlacesMarkers.push(placeMarker);
 
-                places_markers.push(marker);
-
-                bounds.extend(place.geometry.location);
+                resultBounds.extend(placeResult.geometry.location);
             }
 
-            googleMap.fitBounds(bounds);
+            map.fitBounds(resultBounds);
         });
-        // [END searchbox.getPlaces]
-
+        
         /* 
          * Bias the SearchBox results towards places that are within the bounds 
          * of the current map's viewport.
          */
-        google.maps.event.addListener(googleMap, 'bounds_changed', function() {
-            var bounds = googleMap.getBounds();
+        google.maps.event.addListener(map, 'bounds_changed', function() {
+            var bounds = map.getBounds();
             searchBox.setBounds(bounds);
         });
 
@@ -171,7 +161,7 @@ function addTaxiMarkerToMap(map, taxiObject) {
                     status == 2 ? 'Libre' :                                      
                     status == 3 ? 'Ocupado' : 'Error de sistema';
 
-    var marker = createTaxiMarker(plate, latitude, longitude, status);
+    var marker = monitor_markers.createTaxiMarker(plate, latitude, longitude, status);
     marker.setMap(map);
 
     infoWindow = new google.maps.InfoWindow();
@@ -224,28 +214,53 @@ function addTaxiMarkerToMap(map, taxiObject) {
         });
 } /* addTaxiMarkerToMap */
 
-/**
- *
- */
-function createTaxiMarker(plate, latitude, longitude, status) {    
-    /* Add taxi markers. */                                              
-    var image = {                                                        
-            url: WEBROOT + 'img/' + status + URL_IMG_TAXI_BASE_NAME,                                          
-            // This marker is 20 pixels wide by 32 pixels tall.              
-            size: new google.maps.Size(48, 57),                              
-            // The origin for this image is 0,0.                             
-            origin: new google.maps.Point(0, 0),                             
-            // The anchor for this image is the base of the flagpole at 0,32.
-            anchor: new google.maps.Point(24, 57)                            
-        };                                                                   
+var monitor_markers = {
 
-    var marker = new google.maps.Marker({                                
-            position: new google.maps.LatLng(latitude, longitude),        
-            title: plate,                                           
-            icon: image                                                      
-        });                                                                  
-    return marker;
-} /* createTaxiMarker */
+    /**
+     * map: google.maps.Map
+     * placeResult: google.maps.places.PlaceResult
+     */
+    createPlaceResultMarker: function(map, placeResult) {
+        var markerImage = {
+            url: placeResult.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(25, 25)
+        };
+        var marker = new google.maps.Marker({
+            map: map,
+            icon: markerImage,
+            title: placeResult.name,
+            position: placeResult.geometry.location
+        });
+        
+        return marker;    
+    }, /* createPlaceResultMarker */
 
+    /**
+     *
+     */
+    createTaxiMarker: function(plate, latitude, longitude, status) {    
+        /* Add taxi markers. */                                              
+        var image = {                                                        
+                url: WEBROOT + 'img/' + status + URL_IMG_TAXI_BASE_NAME,                                          
+                // This marker is 20 pixels wide by 32 pixels tall.              
+                size: new google.maps.Size(48, 57),                              
+                // The origin for this image is 0,0.                             
+                origin: new google.maps.Point(0, 0),                             
+                // The anchor for this image is the base of the flagpole at 0,32.
+                anchor: new google.maps.Point(24, 57)                            
+            };                                                                   
+
+        var marker = new google.maps.Marker({                                
+                position: new google.maps.LatLng(latitude, longitude),        
+                title: plate,                                           
+                icon: image                                                      
+            });                                                                  
+        return marker;
+    } /* createTaxiMarker */
+
+}; /* monitor_markers namespace */
 
 /* EOF */
