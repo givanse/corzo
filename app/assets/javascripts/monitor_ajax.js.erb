@@ -97,7 +97,7 @@ var monitor_ajax = {
                     longitude = object.Landmark.longitude;
 
                     var geoLocation = new google.maps.LatLng(latitude, longitude);        
-                    var locationControl = new monitor_controls.LocationControl(map, name, geoLocation);
+                    var locationControl = new monitor_controls.locationControl(map, name, geoLocation);
                     map.controls[google.maps.ControlPosition.TOP_LEFT].push(locationControl);
                 }                                                 
         });

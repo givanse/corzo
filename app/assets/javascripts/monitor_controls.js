@@ -3,7 +3,7 @@ var URL_IMG_TAXI_BASE_NAME = 'taxi-48.png';
 
 var monitor_controls = {
 
-    LocationControl: function(map, title, centerLocation) {
+    locationControl: function(map, title, centerLocation) {
 
         // Setting padding to 5 px will offset the control
         // from the edge of the map.
@@ -110,7 +110,7 @@ var monitor_controls = {
             var resultBounds = new google.maps.LatLngBounds();
             var placeResults = searchBox.getPlaces();
             for (var i = 0, placeResult; placeResult = placeResults[i]; i++) {
-
+                console.log(placeResult);
                 var placeMarker = monitor_markers.createPlaceResultMarker(map, placeResult);
                 currPlacesMarkers.push(placeMarker);
 
@@ -239,25 +239,46 @@ var monitor_markers = {
     }, /* createPlaceResultMarker */
 
     /**
+     * map: google.maps.Map
+     * imgFileName: string
+     * title: string
+     */
+    createServicePositionMarker: function(map, imgFileName, title) {
+        var markerImage = {
+            url: WEBROOT + 'img/' + imgFileName,
+            size: new google.maps.Size(32, 32),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(16, 32)
+        };
+        var marker = new google.maps.Marker({
+            map: map,
+            icon: markerImage,
+            title: title
+        });
+        
+        return marker;    
+    }, /* createServicePositionMarker */
+
+    /**
      *
      */
     createTaxiMarker: function(plate, latitude, longitude, status) {    
         /* Add taxi markers. */                                              
         var image = {                                                        
-                url: WEBROOT + 'img/' + status + URL_IMG_TAXI_BASE_NAME,                                          
-                // This marker is 20 pixels wide by 32 pixels tall.              
-                size: new google.maps.Size(48, 57),                              
-                // The origin for this image is 0,0.                             
-                origin: new google.maps.Point(0, 0),                             
-                // The anchor for this image is the base of the flagpole at 0,32.
-                anchor: new google.maps.Point(24, 57)                            
-            };                                                                   
+            url: WEBROOT + 'img/' + status + URL_IMG_TAXI_BASE_NAME,                                          
+            // This marker is 20 pixels wide by 32 pixels tall.              
+            size: new google.maps.Size(48, 57),                              
+            // The origin for this image is 0,0.                             
+            origin: new google.maps.Point(0, 0),                             
+            // The anchor for this image is the base of the flagpole at 0,32.
+            anchor: new google.maps.Point(24, 57)                            
+        };                                                                   
 
         var marker = new google.maps.Marker({                                
-                position: new google.maps.LatLng(latitude, longitude),        
-                title: plate,                                           
-                icon: image                                                      
-            });                                                                  
+            icon: image,
+            title: plate,
+            position: new google.maps.LatLng(latitude, longitude) 
+        });                                                                  
         return marker;
     } /* createTaxiMarker */
 

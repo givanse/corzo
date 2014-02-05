@@ -14,12 +14,51 @@ var theMap = null;
 var geocoder = null;
 
 var contextMenu = null;
-var currentlySelectedInfWin = new google.maps.InfoWindow();
 
 var currentlySelectedPosition = null;
-var positionA = null;
-var positionB = null;
 
+
+
+var monitor = {
+
+    setServicePosition: function(label, searchBox, marker, infoWindow) {
+        contextMenu.close();
+
+        var position = currentlySelectedPosition;
+
+        label.text(position);
+        marker.setPosition(position);
+
+        geocoder.geocode({'latLng': position}, 
+            function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[1]) {
+                        var address = results[1].formatted_address;
+                        
+                        infoWindow.setContent(address);
+                        infoWindow.open(theMap, marker);
+
+                        searchBox.val(address);
+                    } else {
+                        alert('No results found');
+                    }
+                } else {
+                    alert('Geocoder failed due to: ' + status);
+                }
+            }
+        );
+    } /* setServicePosition */
+    
+} /* monitor namespace */
+
+monitor.infoWinA = new google.maps.InfoWindow();
+monitor.infoWinB = new google.maps.InfoWindow();
+monitor.markerPosA = null;
+monitor.markerPosB = null;
+
+/**
+ *
+ */
 function initialize_google_map() {
 
     var mapOptions = {
@@ -45,8 +84,11 @@ function initialize_google_map() {
 
         monitor_ajax.updateTaxiLocationsOnMap(theMap);
 
+        /**
+         * Search boxes initialization.
+         */
         monitor_controls.addSearchBox(theMap, 
-                                      document.getElementById("search-box-a"));
+                                      document.getElementById("search-box-a") );
         monitor_controls.addSearchBox(theMap, 
                                       document.getElementById("search-box-b"));
         /* TODO: Review why calling directly
@@ -56,15 +98,27 @@ function initialize_google_map() {
         new google.maps.LatLng(20.454036,-102.860985));
         theMap.fitBounds(initialBounds);
 
-        /* Add scheduled services panel. */
+        /**
+         * Add scheduled services panel. 
+         */
         var ssp = monitor_controls.buildScheduledServicesPanel();
         theMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(ssp);
         monitor_ajax.updateScheduledServicesList("div#ssp-list");
 
-        /* Add new service form. */
+        /** 
+         * Add new service form. 
+         */
         var nsf = monitor_controls.buildNewServiceForm();
         theMap.controls[google.maps.ControlPosition.TOP_CENTER].push(nsf);
 
+        /**
+         * Initialize service position markers. This indicate the origin (A)
+         * and destination (B) positions of a service request.
+         */
+        monitor.markerPosA = monitor_markers.createServicePositionMarker(
+                                                    theMap, "a.png", "origen");
+        monitor.markerPosB = monitor_markers.createServicePositionMarker(
+                                                    theMap, "b.png", "destino");
     }); /* tilesloaded */
 
     /**
@@ -84,7 +138,6 @@ function initialize_google_map() {
 } /* initialize_google_map */
 
 function init_new_service_form() {
-
     /**
      * Select client number and/or full name
      */
@@ -96,7 +149,6 @@ function init_new_service_form() {
         $( "#full-name" ).val(client_name)
                          .attr("cid", client_id);
     });
-
     /**
      * Select date and time.
      */
@@ -107,53 +159,21 @@ function init_new_service_form() {
                                      scrollDefaultTime: true,
                                      step: 15,
                                      timeFormat: "h:i A"});
-
     /**
-     * Set origin and destination.
+     * Set origin and destination position.
+     *
+     * onclick event: http://stackoverflow.com/a/19237302/7852
      */
-    function set_selected_position(label, searchBox) {
-        label.text(currentlySelectedPosition);
-
-        codeLatLng(currentlySelectedPosition, searchBox);
-    }
-    /* http://stackoverflow.com/a/19237302/7852 */
     $(document).on("click", "button#set-a", function() {
-        set_selected_position( $("label#coords-a"), $("#search-box-a") );
-        positionA = currentlySelectedPosition;
+        monitor.setServicePosition( $("label#coords-a"), $("#search-box-a"), 
+                                    monitor.markerPosA, monitor.infoWinA);
     });
     $(document).on("click", "button#set-b", function() {
-        set_selected_position( $("label#coords-b"), $("#search-box-b") );
-        positionB = currentlySelectedPosition;
+        monitor.setServicePosition( $("label#coords-b"), $("#search-box-b"), 
+                                    monitor.markerPosB, monitor.infoWinB);
     });
 
 } /* init_new_service_form */
-
-/**
- *
- */
-function codeLatLng(position, searchBox) {
-    geocoder.geocode({'latLng': position}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
-            if (results[1]) {
-                marker = new google.maps.Marker({
-                    position: position,
-                    map: theMap
-                });
-                var address = results[1].formatted_address;
-                currentlySelectedInfWin.setContent(address);
-                currentlySelectedInfWin.open(theMap, marker);
-
-                searchBox.val(address);
-
-                contextMenu.close();
-            } else {
-                alert('No results found');
-            }
-        } else {
-            alert('Geocoder failed due to: ' + status);
-        }
-    });
-} /* codeLatLng */
 
 $(document).ready(function() {
     initialize_google_map();
