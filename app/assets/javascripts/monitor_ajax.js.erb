@@ -1,54 +1,82 @@
 
-var WEBROOT = '';
-
-var DEBUG_AJAX=false;
-
-var URL_VEHICLES_GET_CURRENT_POSITIONS = WEBROOT + 'vehicles/get_current_positions.json'; 
-
-var URL_LANDMARKS_GET_ENABLED = WEBROOT + 'taxis/landmarks/getEnabled.json'; 
-
-var URL_SERVICES_GET_FORTHCOMING = WEBROOT + 'services/get_forthcoming.json'; 
-
-var URL_USERS_GET_CLIENTS = WEBROOT + 'users/get_clients.json'; 
-//var URL_USERS_UPDATE_DRIVER_STATUS = WEBROOT + 'users/update_driver_status'; 
-
-/* Configure AJAX */
+/* Configure JQuery AJAX */
 $.ajaxSetup({cache: false, 
              dataType: 'json', 
-             error: function(jqXHR, textStatus, errorThrown) {
-                 if(DEBUG_AJAX === true) {
-                    console.log('AJAX error: ' + textStatus + ', ' + errorThrown);
-                    console.log(jqXHR);
-                 }
-             }
-            });
+             fail: function(jqXHR, textStatus, errorThrown) {
+                        console.log('fail:\n\t' + textStatus + '\n\t' + errorThrown);
+                        console.log('jqXHR: ');
+                        console.log(jqXHR);
+                    }
+           });
 
-var monitor_ajax = {
+monitor.ajax = {
+    url: {
+        users: { set: {}, get: {} },
+        vehicles: { set: {}, get: {} },
+        services: { set: {}, get: {} },
+        landmarks: { set: {}, get: {} }
+    },
 
-    populateClientsList: function(select_node_name) {
-        $.ajax(URL_USERS_GET_CLIENTS).done(
-            function(data) {
+    debug: {
+        DONE: false
+    },
 
-                monitor_ajax.debugAJAXDone(URL_USERS_GET_CLIENTS, data, false);                                   
+    populateClientsList: null,
+    updateTaxiLocationsOnMap: null,
+    setDriverStatus: null,
+    updateScheduledServicesList: null,
+    addCustomControls: null,
+    debugAJAXDone: null
 
-                for (indx in data) {
-                    var client = data[indx];
-                    var client_option = $('<option>').val(client.id)
-                                                     .text(client.id)
-                                                     .attr('name', client.name);
+}; /* monitor.ajax namespace */
 
-                    $( select_node_name ).append(client_option);
-                }
+/**
+ * Constants
+ */
+ 
+/* Users */
+monitor.ajax.url.users.set.DRIVER_STATUS = 'users/set_driver_status.json';
+monitor.ajax.url.users.get.CLIENTS = 'users/get_clients.json';
+/* Vehicles */
+monitor.ajax.url.vehicles.get.CURRENT_POSITIONS = 'vehicles/get_current_positions.json';
+/* Services */
+monitor.ajax.url.services.get.GET_FORTHCOMING = 'services/get_forthcoming.json';
+/* Landmarks */
+monitor.ajax.url.landmarks.get.ENABLED = 'landmarks/get_enabled.json'; // TODO
+
+/**
+ * Functions
+ */
+
+monitor.ajax.populateClientsList = function(select_node_name) {
+    var url = monitor.ajax.url.users.get.CLIENTS;
+
+    $.ajax(url).done(
+        function(data) {
+            monitor.ajax.debugAJAXDone(url, data, false);                                   
+
+            for (indx in data) {
+                var client = data[indx];
+                var client_option = $('<option>').val(client.id)
+                                                 .text(client.id)
+                                                 .attr('name', client.name);
+
+                $( select_node_name ).append(client_option);
             }
-        );
-    }, 
+        }
+    );
+};
 
-    /* Get the latest location reported by every taxi and update the map. */         
-    updateTaxiLocationsOnMap: function (map) {                                         
-        $.ajax(URL_VEHICLES_GET_CURRENT_POSITIONS).done(
+/**
+ * Get the latest location reported by every taxi and update the map. 
+ */         
+monitor.ajax.updateTaxiLocationsOnMap =  function (map) {
+        var url = monitor.ajax.url.vehicles.get.CURRENT_POSITIONS;
+
+        $.ajax(url).done(
             function(data) {                               
 
-                monitor_ajax.debugAJAXDone(URL_VEHICLES_GET_CURRENT_POSITIONS, data, false);                                   
+                monitor.ajax.debugAJAXDone(url, data, false);                                   
                                                                                  
                 for (indx in data['taxisLatLon']) {                                      
                     object = data['taxisLatLon'][indx];                                  
@@ -57,12 +85,45 @@ var monitor_ajax = {
                 }                                                                        
             }
         );                                                                           
-    },
+};
 
-    updateScheduledServicesList: function (container_selector) {
-        $.ajax(URL_SERVICES_GET_FORTHCOMING).done(function(data) {
+/**
+ * selectElement: JQuery <select> object
+ */
+monitor.ajax.setDriverStatus =  function(select) {
+        select.fadeTo(200, 0.33);
 
-            monitor_ajax.debugAJAXDone(URL_SERVICES_GET_FORTHCOMING, data, false);
+        var url = monitor.ajax.url.users.set.DRIVER_STATUS; 
+
+        $.ajax(url).done(                                              
+            function(data) {
+
+                monitor.ajax.debugAJAXDone(url, data, false);
+
+                // TODO: nothing gets updated at the server yet
+                var option = select.find(":selected");
+
+                select.css("background-color", "buttonface");
+            }
+        )
+        .fail(
+            function(jqXHR, textStatus, errorThrown) {
+                select.css("background-color", "#FA8A8A");
+            }
+        )
+        .always(                                                                
+            function() {                                            
+                select.fadeTo(200, 1.0);
+            }                                                                
+        );
+};
+
+monitor.ajax.updateScheduledServicesList =  function (container_selector) {
+        var url = monitor.ajax.url.services.get.GET_FORTHCOMING;
+
+        $.ajax(url).done(function(data) {
+
+            monitor.ajax.debugAJAXDone(url, data, false);
 
             var servicesControls = $(container_selector);
             for (indx in data['services']) {
@@ -79,16 +140,17 @@ var monitor_ajax = {
                           .appendTo(servicesControls); 
             }
         })
-    },
+};
 
-    
-    /**
-     * Add custom controls based on the Landmarks stored in the database.
-     */
-    addCustomControls: function (map) {
-        $.ajax(URL_LANDMARKS_GET_ENABLED).done( function(data) {
+/**
+ * Add custom controls based on the Landmarks stored in the database.
+ */
+monitor.ajax.addCustomControls = function (map) {
+        var url = monitor.ajax.url.landmarks.get.ENABLED;
 
-            monitor_ajax.debugAJAXDone(URL_LANDMARKS_GET_ENABLED, data, false);
+        $.ajax(url).done( function(data) {
+
+            monitor.ajax.debugAJAXDone(url, data, false);
 
                 for (indx in data['enabledLandmarks']) {
                     object = data['enabledLandmarks'][indx];
@@ -97,19 +159,17 @@ var monitor_ajax = {
                     longitude = object.Landmark.longitude;
 
                     var geoLocation = new google.maps.LatLng(latitude, longitude);        
-                    var locationControl = new monitor_controls.locationControl(map, name, geoLocation);
+                    var locationControl = new monitor.controls.locationControl(map, name, geoLocation);
                     map.controls[google.maps.ControlPosition.TOP_LEFT].push(locationControl);
                 }                                                 
         });
-    },
+};
 
-    debugAJAXDone: function (url, data, isEnabled) {
-        if(isEnabled || DEBUG_AJAX === true) {
-            console.log('AJAX done: ' + url);
-            console.log(data);
-        }
+monitor.ajax.debugAJAXDone = function (url, data, isEnabled) {
+    if(isEnabled || monitor.ajax.debug.DONE === true) {
+        console.log('AJAX done:\n\t' + url);
+        console.log(data);
     }
+}; 
 
-}; /* monitor_ajax namespace */
-
-/* EOF */ 
+/* EOF */
