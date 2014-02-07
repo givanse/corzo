@@ -83,6 +83,8 @@ echo "RACK_ENV=development" >>.env
 echo "PORT=3000" >> .env
 gem install foreman
 
+./scripts/install-bootstrap.sh
+
 END=`date +%s`
 ELAPSED=$(( $END - $START ))
 echo 'elapsed: '$ELAPSED/60' mins.'
