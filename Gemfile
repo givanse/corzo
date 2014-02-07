@@ -3,19 +3,22 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 group :development, :test do
-  gem 'rspec-rails', '2.13.1'
-  gem 'spork-rails', '~> 4.0.0'
   # Use debugger
   gem 'columnize', '~> 0.3.6'
   gem 'debugger', group: [:development, :test]
+
+  gem 'foreman'
 end
 
 group :test do
+  gem 'rspec-rails', '2.13.1'
+  gem 'spork-rails', '~> 4.0.0'
   gem 'selenium-webdriver', '~> 2.38.0'
   gem 'capybara', '~> 2.2.0'
 end
 
 group :production do
+  # Include 'rails_12factor' gem to enable all platform features
   gem 'rails_12factor'
 end
 
@@ -70,4 +73,3 @@ gem 'unicorn'
 # gem 'capistrano', group: :development
 
 gem 'orm_adapter'
-
