@@ -8,6 +8,10 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= active_admin 
- *= custom
+ *= require active_admin
+ *= require bootstrap
+ *= require_self
+ *= require scaffolds
+ *= require static_pages
+ *= require custom
  */
