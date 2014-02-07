@@ -35,16 +35,26 @@ rails generate migration add_phone_number_to_users phone_number:string{16}
 # In a bash shell, use dots for precision type fields
 # http://stackoverflow.com/a/14369874/7852
 echo 'Generate models.'
-rails generate model Role name:string{24} --skip
-rails generate model DriverStatus name:string{12} --skip
-rails generate model Driver license:string cellphone:string{16} driver_status:references user:references --skip
-rails generate model Vehicle plate:string model:string year:integer{4} driver:references --skip
-rails generate model Service address:string suburb:string references:string phone_number:string{16} latitude:decimal{9.6} longitude:decimal{9.6} schedule_at:datetime --skip
+rails generate model Role \
+                     name:string{24} --skip
+rails generate model DriverStatus \
+                     name:string{12} --skip
+rails generate model Driver \
+                     license:string cellphone:string{16} \
+                     driver_status:references user:references --skip
+rails generate model Vehicle \
+                     plate:string model:string year:integer{4} \
+                     driver:references --skip
+rails generate model Service \
+                     address:string suburb:string references:string \
+                     phone_number:string{16} \
+                     latitude:decimal{9.6} longitude:decimal{9.6} \
+                     schedule_at:datetime --skip
 rake db:migrate
 
 # Add Active_Admin
 echo 'Install ActiveAdmin'
-rails generate active_admin:install --skip --skip-users # skips user authentication entirely
+rails generate active_admin:install --skip --skip-users # skips authentication 
 rake db:migrate
 
 echo 'Register ActiveAdmin resources'
@@ -60,36 +70,14 @@ echo 'Restore customizations'
 # Edit file config/initializers/active_admin.rb 
 # http://stackoverflow.com/a/14651686/7852
 # restore config file
-cp -v config/initializers/active_admin.rb.bck config/initializers/active_admin.rb
+cp -v config/initializers/active_admin.rb.bck \
+      config/initializers/active_admin.rb
 
 git checkout app/admin/footer.rb
 
 # Populate
 echo 'Almost done, last step, populate the DB.'
 rake db:seed
-
-echo 'Next steps:
-1.- Relationships, manually add:
-  app/models/role.rb
-    has_many :users
-  app/models/user.rb
-    belongs_to :role
-
-  app/models/user.rb
-    has_one :driver
-  app/models/driver.rb
-    belongs_to :user
-
-  app/models/driver_status.rb
-    has_many :drivers
-  app/models/driver.rb
-    belongs_to :driver_status
-
-  app/models/driver.rb
-    has_one :vehicle
-  app/models/vehicle.rb
-    belongs_to :driver
-'
 
 echo "RACK_ENV=development" >>.env
 echo "PORT=3000" >> .env
