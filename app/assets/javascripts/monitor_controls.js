@@ -195,6 +195,7 @@ monitor.controls.buildContextMenu = function(menuWrapperId) {
  * TODO: use a list of markers, put inside a namespace
  */
 function addTaxiMarkerToMap(map, taxiObject) {    
+    var id = taxiObject._id;
     var plate = taxiObject.plate;
     var latitude = taxiObject.lastLatitude;
     var longitude = taxiObject.lastLongitude;
@@ -208,14 +209,11 @@ function addTaxiMarkerToMap(map, taxiObject) {
 
     var marker = monitor.markers.createTaxiMarker(plate, latitude, longitude, status);
     marker.setMap(map);
-
-    var id = taxiObject._id;
     
     infoWindow = new google.maps.InfoWindow();
 
     // Listen for click event  
-    google.maps.event.addListener(marker, 'click', function() { 
-
+    google.maps.event.addListener(marker, 'click', function() {
             var divTaxiInfo = $('<div id=\'TaxiInfo\'>');
             var statusComboBox = $('<select>').attr('id', 'TaxiStatus')
                                               .attr('name', 'data[Taxi][status]')
@@ -226,7 +224,7 @@ function addTaxiMarkerToMap(map, taxiObject) {
             $('<option>').attr({'value':'3'}).html('ocupado').appendTo(statusComboBox);
             statusComboBox.children()[status].setAttribute('selected', 'selected');
 
-            var taxiViewLink = '<a href=\'/taxis/taxis/view/' + id + '\'>' + plate + '</a>';
+            var taxiViewLink = "<a href='admin/vehicles/" + id + "' target='_blank' >" + plate + '</a>';
             var taxiInfo = '<br/>Última ubicación<br/>' + 
                            lastLocUpdate + '<br/>' + 
                            taxiViewLink + '<br/>' + 
