@@ -12,6 +12,7 @@ $.ajaxSetup({cache: false,
 monitor.ajax = {
     url: {
         users: { set: {}, get: {} },
+        drivers: { set: {}, get: {}, root: 'admin/drivers/'},
         vehicles: { set: {}, get: {} },
         services: { set: {}, get: {} },
         landmarks: { set: {}, get: {} }
@@ -35,7 +36,7 @@ monitor.ajax = {
  */
  
 /* Users */
-monitor.ajax.url.users.set.DRIVER_STATUS = 'users/set_driver_status.json';
+monitor.ajax.url.drivers.set.STATUS = '/set_status';
 monitor.ajax.url.users.get.CLIENTS = 'users/get_clients.json';
 /* Vehicles */
 monitor.ajax.url.vehicles.get.CURRENT_POSITIONS = 'vehicles/get_current_positions.json';
@@ -93,9 +94,10 @@ monitor.ajax.updateTaxiLocationsOnMap =  function (map) {
 monitor.ajax.setDriverStatus =  function(select) {
         select.fadeTo(200, 0.33);
 
-        var url = monitor.ajax.url.users.set.DRIVER_STATUS; 
+        var url = monitor.ajax.url.drivers.root + '1' + 
+                  monitor.ajax.url.drivers.set.STATUS;
 
-        $.ajax(url).done(                                              
+        $.ajax(url).done(                                          
             function(data) {
 
                 monitor.ajax.debugAJAXDone(url, data, false);

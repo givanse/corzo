@@ -24,11 +24,5 @@ class UsersController < Devise::RegistrationsController
                 .to_json
     end
 
-    def set_driver_status
-        # TODO
-        #id = params[:id]
-        render :json => "{\"status\": \"error\"}"
-    end
-
 end
 

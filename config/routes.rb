@@ -2,7 +2,6 @@ Corzo::Application.routes.draw do
 
   devise_scope :user do 
     get 'users/get_clients.json' => 'users#get_clients'
-    get 'users/set_driver_status' => 'users#set_driver_status'
   end
   devise_for :users, :controllers => {:registrations => 'users/registrations'}
   resources :users 
