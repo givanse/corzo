@@ -3,7 +3,7 @@ Corzo::Application.routes.draw do
   devise_scope :user do 
     get 'users/get_clients.json' => 'users#get_clients'
   end
-  devise_for :users, :controllers => {:registrations => 'users/registrations'}
+  devise_for :users
   resources :users 
 
   ActiveAdmin.routes(self)

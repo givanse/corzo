@@ -1,7 +1,24 @@
 
 class UsersController < Devise::RegistrationsController
 
+    def index
+        super
+    end
+
+    def create
+        super
+    end
+
+    # sign_up
     def new
+        super
+    end
+
+    def edit 
+        super
+    end
+
+    def show 
         super
     end
 
@@ -9,7 +26,7 @@ class UsersController < Devise::RegistrationsController
         super
     end
 
-    def show
+    def destroy
         super
     end
 
