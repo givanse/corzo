@@ -134,16 +134,25 @@ es_MX:
     required: "requerido"
   activerecord:
     models:
-        driver_status: Estados de Conductor
+        client: Clientes
+        daily_log: Posiciones por dia
         driver: Conductores
-        service: Servicios
+        driver_status: Estados de Conductor
+        drivers_vehicle: Conductores - Autos
+        position_record: Posiciones
+        role: Role
+        tracker_device: Dispositivos GPS        
+        transport_service_location: Ubicaciones de Servicios
+        transport_service: Servicios de traslado 
         user: Usuarios
         vehicle: Vehículos
     attributes:
-      driver_status:
-        name: Estado
-        created_at: Registrado 
-        updated_at: Actualizado
+      client:
+        tservice_location_orig_id: Dirección Default
+        user_id: Usuario 
+      daily_log:
+        tracker_device_id: Dispositivo GPS
+        date: Fecha
       driver:
         license: Permiso de Conductor
         cellphone: Celular
@@ -151,30 +160,54 @@ es_MX:
         user_id: Usuario 
         created_at: Registrado 
         updated_at: Actualizado
+      driver_status:
+        name: Estado
+        created_at: Registrado 
+        updated_at: Actualizado
+      drivers_vehicle:
+        driver_id: Conductor
+        vehicle_id: Vehículo
+        assigned_at: Fecha de asignación
+      position_record:
+        daily_log_id: Número de bitacora
+        latitude: Latitud
+        longitude: Longitud
       role:
         name: Descripción
         created_at: Registrado 
         updated_at: Actualizado
-      service:
-        address: Dirección
-        suburb: Colonia
-        references: Referencias
-        phone_number: Teléfono
-        schedule_at: Agendado
-        longitude: Longitud
+      tracker_device:
+        description: Descripción
+      transport_service_location:
+        comments: Comentarios
         latitude: Latitud
+        longitude: Longitud
+        address: Dirección
+      transport_service:
+        client_id: Número de cliente
+        client_name: Nombre
+        comments: Comentarios
+        fare: Tarifa
+        driver_id: Conductor
+        schedule_at: Agendado
+        tservice_location_orig_id: Origen
+        tservice_location_dest_id: Destino
         created_at: Registrado 
         updated_at: Actualizado
       user:
+        active: Activo
+        email: Email
         name: Nombre
         phone_number: Teléfono
+        role_id: Role
+        tracker_device_id: Dispositivo GPS
         created_at: Registrado 
         updated_at: Actualizado
       vehicle:
-        plate: Placa
         model: Modelo
+        plate: Placa
+        tracker_device_id: Dispositivo GPS
         year: Año
-        driver_id: Conductor
         created_at: Registrado 
         updated_at: Actualizado
 
@@ -188,10 +221,16 @@ es_MX:
             password:
               blank: "vacío"
               too_short: "debe contener al menos 8 caracteres"
+  # active_admin end
 
   time:
     formats:
       long: '%d / %m / %Y - %H:%M'
+  date:
+    formats:
+      long: '%d / %m / %Y'
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, 
+                     Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre] 
 
  
 # Devise locale

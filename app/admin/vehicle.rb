@@ -1,5 +1,5 @@
 ActiveAdmin.register Vehicle do
 
-  menu :parent => "Agentes"
+  menu :parent => "Aparatos"
 
 end

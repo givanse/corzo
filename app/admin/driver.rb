@@ -1,6 +1,6 @@
 ActiveAdmin.register Driver do
   
-  menu :parent => "Agentes"
+  menu :parent => "Usuarios"
   
   # TODO change to POST
   member_action :set_status, :method => :get do

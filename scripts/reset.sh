@@ -23,55 +23,99 @@ rails destroy devise user
 ########### Build ##########
 
 echo 'Create Devise User.'
-rails generate devise user 
+rails g devise user 
 rake db:migrate
 echo 'Add custom fields to Devise User.'
-# Manually add as accessible fields in the User model
-rails generate migration add_role_id_to_users role:references
-rails generate migration add_name_to_users name:string{50}
-rails generate migration add_phone_number_to_users phone_number:string{16}
+# Manually add accessible fields in the User model
+rails g migration add_active_to_users active:boolean
+rails g migration add_name_to_users name:string{50}
+rails g migration add_phone_number_to_users phone_number:string{16}
+rails g migration add_role_id_to_users role:references
+rails g migration add_tracker_device_id_to_users \
+                  tracker_device:references
 
-# Models
+# Migrations
+# http://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-column
 # In a bash shell, use dots for precision type fields
 # http://stackoverflow.com/a/14369874/7852
+echo 'Generate migrations.'
+rails g migration CreateClients tservice_location_orig:references \
+                                user:references --force
+rails g migration CreateDailyLogs tracker_device:references \
+                                  date:date --force
+rails g migration CreateDrivers cellphone:string{16} \
+                                driver_status:references \
+                                license:string \
+                                user:references --skip
+rails g migration CreateDriverStatuses name:string{12} --force
+rails g migration CreateDriversVehicle driver:references \
+                                       vehicle:references \
+                                       assigned_at:datetime --force
+rails g migration CreatePositionRecords daily_log:references \
+                                        latitude:decimal{18.15} \
+                                        longitude:decimal{18.15} --force
+rails g migration CreateRoles name:string{24} --force
+rails g migration CreateTrackerDevices description:string --force
+rails g migration CreateTransportServices client:references \
+                                          client_name:string{48} \
+                                          comments:string \
+                                          fare:decimal{8.3} \
+                                          driver:references \
+                                          schedule_at:datetime \
+                                          tservice_location_orig:references \
+                                          tservice_location_dest:references \
+                                          --force
+rails g migration CreateTransportServiceLocations comments:string \
+                                                  latitude:decimal{18.15} \
+                                                  longitude:decimal{18.15} \
+                                                  address:string --force
+rails g migration CreateVehicles model:string \
+                                 plate:string \
+                                 tracker_device:references \
+                                 year:integer{4} --force
+
+# Models
 echo 'Generate models.'
-rails generate model Role \
-                     name:string{24} --skip
-rails generate model DriverStatus \
-                     name:string{12} --skip
-rails generate model Driver \
-                     license:string cellphone:string{16} \
-                     driver_status:references user:references --skip
-rails generate model Vehicle \
-                     plate:string model:string year:integer{4} \
-                     driver:references --skip
-rails generate model Service \
-                     address:string suburb:string references:string \
-                     phone_number:string{16} \
-                     latitude:decimal{9.6} longitude:decimal{9.6} \
-                     schedule_at:datetime --skip
+rails g model Client --migration false --skip 
+rails g model DailyLog --migration false --skip
+rails g model Driver --migration false --skip 
+rails g model DriverStatus --migration false --skip
+rails g model DriversVehicle --migration false --skip
+rails g model PositionRecord --migration false --skip
+rails g model Role --migration false --skip
+rails g model TrackerDevice --migration false --skip
+rails g model TransportService --migration false --skip 
+rails g model TransportServiceLocation --migration false --skip 
+rails g model Vehicle --migration false --skip
+
 rake db:migrate
 
 # Add Active_Admin
 echo 'Install ActiveAdmin'
-rails generate active_admin:install --skip --skip-users # skips authentication 
+# TODO: https://github.com/gregbell/active_admin/issues/2789
+rails g active_admin:install --skip --skip-users # skips authentication 
 rake db:migrate
 
 echo 'Register ActiveAdmin resources'
-rails generate active_admin:resource User --skip
-rails generate active_admin:resource Role --skip  
-rails generate active_admin:resource DriverStatus --skip 
-rails generate active_admin:resource Driver --skip 
-rails generate active_admin:resource Vehicle --skip 
-rails generate active_admin:resource Service --skip 
-#Enable strong parameters in app/admin/* (???) 
+rails g active_admin:resource Client --skip 
+rails g active_admin:resource DailyLog --skip
+rails g active_admin:resource Driver --skip 
+rails g active_admin:resource DriverStatus --skip 
+rails g active_admin:resource DriversVehicle --skip 
+rails g active_admin:resource PositionRecord --skip 
+rails g active_admin:resource Role --skip  
+rails g active_admin:resource TrackerDevice --skip  
+rails g active_admin:resource TransportService --skip  
+rails g active_admin:resource TransportServiceLocation --skip  
+rails g active_admin:resource User --skip
+rails g active_admin:resource Vehicle --skip 
 
 echo 'Restore customizations'
+git checkout app/admin/
 # Edit file config/initializers/active_admin.rb 
 # http://stackoverflow.com/a/14651686/7852
 # restore config file
-cp -v config/initializers/active_admin.rb.bck \
-      config/initializers/active_admin.rb
+git checkout config/initializers/active_admin.rb
 
 git checkout app/admin/footer.rb
 
@@ -79,14 +123,16 @@ git checkout app/admin/footer.rb
 echo 'Almost done, last step, populate the DB.'
 rake db:seed
 
-echo "RACK_ENV=development" >>.env
-echo "PORT=3000" >> .env
+if [ ! -f .env ] ; then
+    echo "RACK_ENV=development" >>.env
+    echo "PORT=3000" >> .env
+fi
 
 ./scripts/install-bootstrap.sh
 
 END=`date +%s`
 ELAPSED=$(( $END - $START ))
-echo 'elapsed: '$ELAPSED/60' mins.'
+echo 'elapsed: ' $ELAPSED / 60 ' mins.'
 
 echo 'Do not forget to update symbolic links in the assets folder.'
 

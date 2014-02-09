@@ -1,4 +1,4 @@
-ActiveAdmin.register_page "Monitor" do
+ActiveAdmin.register_page "MONITOR" do
 
   menu :priority => 100
 

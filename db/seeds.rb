@@ -6,85 +6,194 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# Owner
+roleOwner = Role.create(name: 'propietario')
+User.create(active: true,
+            email: 'luke@mail.com', 
+            name: 'Luke Skywalker', 
+            phone_number: '6666 7777', 
+            role_id: roleOwner.id, 
+            #tracker_device_id: NULL, 
+            password: '12345678', password_confirmation: '12345678')
+
+# Operators
+roleOperator = Role.create(name: 'operador')
+User.create(active: true,
+            email: 'jorge@mail.com', 
+            name: 'Jorge', 
+            phone_number: '33 0000 0000', 
+            role_id: roleOperator.id, 
+            #tracker_device_id: NULL, 
+            password: '12345678', password_confirmation: '12345678')
+User.create(active: true,
+            email: 'claudia@mail.com', 
+            name: 'Claudia', 
+            phone_number: '33 0000 0000', 
+            role_id: roleOperator.id, 
+            #tracker_device_id: NULL, 
+            password: '12345678', password_confirmation: '12345678')
+
+# Clients
+roleClient = Role.create(name: 'cliente')
+tslMinerva = TransportServiceLocation.create(latitude: 20.674387, 
+                                      longitude: -103.387315, 
+                                      address: 'calle sin nombre 200')
+user = User.create(active: true,
+                   email: 'piggy@mail.com', 
+                   name: 'Miss Piggy', 
+                   phone_number: '7777 7777', 
+                   role_id: roleClient.id, 
+                   #tracker_device_id: NULL, 
+                   password: '12345678', password_confirmation: '12345678')
+clientPiggy = Client.create(tservice_location_orig_id: tslMinerva.id, 
+                            user_id: user.id)
+user = User.create(active: true,
+                   email: 'poogy@mail.com', 
+                   name: 'Miss Poogy', 
+                   phone_number: '8888 8888', 
+                   role_id: roleClient.id, 
+                   #tracker_device_id: NULL, 
+                   password: '12345678', password_confirmation: '12345678')
+clientPoogy = Client.create(tservice_location_orig_id: tslMinerva.id, 
+                            user_id: user.id)
+
+# Drivers
+roleDriver = Role.create(name: 'conductor')
+
 incomunicado = DriverStatus.create(name: 'incomunicado')
 inactivo = DriverStatus.create(name: 'inactivo')
 libre = DriverStatus.create(name: 'libre')
 ocupado = DriverStatus.create(name: 'ocupado')
 
-admin = Role.create(name: 'administrador')
-owner = Role.create(name: 'propietario')
-op = Role.create(name: 'operador')
-driver = Role.create(name: 'conductor')
-client = Role.create(name: 'cliente')
+user = User.create(active: true,
+                   email: 'picapiedra@mail.com', 
+                   name: 'Pedro Picapiedra', 
+                   phone_number: '6666 7777', 
+                   role_id: roleDriver.id, 
+                   tracker_device_id: 
+                       TrackerDevice.create(description: 'ABC001').id,
+                   password: '12345678', password_confirmation: '12345678')
+d1 = Driver.create(license: '01020304', cellphone: '33 0000 1111', 
+                   driver_status_id: incomunicado.id, user_id: user.id)
 
-ua = User.create(name: 'Luke Skywalker', phone_number: '6666 7777', 
-                 email: 'luke@mail.com', role_id: admin.id, 
-                 password: '12345678', password_confirmation: '12345678')
-uo = User.create(name: 'Buzz Lighyear', phone_number: '6666 7777', 
-                 email: 'buzz@mail.com', role_id: owner.id, 
-                 password: '12345678', password_confirmation: '12345678')
+user = User.create(active: true,
+                   email: 'infante@mail.com', 
+                   name: 'Pedro Infante', 
+                   phone_number: '6666 7777', 
+                   role_id: roleDriver.id, 
+                   tracker_device_id: 
+                       TrackerDevice.create(description: 'ABC002').id,
+                   password: '12345678', password_confirmation: '12345678')
+d2 = Driver.create(license: '11121314', cellphone: '33 0000 1111', 
+                   driver_status_id: inactivo.id, user_id: user.id)
 
-uop = User.create(name: 'Bruno Diaz', phone_number: '6666 7777', 
-                 email: 'bruno@mail.com', role_id: op.id, 
-                 password: '12345678', password_confirmation: '12345678')
+user = User.create(active: true,
+                   email: 'navajas@mail.com', 
+                   name: 'Pedro Navajas', 
+                   phone_number: '6666 7777', 
+                   role_id: roleDriver.id, 
+                   tracker_device_id: 
+                       TrackerDevice.create(description: 'ABC003').id,
+                   password: '12345678', password_confirmation: '12345678')
+d3 = Driver.create(license: '21222324', cellphone: '33 0000 1111', 
+                   driver_status_id: libre.id, user_id: user.id)
 
-# Drivers - Pedro
-ud1 = User.create(name: 'Pedro Picapiedra', phone_number: '6666 7777', 
-                 email: 'picapiedra@mail.com', role_id: driver.id, 
-                 password: '12345678', password_confirmation: '12345678')
-ud2 = User.create(name: 'Pedro Infante', phone_number: '6666 7777', 
-                 email: 'infante@mail.com', role_id: driver.id, 
-                 password: '12345678', password_confirmation: '12345678')
-ud3 = User.create(name: 'Pedro Navajas', phone_number: '6666 7777', 
-                 email: 'navajas@mail.com', role_id: driver.id, 
-                 password: '12345678', password_confirmation: '12345678')
-ud4 = User.create(name: 'Pedro Paramo', phone_number: '6666 7777', 
-                 email: 'paramo@mail.com', role_id: driver.id, 
-                 password: '12345678', password_confirmation: '12345678')
-# Clients - Miss
-User.create(name: 'Miss Piggy', phone_number: '7777 7777', 
-            email: 'piggy@mail.com', role_id: client.id, 
-            password: '12345678', password_confirmation: '12345678')
-User.create(name: 'Miss Poogy', phone_number: '8888 8888', 
-            email: 'poogy@mail.com', role_id: client.id, 
-            password: '12345678', password_confirmation: '12345678')
+user = User.create(active: true,
+                   email: 'paramo@mail.com', 
+                   name: 'Pedro Paramo', 
+                   phone_number: '6666 7777', 
+                   role_id: roleDriver.id, 
+                   tracker_device_id: 
+                       TrackerDevice.create(description: 'ABC004').id,
+                   password: '12345678', password_confirmation: '12345678')
+d4 = Driver.create(license: '31323334', cellphone: '33 0000 1111', 
+                   driver_status_id: ocupado.id, user_id: user.id)
 
-d1 = Driver.create(license: '01020304', cellphone: '33 0000 1111', driver_status_id: libre.id, user_id: ud1.id)
-d2 = Driver.create(license: '11121314', cellphone: '33 0000 1111', driver_status_id: ocupado.id, user_id: ud2.id)
-d3 = Driver.create(license: '21222324', cellphone: '33 0000 1111', driver_status_id: inactivo.id, user_id: ud3.id)
-d4 = Driver.create(license: '31323334', cellphone: '33 0000 1111', driver_status_id: libre.id, user_id: ud4.id)
+# Vehicles
+v1 = Vehicle.create(model: 'Tsuru',  
+               plate: 'amj-0000',  
+               tracker_device_id: 
+                   TrackerDevice.create(description: 'TaxiGPS01').id,
+               year: 2010)
+v2 = Vehicle.create(model: 'Tsuru',  
+               plate: 'amj-0001',  
+               tracker_device_id: 
+                   TrackerDevice.create(description: 'TaxiGPS02').id,
+               year: 2011)
+v3 = Vehicle.create(model: 'Sentra',  
+               plate: 'amj-0002',
+               tracker_device_id: 
+                   TrackerDevice.create(description: 'TaxiGPS03').id,
+               year: 2012)
+v4 = Vehicle.create(model: 'Sentra',  
+               plate: 'amj-0003',  
+               tracker_device_id: 
+                   TrackerDevice.create(description: 'TaxiGPS04').id,
+               year: 2012)
+
+# Drivers Vehicles
+DriversVehicle.create(driver_id: d1.user_id,
+                      vehicle_id: v1.id,
+                      assigned_at: DateTime.new(2009, 06, 06, 12, 00))
+DriversVehicle.create(driver_id: d2.user_id,
+                      vehicle_id: v2.id,
+                      assigned_at: DateTime.new(2009, 06, 06, 12, 00))
+DriversVehicle.create(driver_id: d3.user_id,
+                      vehicle_id: v3.id,
+                      assigned_at: DateTime.new(2009, 06, 06, 12, 00))
+DriversVehicle.create(driver_id: d4.user_id,
+                      vehicle_id: v4.id,
+                      assigned_at: DateTime.new(2009, 06, 06, 12, 00))
 
 
 # TODO: `block in trace_on': invalid byte sequence in US-ASCII
 # For: Eca Do Queirós
-Service.create(address: 'Eca Do Queiros 5210', 
-               suburb: 'Jardines Universidad', 
-               references: 'reja blanca, hay un arbol de naranjas',
-               phone_number: '4444 9999', 
-               latitude: 20.69131, longitude: -103.421765, 
-               schedule_at: DateTime.new(2013, 12, 30, 18, 30))
-Service.create(address: 'Paseo de las Azucenas 318', 
-               suburb: 'Prados Tepeyac', 
-               references: 'al lado de un Oxxo',
-               phone_number: '4444 9999', 
-               latitude: 20.655326, longitude: -103.410482, 
-               schedule_at: DateTime.new(2013, 11, 15, 15, 30))
-Service.create(address: 'Delgadillo Araujo 158', 
-               suburb: 'San Andres', 
-               references: 'no se ve el numero porque hay enredadera',
-               phone_number: '4444 9999', 
-               latitude: 20.658682, longitude: -103.30261, 
-               schedule_at: DateTime.new(2015, 10, 01, 10, 00))
-Service.create(address: '', 
-               suburb: '', 
-               references: 'Plaza Galerias, en la entrada de Liverpool',
-               phone_number: '4444 9999', 
-               latitude: 20.676736, longitude: -103.430144, 
-               schedule_at: DateTime.new(2015, 8, 16, 7)) # mes, dia, hora
+TransportService.create(#client_id: NULL,
+               client_name: 'Martin Fierro',
+               comments: 'reja blanca, hay un arbol de naranjas',
+               fare: 50.0,
+               driver_id: 1,
+               schedule_at: DateTime.new(2013, 12, 30, 18, 30),
+               tservice_location_orig_id: TransportServiceLocation.create(
+                   latitude: 20.69138, 
+                   longitude: -103.430241, 
+                   address: 'Eca Do Queiros 5210, Jardines Universidad').id,
+               tservice_location_dest_id: TransportServiceLocation.create(
+                   latitude: 20.69128, 
+                   longitude: -103.419641, 
+                   address: 'Eca Do Queiros 5067, Jardines Universidad').id)
 
-Vehicle.create(plate: 'amj-0000',  model: 'Tsuru',  year: 2010, driver_id: d1.id)
-Vehicle.create(plate: 'amj-0001',  model: 'Tsuru',  year: 2012, driver_id: d2.id)
-Vehicle.create(plate: 'amj-0002',  model: 'Tsuru',  year: 2012, driver_id: d3.id)
-Vehicle.create(plate: 'amj-0003',  model: 'Tsuru',  year: 2013, driver_id: d4.id)
+TransportService.create(client_id: clientPiggy.user_id,
+               #client_name: NULL,
+               comments: 'no se ve el numero porque hay enredadera',
+               fare: 50.0,
+               #driver_id: NULL,
+               schedule_at: DateTime.new(2015, 10, 01, 10, 00), # mes dia hora
+               #tservice_location_orig_id: NULL, 
+               tservice_location_dest_id: TransportServiceLocation.create(
+                   latitude: 20.658682, 
+                   longitude: -103.30261, 
+                   address: 'Delgadillo Araujo 158, San Andres').id)
+
+TransportService.create(client_id: clientPoogy.user_id,
+               #client_name: NULL,
+               comments: 'Plaza Galerias, en la entrada de Liverpool',
+               fare: 50.0,
+               #driver_id: NULL,
+               schedule_at: DateTime.new(2015, 8, 16, 7), # mes dia hora
+               #tservice_location_orig_id: NULL, 
+               tservice_location_dest_id: TransportServiceLocation.create(
+                   latitude: 20.676736, 
+                   longitude: -103.430144, 
+                   #address: NULL
+               ).id)
+
+# Daily Logs 
+DailyLog.create(tracker_device_id: 1, date: Date.new(2000, 1, 20))
+DailyLog.create(tracker_device_id: 1, date: Date.new(2000, 1, 21))
+DailyLog.create(tracker_device_id: 2, date: Date.new(2000, 1, 20))
+DailyLog.create(tracker_device_id: 2, date: Date.new(2000, 1, 21))
+
+# Position Records
 
 #EOF

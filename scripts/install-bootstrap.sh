@@ -5,7 +5,7 @@ set -e
 bootstrapZip='bootstrap-3.0.0-dist.zip'
 bootstrapFolder='bootstrap-3.0.0'
 
-if [ ! -f $bootstrapZip]; then
+if [ ! -f $bootstrapZip ] ; then
     echo 'downloading Bootstrap...'
     # http://getbootstrap.com/
     wget https://github.com/twbs/bootstrap/releases/download/v3.0.0/bootstrap-3.0.0-dist.zip

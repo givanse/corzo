@@ -4,12 +4,16 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+Gemfile.lock
+
 # Ignore bundler config.
 /.bundle
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal
+db/migrate
+db/schema.rb
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
@@ -27,3 +31,7 @@ app/assets/javascripts/jquery.timepicker.js
 app/assets/javascripts/jquery.timepicker.min.js
 app/assets/stylesheets/jquery-ui-1.10.4.css
 app/assets/stylesheets/jquery.timepicker.css
+bootstrap-3.0.0-dist.zip
+bootstrap-3.0.0/
+
+dia/*.dia.autosave
