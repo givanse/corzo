@@ -136,26 +136,27 @@ monitor.ajax.setDriverStatus =  function(select) {
         );
 };
 
-monitor.ajax.updateScheduledServicesList =  function (container_selector) {
+monitor.ajax.updateScheduledServicesList =  function(sslSelectorString) {
         var url = monitor.ajax.url.services.get.GET_FORTHCOMING;
 
         $.ajax(url).done(function(data) {
 
             monitor.ajax.debugAJAXDone(url, data, false);
 
-            var servicesControls = $(container_selector);
-            for (indx in data['services']) {
-                var address = data['services'][indx].Service.address;
-                var scheduled = data['services'][indx].Service.scheduled;
-                $('<div>').append(address + '<br/>' + scheduled) 
-                          .css({
-                              'background-color': 'white', 
-                              'color': 'black', 
-                              'border-radius': '3px', 
-                              'margin': '2px 5px 2px 5px', 
-                              'padding': '0 2px 0 2px', 
-                              'cursor': 'pointer'})
-                          .appendTo(servicesControls); 
+            var sslWrapper = $(sslSelectorString);
+
+            for (i = 0; i < data['services'].length; i++) {
+                var ss = data['services'][i].Service;
+
+                // beware of the closure in the loop!
+                $(".scheduled-service-empty").clone()
+                                             .attr("class", "scheduled-service")
+                                             .css("display", "block")
+                                             .click({ ss: ss}, function(e) {
+                                                 monitor.controls.updateTransportServiceForm(e.data.ss);
+                                             })
+                                             .text(ss.address + ' ' + ss.scheduled)
+                                             .appendTo(sslWrapper);
             }
         })
 };

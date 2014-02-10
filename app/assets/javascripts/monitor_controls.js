@@ -4,6 +4,7 @@ monitor.controls = {
     locationControl: null,
     buildScheduledServicesPanel: null,
     TransportServiceForm: null,
+    updateTransportServiceForm: null,
     addSearchBox: null,
     buildContextMenu: null
 
@@ -60,6 +61,8 @@ monitor.controls.buildScheduledServicesPanel = function() {
         }
     );
 
+    $("div#ssp").css("display", "block");
+
     /** 
      * Call .get(0) or you'll get this error:
      *     TypeError: a[w] is undefined
@@ -91,7 +94,13 @@ monitor.controls.TransportServiceForm = function() {
      * Used as a wrapper and for positioning within the map.                                             
      */                                                                          
     return $("div#nsf").get(0);                                          
-}; /* buildNewServicesForm */
+}; /* TransportServiceForm */
+
+monitor.controls.updateTransportServiceForm = function(ss) {
+    $("#tservice-id").text(ss._id);
+    $("#search-box-a").val(ss.address);
+    $("#select-date").val(ss.scheduled);
+}; /* updateTransportServiceForm */
 
 /**
  * Creates a search box, links it to the inputElement and adds it 

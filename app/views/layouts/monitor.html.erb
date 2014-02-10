@@ -44,19 +44,24 @@
 
     <!-- ssp -->
     <!-- monitor.controls.buildScheduledServicesPanel -->
-    <div id="ssp" class="controlDiv">
+    <div id="ssp" class="controlDiv" style="display: none;">
         <div id="ssp-ui" class="ui">
            <div id="ssp-controls">
                <img src="img/minimize_window16.png">
            </div>
+
            <div id="clock" class="toggleable">
              Lunes, Enero 10 2014, 15:30
            </div> 
+
            <div id="ssp-list" class="toggleable">
-              <!-- monitor.ajax.updateScheduledServicesList -->
+              
            </div> 
         </div>
     </div>                 
+    <div class="scheduled-service-empty" style="display: none;">
+        <!-- monitor.ajax.updateScheduledServicesList -->
+    </div>
 
     <!-- nsf -->
     <div id="nsf" class="controlDiv">
@@ -65,7 +70,7 @@
                <img src="img/minimize_window16.png">
            </div> 
            <div id="col1" class="nsf-col toggleable">
-               <label>Servicio No.</label><label id="service-no">0001</label>
+               <label>Servicio No.</label><label id="tservice-id">0001</label>
                <br>
                <label>10 / Enero / 2014</label>
                <br>
