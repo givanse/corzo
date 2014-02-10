@@ -1,9 +1,9 @@
 /*
  *
- *= require monitor_controls
  *= require jquery-ui
  *= require jquery.timepicker 
  *= require bootstrap
+ *= require monitor_controls
  *= require_self
  */
 

@@ -116,7 +116,7 @@ monitor.controls.addSearchBox = function(map, inputElement) {
         var resultBounds = new google.maps.LatLngBounds();
         var placeResults = searchBox.getPlaces();
         for (var i = 0, placeResult; placeResult = placeResults[i]; i++) {
-            var placeMarker = monitor_markers.createPlaceResultMarker(map, placeResult);
+            var placeMarker = monitor.markers.createPlaceResultMarker(map, placeResult);
             currPlacesMarkers.push(placeMarker);
 
             resultBounds.extend(placeResult.geometry.location);
@@ -189,64 +189,5 @@ monitor.controls.buildContextMenu = function(menuWrapperId) {
 
     return contextMenu;
 }; /* buildContextMenu */
-
-
-/**
- * TODO: use a list of markers, put inside a namespace
- */
-function addTaxiMarkerToMap(map, taxiObject) {    
-    var id = taxiObject._id;
-    var plate = taxiObject.plate;
-    var latitude = taxiObject.lastLatitude;
-    var longitude = taxiObject.lastLongitude;
-    var phone = taxiObject.driverCellphone;
-    var status = taxiObject.status;
-    var lastLocUpdate = taxiObject.modifiedLocation;
-    var statusMsg = status == 0 ? 'Incomunicado' :                               
-                    status == 1 ? 'Inactivo' :                                   
-                    status == 2 ? 'Libre' :                                      
-                    status == 3 ? 'Ocupado' : 'Error de sistema';
-
-    var marker = monitor.markers.createTaxiMarker(plate, latitude, longitude, status);
-    marker.setMap(map);
-    
-    infoWindow = new google.maps.InfoWindow();
-
-    // Listen for click event  
-    google.maps.event.addListener(marker, 'click', function() {
-            var divTaxiInfo = $('<div id=\'TaxiInfo\'>');
-            var statusComboBox = $('<select>').attr('id', 'TaxiStatus')
-                                              .attr('name', 'data[Taxi][status]')
-                                              .appendTo(divTaxiInfo);
-            $('<option>').attr({'value':'0'}).html('incomunicado').appendTo(statusComboBox);
-            $('<option>').attr({'value':'1'}).html('inactivo').appendTo(statusComboBox);
-            $('<option>').attr({'value':'2'}).html('libre').appendTo(statusComboBox);
-            $('<option>').attr({'value':'3'}).html('ocupado').appendTo(statusComboBox);
-            statusComboBox.children()[status].setAttribute('selected', 'selected');
-
-            var taxiViewLink = "<a href='admin/vehicles/" + id + "' target='_blank' >" + plate + '</a>';
-            var taxiInfo = '<br/>Última ubicación<br/>' + 
-                           lastLocUpdate + '<br/>' + 
-                           taxiViewLink + '<br/>' + 
-                           phone;
-            divTaxiInfo.append(taxiInfo);
-
-            var wrapperDiv = $('<div>');
-            divTaxiInfo.appendTo(wrapperDiv);
-            infoWindow.setContent(wrapperDiv.html()); 
-            infoWindow.setPosition(marker.position); 
-            infoWindow.open(map); 
-        });
-
-    /* Add events until the InfoWindow's DOM is ready (available). */
-    google.maps.event.addListener(infoWindow, 'domready', function() {
-
-        var select = $('div#TaxiInfo select#TaxiStatus');
-
-        select.change(function() { 
-            monitor.ajax.setDriverStatus(select);
-        });
-    });
-} /* addTaxiMarkerToMap */
 
 /* EOF */

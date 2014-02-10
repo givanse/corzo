@@ -60,10 +60,10 @@ clientPoogy = Client.create(tservice_location_orig_id: tslMinerva.id,
 # Drivers
 roleDriver = Role.create(name: 'conductor')
 
-incomunicado = DriverStatus.create(name: 'incomunicado')
-inactivo = DriverStatus.create(name: 'inactivo')
-libre = DriverStatus.create(name: 'libre')
-ocupado = DriverStatus.create(name: 'ocupado')
+incomunicado = DriverStatus.create(id: 0, name: 'incomunicado')
+inactivo = DriverStatus.create(id: 1, name: 'inactivo')
+libre = DriverStatus.create(id: 2, name: 'libre')
+ocupado = DriverStatus.create(id: 3, name: 'ocupado')
 
 user = User.create(active: true,
                    email: 'picapiedra@mail.com', 

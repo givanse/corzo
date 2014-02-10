@@ -6,9 +6,10 @@ monitor.markers = {
 
     createPlaceResultMarker: null,
     createServicePositionMarker: null,
-    createTaxiMarker: null
+    createTaxiMarker: null,
+    createTaxiMarkerInfoWindow: null
 
-}; /* monitor_markers namespace */
+};
 
 /**
  * map: google.maps.Map
@@ -56,8 +57,10 @@ monitor.markers.createServicePositionMarker = function(map, imgFileName, title) 
 /**
  *
  */
-monitor.markers.createTaxiMarker = function(plate, latitude, longitude, status) {    
-    /* Add taxi markers. */                                              
+monitor.markers.createTaxiMarker = function(map, plate, latitude, longitude, status) {    
+    /**
+     * Create marker. 
+     */                                              
     var image = {                                                        
         url: monitor.img.FOLDER + status + monitor.img.TAXI_BASE_NAME,                                          
         // This marker is 20 pixels wide by 32 pixels tall.              
@@ -68,12 +71,79 @@ monitor.markers.createTaxiMarker = function(plate, latitude, longitude, status) 
         anchor: new google.maps.Point(24, 57)                            
     };                                                                   
 
-    var marker = new google.maps.Marker({                                
+    var marker = new google.maps.Marker({      
         icon: image,
         title: plate,
         position: new google.maps.LatLng(latitude, longitude) 
-    });                                                                  
+    });
+
+    /**
+     * Add InfoWindow with Driver and Vehicle details.
+     */
+    var infoWindow = monitor.markers.createTaxiMarkerInfoWindow();
+     
+    google.maps.event.addListener(marker, 'click', function() {
+            infoWindow.setPosition(marker.position);
+            infoWindow.open(map);
+    });
+
     return marker;
 }; /* createTaxiMarker */
+
+monitor.markers.createTaxiMarkerInfoWindow = function() {   
+    var infoWindow = new google.maps.InfoWindow();
+
+    var driver_status_id = 3;
+    var plate = "AMJ-0001";
+    var driver_name = "Pedro Picapiedra";
+    var driver_id = 1;
+    var vehicle_id = 1;
+
+    var vehicleInfo = $("div#driver-vehicle-info").clone()
+                                                  .css("display", "block");
+
+    vehicleInfo.children("select#driver-status")
+               .children("#" + driver_status_id)
+               .get(0)
+               .setAttribute("selected", "selected");
+
+    vehicleInfo.children("#vehicle-link")
+               .text(plate)
+               .get(0)
+               .setAttribute("href", "admin/vehicles/" + vehicle_id);
+
+    vehicleInfo.children("#driver-link")
+               .text(driver_name)
+               .get(0)
+               .setAttribute("href", "admin/drivers/" + driver_id);
+
+    /* insert to InfoWindow */
+    var wrapperDiv = $('<div>');
+    vehicleInfo.appendTo(wrapperDiv);
+    infoWindow.setContent(wrapperDiv.html());
+
+    /* Add events until the InfoWindow's DOM is ready (available). */
+    google.maps.event.addListener(infoWindow, 'domready', function() {
+
+        /* Update the driver's status. */
+        var selectDriverStatus = $('div#driver-vehicle-info select#driver-status');
+
+        selectDriverStatus.change(
+            function() { 
+                monitor.ajax.setDriverStatus(selectDriverStatus);
+            }
+        );
+
+        /* Update the New Service Form.*/
+        $("div#driver-vehicle-info button#assign").click(
+            function() {
+                $("#nsf-ui #col3 #select-driver").val(driver_name);
+            }
+        );
+
+    });
+
+    return infoWindow;
+}; /* createTaxiMarkerInfoWindow */
 
 /* EOF */
