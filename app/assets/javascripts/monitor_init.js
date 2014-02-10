@@ -13,6 +13,7 @@ function initialize_google_map() {
         disableDefaultUI: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         zoomControl: true,
+        // TODO http://stackoverflow.com/a/9773082/7852
         zoomControlOptions: {
             position: google.maps.ControlPosition.RIGHT_CENTER
         }

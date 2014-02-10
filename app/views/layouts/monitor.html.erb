@@ -43,12 +43,18 @@
     <!-- map controls -->
 
     <!-- ssp -->
+    <!-- monitor.controls.buildScheduledServicesPanel -->
     <div id="ssp" class="controlDiv">
         <div id="ssp-ui" class="ui">
            <div id="ssp-controls">
                <img src="img/minimize_window16.png">
+           </div>
+           <div id="clock" class="toggleable">
+             Lunes, Enero 10 2014, 15:30
            </div> 
-           <div id="ssp-list"></div> 
+           <div id="ssp-list" class="toggleable">
+              <!-- monitor.ajax.updateScheduledServicesList -->
+           </div> 
         </div>
     </div>                 
 
@@ -58,10 +64,10 @@
            <div id="nsf-controls">
                <img src="img/minimize_window16.png">
            </div> 
-           <div id="col1" class="nsf-col">
+           <div id="col1" class="nsf-col toggleable">
                <label>Servicio No.</label><label id="service-no">0001</label>
                <br>
-               <label>10 / Enero / 2013</label>
+               <label>10 / Enero / 2014</label>
                <br>
                <label>No. Cliente: </label>
                <select id="select-client">
@@ -70,7 +76,7 @@
                <br>
                <input id="full-name" placeholder="Nombre Completo" size=26>
            </div>
-           <div id="col2" class="nsf-col">
+           <div id="col2" class="nsf-col toggleable">
                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                <input id="select-date" placeholder="Fecha" size=12 type="text">
                &nbsp;
@@ -89,7 +95,7 @@
                &nbsp;&nbsp;&nbsp;&nbsp;
                <label id="coords-b">00.000000000000000, 00.000000000000000</label>
            </div>
-           <div id="col3" class="nsf-col">
+           <div id="col3" class="nsf-col toggleable">
                <textarea id="comments" placeholder="Referencias y Comentarios" cols=25 rows=4></textarea>
                <br>
                <br>
@@ -98,7 +104,7 @@
                <br>
                <input id="select-driver" placeholder="Conductor" size=26 readonly>
            </div>
-           <div id="col4" class="nsf-col">
+           <div id="col4" class="nsf-col toggleable">
                <button>Borrar</button>
                <button>Guardar y Copiar</button>
                <button>Guardar</button>
@@ -106,7 +112,7 @@
        </div> 
     </div>                 
 
-    <!-- context menu -->
+    <!-- Context menu -->
     <div id="context-menu">
         <button id="set-a">fijar A</button>
         <br>

@@ -24,6 +24,18 @@ div#map-canvas {
     border-radius: 5px;                          
 }
 
+/* Map control's controls */
+
+#ssp-controls, 
+#nsf-controls {
+    text-align: right;
+}
+#ssp-controls img, 
+#nsf-controls img {
+    cursor: pointer;
+    padding: 2px;
+}
+
 /* Scheduled Service Panel */
 
 #ssp #ssp-ui {
@@ -31,9 +43,17 @@ div#map-canvas {
     width: 175px;                             
 }
 
+#ssp-ui #clock,
 #ssp-ui #ssp-list {
+    margin: 2px 5px;
     margin-top: 4px;
+    padding: 1px 2px;
     overflow: auto;
+}
+
+#ssp-ui #clock {
+    background-color: #A9A9FF;
+    border-radius: 5px;
 }
 
 /* New Service Form */
@@ -53,7 +73,7 @@ div#map-canvas {
 #nsf #nsf-ui #col3 {
     border: 1px solid #A9A9FF;
     border-radius: 3px;
-    margin: 0px 5px 5px 5px;
+    margin: 5px;
     display: table-cell;
     float: left;
     height: 200px;
@@ -94,18 +114,6 @@ input#select-driver {
 textarea#comments {
     resize: none; 
     border: solid 2px lightgray;
-}
-
-/* Map control's controls */
-
-#ssp-controls, 
-#nsf-controls {
-    text-align: right;
-}
-#ssp-controls img, 
-#nsf-controls img {
-    cursor: pointer;
-    padding: 2px;
 }
 
 /* Context menu */

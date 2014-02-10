@@ -52,17 +52,20 @@ monitor.controls.locationControl = function(map, title, centerLocation) {
 monitor.controls.buildScheduledServicesPanel = function() {
     var minimizeButton = $("#ssp #ssp-ui #ssp-controls img").click(
         function() {
-            var display = $("#ssp #ssp-ui #ssp-list").css("display");
+            var selectorString = "#ssp #ssp-ui .toggleable";
+
+            var display = $(selectorString).css("display");
             var displayValue = (display == "none") ? "block" : "none" ;
-            $("#ssp #ssp-ui #ssp-list").css("display", displayValue);
-        });
+            $(selectorString).css("display", displayValue);
+        }
+    );
 
     /** 
      * Call .get(0) or you'll get this error:
      *     TypeError: a[w] is undefined
      *
-     * The map does stuff with the controlDiv and expects the DOM object, not
-     * the JQuery selector. 
+     * The map does stuff with the controlDiv and expects the DOM object, 
+     * text node, not the JQuery node. 
      */
     return $("div#ssp").get(0);
 }, /* buildScheduledServicesPanel */
@@ -71,17 +74,19 @@ monitor.controls.TransportServiceForm = function() {
 
     var minimizeButton = $("#nsf #nsf-ui #nsf-controls img").click(
         function() {
-            var display = $("#nsf #nsf-ui .nsf-col").css("display");
+            var selectorString = "#nsf #nsf-ui .toggleable";
+
+            var display = $(selectorString).css("display");
             var displayValue = (display == "none") ? "block" : "none" ;
-            $("#nsf #nsf-ui .nsf-col").css("display", displayValue);
+            $(selectorString).css("display", displayValue);
         });
 
     /**                                                                             
      * Call .get(0) or you'll get this error:                                       
      *     TypeError: a[w] is undefined                                             
      *                                                                              
-     * The map does stuff with the controlDiv and expects the DOM object, not       
-     * the JQuery selector.            
+     * The map does stuff with the controlDiv and expects the DOM object, 
+     * text node, not the JQuery node.            
      *
      * Used as a wrapper and for positioning within the map.                                             
      */                                                                          
