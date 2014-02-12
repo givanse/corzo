@@ -60,10 +60,10 @@ clientPoogy = Client.create(tservice_location_orig_id: tslMinerva.id,
 # Drivers
 roleDriver = Role.create(name: 'conductor')
 
-incomunicado = DriverStatus.create(id: 0, name: 'incomunicado')
-inactivo = DriverStatus.create(id: 1, name: 'inactivo')
-libre = DriverStatus.create(id: 2, name: 'libre')
-ocupado = DriverStatus.create(id: 3, name: 'ocupado')
+incomunicado = DriverStatus.create(id: 1, name: 'incomunicado')
+inactivo = DriverStatus.create(id: 2, name: 'inactivo')
+libre = DriverStatus.create(id: 3, name: 'libre')
+ocupado = DriverStatus.create(id: 4, name: 'ocupado')
 
 user = User.create(active: true,
                    email: 'picapiedra@mail.com', 
@@ -110,23 +110,30 @@ d4 = Driver.create(license: '31323334', cellphone: '33 0000 1111',
                    driver_status_id: ocupado.id, user_id: user.id)
 
 # Vehicles
+roleRegular = VehicleRole.create(id: 1, name: 'taxi');
+roleExecutive = VehicleRole.create(id: 2, name: 'taxi ejecutivo');
+
 v1 = Vehicle.create(model: 'Tsuru',  
                plate: 'amj-0000',  
+               vehicle_role_id: roleRegular.id,  
                tracker_device_id: 
                    TrackerDevice.create(description: 'TaxiGPS01').id,
                year: 2010)
 v2 = Vehicle.create(model: 'Tsuru',  
-               plate: 'amj-0001',  
+               plate: 'amj-0001',
+               vehicle_role_id: roleRegular.id,  
                tracker_device_id: 
                    TrackerDevice.create(description: 'TaxiGPS02').id,
                year: 2011)
 v3 = Vehicle.create(model: 'Sentra',  
                plate: 'amj-0002',
+               vehicle_role_id: roleExecutive.id,  
                tracker_device_id: 
                    TrackerDevice.create(description: 'TaxiGPS03').id,
                year: 2012)
 v4 = Vehicle.create(model: 'Sentra',  
                plate: 'amj-0003',  
+               vehicle_role_id: roleExecutive.id,  
                tracker_device_id: 
                    TrackerDevice.create(description: 'TaxiGPS04').id,
                year: 2012)

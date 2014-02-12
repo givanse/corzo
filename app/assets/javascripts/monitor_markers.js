@@ -57,12 +57,12 @@ monitor.markers.createServicePositionMarker = function(map, imgFileName, title) 
 /**
  *
  */
-monitor.markers.createTaxiMarker = function(map, plate, latitude, longitude, status) {    
+monitor.markers.createTaxiMarker = function(map, plate, latitude, longitude, driver_status_id, icon_base_name) {   
     /**
      * Create marker. 
      */                                              
-    var image = {                                                        
-        url: monitor.img.FOLDER + status + monitor.img.TAXI_BASE_NAME,                                          
+    var image = {                     
+        url: monitor.img.FOLDER + driver_status_id + icon_base_name,
         // This marker is 20 pixels wide by 32 pixels tall.              
         size: new google.maps.Size(48, 57),                              
         // The origin for this image is 0,0.                             
@@ -80,7 +80,7 @@ monitor.markers.createTaxiMarker = function(map, plate, latitude, longitude, sta
     /**
      * Add InfoWindow with Driver and Vehicle details.
      */
-    var infoWindow = monitor.markers.createTaxiMarkerInfoWindow();
+    var infoWindow = monitor.markers.createTaxiMarkerInfoWindow(driver_status_id, plate);
      
     google.maps.event.addListener(marker, 'click', function() {
             infoWindow.setPosition(marker.position);
@@ -90,11 +90,9 @@ monitor.markers.createTaxiMarker = function(map, plate, latitude, longitude, sta
     return marker;
 }; /* createTaxiMarker */
 
-monitor.markers.createTaxiMarkerInfoWindow = function() {   
+monitor.markers.createTaxiMarkerInfoWindow = function(driver_status_id, plate) {   
     var infoWindow = new google.maps.InfoWindow();
 
-    var driver_status_id = 3;
-    var plate = "AMJ-0001";
     var driver_name = "Pedro Picapiedra";
     var driver_id = 1;
     var vehicle_id = 1;

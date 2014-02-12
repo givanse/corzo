@@ -88,16 +88,12 @@ monitor.ajax.updateTaxiLocationsOnMap =  function (map) {
                     var latitude = taxiObject.lastLatitude;
                     var longitude = taxiObject.lastLongitude;
                     var phone = taxiObject.driverCellphone;
-                    var status = taxiObject.status;
+                    var driver_status_id = taxiObject.status;
                     var lastLocUpdate = taxiObject.modifiedLocation;
-                    var statusMsg = status == 0 ? 'Incomunicado' :                               
-                                    status == 1 ? 'Inactivo' :                                   
-                                    status == 2 ? 'Libre' :                                      
-                                    status == 3 ? 'Ocupado' : 
-                                                  'Error de sistema';
+                    var icon_base_name = taxiObject.icon_base_name;
 
                     var marker = monitor.markers.createTaxiMarker(
-                                       map, plate, latitude, longitude, status);
+                                       map, plate, latitude, longitude, driver_status_id, icon_base_name);
                     marker.setMap(map);                               
                 }                                                                        
             }

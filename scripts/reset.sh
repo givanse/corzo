@@ -71,8 +71,10 @@ rails g migration CreateTransportServiceLocations comments:string \
                                                   address:string --force
 rails g migration CreateVehicles model:string \
                                  plate:string \
+                                 vehicle_role:references \
                                  tracker_device:references \
                                  year:integer{4} --force
+rails g migration CreateVehicleRoles name:string --force
 
 # Models
 echo 'Generate models.'
@@ -87,6 +89,7 @@ rails g model TrackerDevice --migration false --skip
 rails g model TransportService --migration false --skip 
 rails g model TransportServiceLocation --migration false --skip 
 rails g model Vehicle --migration false --skip
+rails g model VehicleRole --migration false --skip 
 
 rake db:migrate
 
@@ -109,14 +112,12 @@ rails g active_admin:resource TransportService --skip
 rails g active_admin:resource TransportServiceLocation --skip  
 rails g active_admin:resource User --skip
 rails g active_admin:resource Vehicle --skip 
+rails g active_admin:resource VehicleRole --skip 
 
 echo 'Restore customizations'
+git checkout app/models/user.rb
 git checkout app/admin/
-# Edit file config/initializers/active_admin.rb 
-# http://stackoverflow.com/a/14651686/7852
-# restore config file
 git checkout config/initializers/active_admin.rb
-
 git checkout app/admin/footer.rb
 
 # Populate

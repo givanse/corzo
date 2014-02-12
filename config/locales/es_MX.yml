@@ -146,6 +146,7 @@ es_MX:
         transport_service: Servicios de traslado 
         user: Usuarios
         vehicle: Vehículos
+        vehicle_role: Roles de vehículo
     attributes:
       client:
         tservice_location_orig_id: Dirección Default
@@ -204,12 +205,15 @@ es_MX:
         created_at: Registrado 
         updated_at: Actualizado
       vehicle:
+        created_at: Registrado 
         model: Modelo
         plate: Placa
         tracker_device_id: Dispositivo GPS
-        year: Año
-        created_at: Registrado 
         updated_at: Actualizado
+        vehicle_role_id: Role
+        year: Año
+      vehicle_role:
+        name: Nombre
 
     # activerecord.errors.models
     errors:
