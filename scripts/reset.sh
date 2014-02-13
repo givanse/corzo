@@ -8,7 +8,7 @@ START=`date +%s`
 
 # Shutdown app / server
 
-rm -rv db/migrate/
+rm -rv db/migrate/ || true
 mkdir -v db/migrate
 
 ########### Clean ##########
@@ -36,6 +36,7 @@ rails g migration add_tracker_device_id_to_users \
 
 # Migrations
 # http://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-column
+#
 # In a bash shell, use dots for precision type fields
 # http://stackoverflow.com/a/14369874/7852
 echo 'Generate migrations.'
@@ -130,12 +131,11 @@ if [ ! -f .env ] ; then
 fi
 
 ./scripts/install-bootstrap.sh
+./scripts/install-libraries.sh
 
 END=`date +%s`
 ELAPSED=$(( $END - $START ))
 echo 'elapsed: ' $ELAPSED / 60 ' mins.'
-
-echo 'Do not forget to update symbolic links in the assets folder.'
 
 exit
 #EOF
