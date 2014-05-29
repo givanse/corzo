@@ -33,7 +33,5 @@ app/assets/javascripts/jquery.timepicker.js
 app/assets/javascripts/jquery.timepicker.min.js
 app/assets/stylesheets/jquery-ui-1.10.4.css
 app/assets/stylesheets/jquery.timepicker.css
-bootstrap-3.0.0-dist.zip
-bootstrap-3.0.0/
 
 dia/*.dia.autosave
