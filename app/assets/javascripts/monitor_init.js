@@ -12,6 +12,7 @@ function initialize_google_map() {
         maxZoom: 18,
         disableDefaultUI: true,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
+        streetViewControl: true,
         zoomControl: true,
         // TODO http://stackoverflow.com/a/9773082/7852
         zoomControlOptions: {
