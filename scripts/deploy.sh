@@ -1,6 +1,15 @@
 #/!bin/bash
 
-git push -f heroku master
+git merge rails
+source ~/.rvm/scripts/rvm
+bundle update
+bundle install
+
+git add Gemfile.lock 
+git add app/assets
+git commit -m 'update Gemfile.lock & add libraries'
+
+git push -f heroku heroku:master
 
 # destroy
 
