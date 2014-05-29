@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0'
+ruby '2.1.1'
+
+gem 'rails', '4.1.0'
+gem 'sass-rails', '~> 4.0.3'
 
 group :development, :test do
   # Use debugger
@@ -32,12 +35,6 @@ gem 'i18n', github: 'svenfuchs/i18n'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '0.15.1'
-
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.2'
-
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

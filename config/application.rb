@@ -37,7 +37,7 @@ module Corzo
     # If you are deploying on Heroku with Rails 3.2 only, you may want to
     # forcing your application to not access the DB 
     # or load models when precompiling your assets.
-    config.assets.initialize_on_precompile = false
+    # config.assets.initialize_on_precompile = false
 
     # Bootstrap
     # Make bootstrap-sass compatible withe asset pipeline

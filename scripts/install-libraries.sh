@@ -18,15 +18,15 @@ unzip -o $zipFolder
 echo 'JQuery UI, copying'
 # image
 mkdir -p public/assets/images/
-cp -v $folder/themes/base/images/* \
+cp -v $folder/development-bundle/themes/base/images/* \
       public/assets/images/
 # css
-cp -v $folder/themes/base/jquery-ui.css \
+cp -v $folder/development-bundle/themes/base/jquery-ui.css \
       app/assets/stylesheets/
 # js
-cp -v $folder/ui/jquery-ui.js \
+cp -v $folder/js/jquery-ui-1.10.4.js \
       app/assets/javascripts/
-cp -v $folder/ui/i18n/jquery.ui.datepicker-es.js \
+cp -v $folder/development-bundle/ui/i18n/jquery.ui.datepicker-es.js \
       app/assets/javascripts/i18n/
 
 

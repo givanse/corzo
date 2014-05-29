@@ -26,7 +26,7 @@ public/assets/
 # external libraries
 app/assets/javascripts/jquery-2*
 app/assets/javascripts/i18n/jquery.ui.datepicker-es.js
-app/assets/javascripts/jquery-ui.js
+#app/assets/javascripts/jquery-ui.js
 app/assets/stylesheets/jquery-ui.css
 app/assets/javascripts/jquery-ui-1.10.4.js
 app/assets/javascripts/jquery.timepicker.js
