@@ -26,8 +26,7 @@ var monitor = {
     currSelectedPos: null,
     contextMenu: null,
     img: {
-        FOLDER: 'img/', 
-        TAXI_BASE_NAME: 'taxi-48.png'
+        FOLDER: 'img/'
     },
 
     /* sub-namespaces */

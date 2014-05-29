@@ -1,5 +1,6 @@
 
-Development branch.
 
-Front-end and customizations.
+./scripts/setup
+
+./scripts/reset
 

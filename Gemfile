@@ -22,6 +22,7 @@ group :production do
   gem 'rails_12factor'
 end
 
+# Getting from the repo until 1.0.0 is released.
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'ransack'
 

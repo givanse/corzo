@@ -17,7 +17,7 @@ ActiveAdmin.register User do
     column :role_id                                                          
     column :created_at                                                           
     column :updated_at                                                           
-    default_actions                                                              
+    actions                                                              
   end 
   
 end

@@ -137,5 +137,8 @@ END=`date +%s`
 ELAPSED=$(( $END - $START ))
 echo 'elapsed: ' $ELAPSED / 60 ' mins.'
 
+echo 'Start the server with:'
+echo '    $> foreman start' 
+
 exit
 #EOF
