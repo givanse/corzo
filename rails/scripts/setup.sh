@@ -49,5 +49,7 @@ npm install phantomjs -g
 npm install -g ember-cli
 ember -v
 
+./scripts/install-libraries.sh
+
 exit
 #EOF

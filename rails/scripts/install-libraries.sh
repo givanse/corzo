@@ -48,6 +48,8 @@ cp -v $folder/jquery.timepicker.js \
 cp -v $folder/jquery.timepicker.min.js \
       app/assets/javascripts/
 
+git clean -d -f
+
 echo 'Success!'
 
 exit 0
