@@ -1,3 +1,9 @@
 <h3>Drivers</h3>
 
-{{outlet}}
+{{#each d in drivers}}
+    {{d.drivers.id}}
+    {{d.drivers.driver_status_id}}
+    {{d.drivers.cellphone}}
+    {{d.drivers.license}}
+    <br>
+{{/each}}

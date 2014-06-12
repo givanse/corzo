@@ -33,6 +33,8 @@ rails g migration add_phone_number_to_users phone_number:string{16}
 rails g migration add_role_id_to_users role:references
 rails g migration add_tracker_device_id_to_users \
                   tracker_device:references
+rails g migration add_authentication_token_to_users authentication_token:string
+
 
 # Migrations
 # http://api.rubyonrails.org/classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-column

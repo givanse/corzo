@@ -15,6 +15,13 @@ var app = new EmberApp({
 
 // Use this to add additional libraries to the generated output files.
 app.import('vendor/ember-data/ember-data.js');
+app.import('vendor/ember-simple-auth/ember-simple-auth.js');
+app.import('vendor/ember-simple-auth/ember-simple-auth-devise.js');
+app.import('vendor/rails-csrf/dist/named-amd/main.js', {
+  'rails-csrf': [
+    'service'
+  ]
+});
 
 // If the library that you are including contains AMD or ES6 modules that
 // you would like to import into your application please specify an

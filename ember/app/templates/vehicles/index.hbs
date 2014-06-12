@@ -1,3 +1,11 @@
-{{#each}}
-    {{link-to plate 'vehicles.show' this}}
+<h3>Vehicles</h3>
+
+{{#each v in vehicles}}
+    {{v.vehicles.id}}
+    {{v.vehicles.model}}
+    {{v.vehicles.plate}}
+    {{v.vehicles.vehicle_role_id}}
+    {{v.vehicles.tracker_device_id}}
+    {{v.vehicles.year}}
+    <br>
 {{/each}}

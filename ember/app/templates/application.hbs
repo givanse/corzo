@@ -1,8 +1,16 @@
 <h2 id='title'>GPS Monitor</h2>
 
-{{link-to 'Home' 'application'}}
+{{link-to 'Home' 'index'}}
 {{link-to 'About' 'about'}}
 {{link-to 'Drivers' 'drivers'}}
 {{link-to 'Vehicles' 'vehicles'}}
+
+{{#if session.isAuthenticated}}
+  <button {{ action 'invalidateSession' }}>Logout</button>
+{{else}}
+  {{#link-to 'login'}}Login{{/link-to}}
+{{/if}}
+
+<hr>
 
 {{outlet}}
