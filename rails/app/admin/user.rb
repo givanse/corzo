@@ -5,14 +5,14 @@ ActiveAdmin.register User do
   filter :email
   filter :name
   filter :phone_number
-  filter :role
+  filter :user_role
   filter :created_at
   filter :updated_at
 
   index do
     selectable_column
     column :name
-    column :role
+    column :user_role
     column :phone_number
     column :email
     actions

@@ -1,5 +1,7 @@
 ActiveAdmin.register VehicleRole do
 
-  menu :parent => "Categorías"
+  permit_params :name
+
+  menu :parent => "Role"
   
 end

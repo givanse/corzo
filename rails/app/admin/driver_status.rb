@@ -1,16 +1,8 @@
 ActiveAdmin.register DriverStatus do
 
-  menu :parent => "Categorías"
+  config.clear_action_items!
 
-  config.filters = false                                                         
-                                                                                 
-  index do                                                                       
-    selectable_column                                                            
-    column :id                                                                   
-    column :name                                                                 
-    column :created_at                                                           
-    column :updated_at                                                           
-    actions                                                              
-  end                                                                            
-  
+  #menu :parent => "Categorías"
+  menu false 
+
 end

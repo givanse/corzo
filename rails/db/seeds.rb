@@ -7,34 +7,34 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Owner
-roleOwner = Role.create(name: 'propietario')
+roleOwner = UserRole.create(name: 'propietario')
 User.create(active: true,
             email: 'luke@mail.com', 
             name: 'Luke Skywalker', 
             phone_number: '6666 7777', 
-            role_id: roleOwner.id, 
+            user_role_id: roleOwner.id, 
             #tracker_device_id: NULL, 
             password: '12345678', password_confirmation: '12345678')
 
 # Operators
-roleOperator = Role.create(name: 'operador')
+roleOperator = UserRole.create(name: 'operador')
 User.create(active: true,
             email: 'jorge@mail.com', 
             name: 'Jorge', 
             phone_number: '33 0000 0000', 
-            role_id: roleOperator.id, 
+            user_role_id: roleOperator.id, 
             #tracker_device_id: NULL, 
             password: '12345678', password_confirmation: '12345678')
 User.create(active: true,
             email: 'claudia@mail.com', 
             name: 'Claudia', 
             phone_number: '33 0000 0000', 
-            role_id: roleOperator.id, 
+            user_role_id: roleOperator.id, 
             #tracker_device_id: NULL, 
             password: '12345678', password_confirmation: '12345678')
 
 # Clients
-roleClient = Role.create(name: 'cliente')
+roleClient = UserRole.create(name: 'cliente')
 tslMinerva = Location.create(latitude: 20.674387, 
                                       longitude: -103.387315, 
                                       address: 'calle sin nombre 200')
@@ -42,7 +42,7 @@ user = User.create(active: true,
                    email: 'piggy@mail.com', 
                    name: 'Miss Piggy', 
                    phone_number: '7777 7777', 
-                   role_id: roleClient.id, 
+                   user_role_id: roleClient.id, 
                    #tracker_device_id: NULL, 
                    password: '12345678', password_confirmation: '12345678')
 clientPiggy = Client.create(default_location_id: tslMinerva.id, 
@@ -51,14 +51,14 @@ user = User.create(active: true,
                    email: 'poogy@mail.com', 
                    name: 'Miss Poogy', 
                    phone_number: '8888 8888', 
-                   role_id: roleClient.id, 
+                   user_role_id: roleClient.id, 
                    #tracker_device_id: NULL, 
                    password: '12345678', password_confirmation: '12345678')
 clientPoogy = Client.create(default_location_id: tslMinerva.id, 
                             user_id: user.id)
 
 # Drivers
-roleDriver = Role.create(name: 'conductor')
+roleDriver = UserRole.create(name: 'conductor')
 
 incomunicado = DriverStatus.create(id: 1, name: 'incomunicado')
 inactivo = DriverStatus.create(id: 2, name: 'inactivo')
@@ -69,7 +69,7 @@ user = User.create(active: true,
                    email: 'picapiedra@mail.com', 
                    name: 'Pedro Picapiedra', 
                    phone_number: '6666 7777', 
-                   role_id: roleDriver.id, 
+                   user_role_id: roleDriver.id, 
                    password: '12345678', password_confirmation: '12345678')
 d1 = Driver.create(license: '01020304', cellphone: '33 0000 1111', 
                    tracker_device_id: 
@@ -80,7 +80,7 @@ user = User.create(active: true,
                    email: 'infante@mail.com', 
                    name: 'Pedro Infante', 
                    phone_number: '6666 7777', 
-                   role_id: roleDriver.id, 
+                   user_role_id: roleDriver.id, 
                    password: '12345678', password_confirmation: '12345678')
 d2 = Driver.create(license: '11121314', cellphone: '33 0000 1111', 
                    tracker_device_id: 
@@ -91,7 +91,7 @@ user = User.create(active: true,
                    email: 'navajas@mail.com', 
                    name: 'Pedro Navajas', 
                    phone_number: '6666 7777', 
-                   role_id: roleDriver.id, 
+                   user_role_id: roleDriver.id, 
                    password: '12345678', password_confirmation: '12345678')
 d3 = Driver.create(license: '21222324', cellphone: '33 0000 1111', 
                    tracker_device_id: 
@@ -102,7 +102,7 @@ user = User.create(active: true,
                    email: 'paramo@mail.com', 
                    name: 'Pedro Paramo', 
                    phone_number: '6666 7777', 
-                   role_id: roleDriver.id, 
+                   user_role_id: roleDriver.id, 
                    password: '12345678', password_confirmation: '12345678')
 d4 = Driver.create(license: '31323334', cellphone: '33 0000 1111', 
                    tracker_device_id: 
@@ -110,8 +110,8 @@ d4 = Driver.create(license: '31323334', cellphone: '33 0000 1111',
                    driver_status_id: ocupado.id, user_id: user.id)
 
 # Vehicles
-roleRegular = VehicleRole.create(id: 1, name: 'taxi');
-roleExecutive = VehicleRole.create(id: 2, name: 'taxi ejecutivo');
+roleRegular = VehicleRole.create(id: 0, name: 'taxi');
+roleExecutive = VehicleRole.create(id: 1, name: 'taxi ejecutivo');
 
 v1 = Vehicle.create(model: 'Tsuru',  
                plate: 'amj-0000',  

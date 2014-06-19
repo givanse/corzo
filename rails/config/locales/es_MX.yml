@@ -138,7 +138,7 @@ es_MX:
         driver: Conductor
         driver_status: Estados de Conductor
         driver_vehicle_record: Conductor - Vehículo 
-        role: Role de Usuario
+        user_role: Role de Usuario
         tracker_device: Dispositivo GPS        
         location: Ubicaciones Predefinidas 
         transport_service: Servicios de Traslado 
@@ -171,8 +171,8 @@ es_MX:
         daily_log_id: Número de bitacora
         latitude: Latitud
         longitude: Longitud
-      role:
-        name: Descripción
+      user_role:
+        name: Nombre 
         created_at: Registrado 
         updated_at: Actualizado
       tracker_device:
@@ -203,7 +203,7 @@ es_MX:
         email: Email
         name: Nombre
         phone_number: Teléfono
-        role_id: Role
+        user_role_id: Role
         tracker_device_id: Dispositivo GPS
         created_at: Registrado 
         updated_at: Actualizado

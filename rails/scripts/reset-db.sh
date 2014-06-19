@@ -11,7 +11,7 @@ echo 'Add custom fields to Devise User.'
 rails g migration add_active_to_users active:boolean
 rails g migration add_name_to_users name:string{50}
 rails g migration add_phone_number_to_users phone_number:string{16}
-rails g migration add_role_id_to_users role:references
+rails g migration add_user_role_id_to_users user_role:references
 rails g migration add_authentication_token_to_users authentication_token:string
 
 # Migrations
@@ -36,7 +36,7 @@ rails g migration CreateDriverVehicleRecord driver:references \
 rails g migration CreatePositionRecords daily_log:references \
                                         latitude:decimal{18.15} \
                                         longitude:decimal{18.15} --force
-rails g migration CreateRoles name:string{24} --force
+rails g migration CreateUserRoles name:string{24} --force
 rails g migration CreateTrackerDevices description:string --force
 rails g migration CreateTransportServices client:references \
                                           client_name:string{48} \

@@ -33,7 +33,7 @@ rake db:migrate
 #rails g model DriverStatus --migration false --skip
 #rails g model DriverVehicleRecord --migration false --skip
 #rails g model PositionRecord --migration false --skip
-#rails g model Role --migration false --skip
+#rails g model UserRole --migration false --skip
 #rails g model TrackerDevice --migration false --skip
 #rails g model TransportService --migration false --skip
 #rails g model Location --migration false --skip
@@ -54,7 +54,7 @@ rails g active_admin:resource Driver --skip
 rails g active_admin:resource DriverStatus --skip
 rails g active_admin:resource DriverVehicleRecord --skip
 rails g active_admin:resource PositionRecord --skip
-rails g active_admin:resource Role --skip
+rails g active_admin:resource UserRole --skip
 rails g active_admin:resource TrackerDevice --skip
 rails g active_admin:resource TransportService --skip
 rails g active_admin:resource Location --skip
