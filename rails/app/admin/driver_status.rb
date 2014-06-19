@@ -1,6 +1,6 @@
 ActiveAdmin.register DriverStatus do
 
-  menu :parent => "Categorias" # TODO: add accent
+  menu :parent => "Categorías"
 
   config.filters = false                                                         
                                                                                  
@@ -10,15 +10,7 @@ ActiveAdmin.register DriverStatus do
     column :name                                                                 
     column :created_at                                                           
     column :updated_at                                                           
-    default_actions                                                              
+    actions                                                              
   end                                                                            
-                                                                                 
-  index :as => :grid, :default => true do |driver_status|                                 
-    div do                                                                       
-      b do                                                                       
-        link_to(driver_status.name.upcase, admin_driver_status_path(driver_status))                         
-      end                                                                        
-    end                                                                          
-  end
   
 end

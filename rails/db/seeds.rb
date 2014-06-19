@@ -35,7 +35,7 @@ User.create(active: true,
 
 # Clients
 roleClient = Role.create(name: 'cliente')
-tslMinerva = TransportServiceLocation.create(latitude: 20.674387, 
+tslMinerva = Location.create(latitude: 20.674387, 
                                       longitude: -103.387315, 
                                       address: 'calle sin nombre 200')
 user = User.create(active: true,
@@ -45,7 +45,7 @@ user = User.create(active: true,
                    role_id: roleClient.id, 
                    #tracker_device_id: NULL, 
                    password: '12345678', password_confirmation: '12345678')
-clientPiggy = Client.create(tservice_location_orig_id: tslMinerva.id, 
+clientPiggy = Client.create(default_location_id: tslMinerva.id, 
                             user_id: user.id)
 user = User.create(active: true,
                    email: 'poogy@mail.com', 
@@ -54,7 +54,7 @@ user = User.create(active: true,
                    role_id: roleClient.id, 
                    #tracker_device_id: NULL, 
                    password: '12345678', password_confirmation: '12345678')
-clientPoogy = Client.create(tservice_location_orig_id: tslMinerva.id, 
+clientPoogy = Client.create(default_location_id: tslMinerva.id, 
                             user_id: user.id)
 
 # Drivers
@@ -70,10 +70,10 @@ user = User.create(active: true,
                    name: 'Pedro Picapiedra', 
                    phone_number: '6666 7777', 
                    role_id: roleDriver.id, 
-                   tracker_device_id: 
-                       TrackerDevice.create(description: 'ABC001').id,
                    password: '12345678', password_confirmation: '12345678')
 d1 = Driver.create(license: '01020304', cellphone: '33 0000 1111', 
+                   tracker_device_id: 
+                       TrackerDevice.create(description: 'ABC001').id,
                    driver_status_id: incomunicado.id, user_id: user.id)
 
 user = User.create(active: true,
@@ -81,10 +81,10 @@ user = User.create(active: true,
                    name: 'Pedro Infante', 
                    phone_number: '6666 7777', 
                    role_id: roleDriver.id, 
-                   tracker_device_id: 
-                       TrackerDevice.create(description: 'ABC002').id,
                    password: '12345678', password_confirmation: '12345678')
 d2 = Driver.create(license: '11121314', cellphone: '33 0000 1111', 
+                   tracker_device_id: 
+                       TrackerDevice.create(description: 'ABC002').id,
                    driver_status_id: inactivo.id, user_id: user.id)
 
 user = User.create(active: true,
@@ -92,10 +92,10 @@ user = User.create(active: true,
                    name: 'Pedro Navajas', 
                    phone_number: '6666 7777', 
                    role_id: roleDriver.id, 
-                   tracker_device_id: 
-                       TrackerDevice.create(description: 'ABC003').id,
                    password: '12345678', password_confirmation: '12345678')
 d3 = Driver.create(license: '21222324', cellphone: '33 0000 1111', 
+                   tracker_device_id: 
+                       TrackerDevice.create(description: 'ABC003').id,
                    driver_status_id: libre.id, user_id: user.id)
 
 user = User.create(active: true,
@@ -103,10 +103,10 @@ user = User.create(active: true,
                    name: 'Pedro Paramo', 
                    phone_number: '6666 7777', 
                    role_id: roleDriver.id, 
-                   tracker_device_id: 
-                       TrackerDevice.create(description: 'ABC004').id,
                    password: '12345678', password_confirmation: '12345678')
 d4 = Driver.create(license: '31323334', cellphone: '33 0000 1111', 
+                   tracker_device_id: 
+                       TrackerDevice.create(description: 'ABC004').id,
                    driver_status_id: ocupado.id, user_id: user.id)
 
 # Vehicles
@@ -138,46 +138,47 @@ v4 = Vehicle.create(model: 'Sentra',
                    TrackerDevice.create(description: 'TaxiGPS04').id,
                year: 2012)
 
-# Drivers Vehicles
-DriversVehicle.create(driver_id: d1.user_id,
-                      vehicle_id: v1.id,
-                      assigned_at: DateTime.new(2009, 06, 06, 12, 00))
-DriversVehicle.create(driver_id: d2.user_id,
-                      vehicle_id: v2.id,
-                      assigned_at: DateTime.new(2009, 06, 06, 12, 00))
-DriversVehicle.create(driver_id: d3.user_id,
-                      vehicle_id: v3.id,
-                      assigned_at: DateTime.new(2009, 06, 06, 12, 00))
-DriversVehicle.create(driver_id: d4.user_id,
-                      vehicle_id: v4.id,
-                      assigned_at: DateTime.new(2009, 06, 06, 12, 00))
+# Drivers Vehicles - Log of asignations
+DriverVehicleRecord.create(driver_id: d1.user_id,
+                           vehicle_id: v1.id,
+                           assigned_at: DateTime.new(2009, 06, 06, 12, 00))
+DriverVehicleRecord.create(driver_id: d2.user_id,
+                           vehicle_id: v2.id,
+                           assigned_at: DateTime.new(2009, 06, 06, 12, 00))
+DriverVehicleRecord.create(driver_id: d3.user_id,
+                           vehicle_id: v3.id,
+                           assigned_at: DateTime.new(2009, 06, 06, 12, 00))
+DriverVehicleRecord.create(driver_id: d4.user_id,
+                           vehicle_id: v4.id,
+                           assigned_at: DateTime.new(2009, 06, 06, 12, 00))
 
 
 # TODO: `block in trace_on': invalid byte sequence in US-ASCII
 # For: Eca Do Queirós
 TransportService.create(#client_id: NULL,
                client_name: 'Martin Fierro',
-               comments: 'reja blanca, hay un arbol de naranjas',
                fare: 50.0,
                driver_id: 1,
+               #client_id: NULL,
                schedule_at: DateTime.new(2013, 12, 30, 18, 30),
-               tservice_location_orig_id: TransportServiceLocation.create(
+               tservice_location_orig_id: Location.create(
                    latitude: 20.69138, 
                    longitude: -103.430241, 
+                   comments: 'reja blanca, hay un arbol de naranjas',
                    address: 'Eca Do Queiros 5210, Jardines Universidad').id,
-               tservice_location_dest_id: TransportServiceLocation.create(
+               tservice_location_dest_id: Location.create(
                    latitude: 20.69128, 
                    longitude: -103.419641, 
                    address: 'Eca Do Queiros 5067, Jardines Universidad').id)
 
 TransportService.create(client_id: clientPiggy.user_id,
                #client_name: NULL,
-               comments: 'no se ve el numero porque hay enredadera',
                fare: 50.0,
                #driver_id: NULL,
+               client_id: clientPiggy.id,
                schedule_at: DateTime.new(2015, 10, 01, 10, 00), # mes dia hora
                #tservice_location_orig_id: NULL, 
-               tservice_location_dest_id: TransportServiceLocation.create(
+               tservice_location_dest_id: Location.create(
                    latitude: 20.658682, 
                    longitude: -103.30261, 
                    address: 'Delgadillo Araujo 158, San Andres').id)
@@ -187,20 +188,13 @@ TransportService.create(client_id: clientPoogy.user_id,
                comments: 'Plaza Galerias, en la entrada de Liverpool',
                fare: 50.0,
                #driver_id: NULL,
+               #client_id: NULL,
                schedule_at: DateTime.new(2015, 8, 16, 7), # mes dia hora
                #tservice_location_orig_id: NULL, 
-               tservice_location_dest_id: TransportServiceLocation.create(
+               tservice_location_dest_id: Location.create(
                    latitude: 20.676736, 
                    longitude: -103.430144, 
                    #address: NULL
                ).id)
-
-# Daily Logs 
-DailyLog.create(tracker_device_id: 1, date: Date.new(2000, 1, 20))
-DailyLog.create(tracker_device_id: 1, date: Date.new(2000, 1, 21))
-DailyLog.create(tracker_device_id: 2, date: Date.new(2000, 1, 20))
-DailyLog.create(tracker_device_id: 2, date: Date.new(2000, 1, 21))
-
-# Position Records
 
 #EOF

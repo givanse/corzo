@@ -29,6 +29,7 @@ end
 # Getting from the repo until 1.0.0 is released.
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'ransack'
+gem 'active_admin_importable'
 
 # Needed this fix:
 # https://github.com/svenfuchs/i18n/pull/229

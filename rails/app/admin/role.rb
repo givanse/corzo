@@ -13,7 +13,7 @@ ActiveAdmin.register Role do
   #  permitted
   # end
 
-  menu :parent => "Categorias" # TODO: add accent
+  menu :parent => "Categorías"
 
   config.filters = false
 
@@ -23,15 +23,7 @@ ActiveAdmin.register Role do
     column :name
     column :created_at
     column :updated_at
-    default_actions
-  end
-
-  index :as => :grid, :default => true do |role|
-    div do
-      b do 
-        link_to(role.name.upcase, admin_role_path(role))
-      end
-    end
+    actions
   end
   
 end

@@ -4,14 +4,13 @@ ActiveAdmin.register TransportService do
 
   index do
     selectable_column
-    column :id
-    column :client_id
     column :client_name
+
+    column :driver
+    column :client
+
     column :fare
-    column :driver_id
     column :schedule_at
-    column :created_at
-    column :updated_at
     actions
   end
 

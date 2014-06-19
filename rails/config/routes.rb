@@ -1,10 +1,10 @@
 Corzo::Application.routes.draw do
+  devise_for :users
+  #, controllers: { sessions: 'sessions' }
 
   namespace :api do
     get :csrf, to: 'csrf#index'
   end
-
-  devise_for :users, controllers: { sessions: 'sessions' }
 
   devise_scope :user do 
     get 'users/get_clients.json' => 'users#get_clients'

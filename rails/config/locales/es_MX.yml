@@ -44,7 +44,7 @@ es_MX:
       block: "Lista"
       grid: "Cuadrícula"
       blog: "Blog"
-    dashboard: Inicio
+    dashboard: "Inicio"
     dashboard_welcome:
       welcome: "Bienvenido a Corzo Admin. Esta es la página de inicio predeterminada."
       call_to_action: "Para agregar secciones edite 'app/admin/dashboard.rb'"
@@ -134,19 +134,17 @@ es_MX:
     required: "requerido"
   activerecord:
     models:
-        client: Clientes
-        daily_log: Posiciones por dia
-        driver: Conductores
+        client: Cliente
+        driver: Conductor
         driver_status: Estados de Conductor
-        drivers_vehicle: Conductores - Autos
-        position_record: Posiciones
-        role: Role
-        tracker_device: Dispositivos GPS        
-        transport_service_location: Ubicaciones de Servicios
-        transport_service: Servicios de traslado 
-        user: Usuarios
-        vehicle: Vehículos
-        vehicle_role: Roles de vehículo
+        driver_vehicle_record: Conductor - Vehículo 
+        role: Role de Usuario
+        tracker_device: Dispositivo GPS        
+        location: Ubicaciones Predefinidas 
+        transport_service: Servicios de Traslado 
+        user: Usuario
+        vehicle: Vehículo
+        vehicle_role: Role de Vehículo
     attributes:
       client:
         tservice_location_orig_id: Dirección Default
@@ -165,7 +163,7 @@ es_MX:
         name: Estado
         created_at: Registrado 
         updated_at: Actualizado
-      drivers_vehicle:
+      driver_vehicle_record:
         driver_id: Conductor
         vehicle_id: Vehículo
         assigned_at: Fecha de asignación
@@ -185,13 +183,18 @@ es_MX:
         longitude: Longitud
         address: Dirección
       transport_service:
-        client_id: Número de cliente
-        client_name: Nombre
+        client: Cliente 
+        client_id: Cliente
+        client_name: Nombre Cliente
         comments: Comentarios
         fare: Tarifa
+        driver: Conductor
         driver_id: Conductor
+        driver_name: Nombre Conductor
         schedule_at: Agendado
+        tservice_location_orig: Origen
         tservice_location_orig_id: Origen
+        tservice_location_dest: Destino
         tservice_location_dest_id: Destino
         created_at: Registrado 
         updated_at: Actualizado
@@ -208,9 +211,9 @@ es_MX:
         created_at: Registrado 
         model: Modelo
         plate: Placa
-        tracker_device_id: Dispositivo GPS
+        tracker_device: Dispositivo GPS
         updated_at: Actualizado
-        vehicle_role_id: Role
+        vehicle_role: Role
         year: Año
       vehicle_role:
         name: Nombre

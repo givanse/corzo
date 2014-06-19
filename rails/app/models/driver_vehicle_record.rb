@@ -1,4 +1,4 @@
-class DriversVehicle < ActiveRecord::Base
+class DriverVehicleRecord < ActiveRecord::Base
 
     belongs_to :driver, :primary_key => 'user_id'
     belongs_to :vehicle
