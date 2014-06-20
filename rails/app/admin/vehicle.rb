@@ -2,7 +2,7 @@ ActiveAdmin.register Vehicle do
     
   active_admin_importable
 
-  menu :parent => "Bienes"
+  menu :parent => "Inventario"
 
   index do
     selectable_column

@@ -73,7 +73,7 @@ user = User.create(active: true,
                    password: '12345678', password_confirmation: '12345678')
 d1 = Driver.create(license: '01020304', cellphone: '33 0000 1111', 
                    tracker_device_id: 
-                       TrackerDevice.create(description: 'ABC001').id,
+                       TrackerDevice.create(model: 'ABC001').id,
                    driver_status_id: incomunicado.id, user_id: user.id)
 
 user = User.create(active: true,
@@ -84,7 +84,7 @@ user = User.create(active: true,
                    password: '12345678', password_confirmation: '12345678')
 d2 = Driver.create(license: '11121314', cellphone: '33 0000 1111', 
                    tracker_device_id: 
-                       TrackerDevice.create(description: 'ABC002').id,
+                       TrackerDevice.create(model: 'ABC002').id,
                    driver_status_id: inactivo.id, user_id: user.id)
 
 user = User.create(active: true,
@@ -95,7 +95,7 @@ user = User.create(active: true,
                    password: '12345678', password_confirmation: '12345678')
 d3 = Driver.create(license: '21222324', cellphone: '33 0000 1111', 
                    tracker_device_id: 
-                       TrackerDevice.create(description: 'ABC003').id,
+                       TrackerDevice.create(model: 'ABC003').id,
                    driver_status_id: libre.id, user_id: user.id)
 
 user = User.create(active: true,
@@ -106,7 +106,7 @@ user = User.create(active: true,
                    password: '12345678', password_confirmation: '12345678')
 d4 = Driver.create(license: '31323334', cellphone: '33 0000 1111', 
                    tracker_device_id: 
-                       TrackerDevice.create(description: 'ABC004').id,
+                       TrackerDevice.create(model: 'ABC004').id,
                    driver_status_id: ocupado.id, user_id: user.id)
 
 # Vehicles
@@ -117,25 +117,25 @@ v1 = Vehicle.create(model: 'Tsuru',
                plate: 'amj-0000',  
                vehicle_role_id: roleRegular.id,  
                tracker_device_id: 
-                   TrackerDevice.create(description: 'TaxiGPS01').id,
+                   TrackerDevice.create(model: 'TaxiGPS01').id,
                year: 2010)
 v2 = Vehicle.create(model: 'Tsuru',  
                plate: 'amj-0001',
                vehicle_role_id: roleRegular.id,  
                tracker_device_id: 
-                   TrackerDevice.create(description: 'TaxiGPS02').id,
+                   TrackerDevice.create(model: 'TaxiGPS02').id,
                year: 2011)
 v3 = Vehicle.create(model: 'Sentra',  
                plate: 'amj-0002',
                vehicle_role_id: roleExecutive.id,  
                tracker_device_id: 
-                   TrackerDevice.create(description: 'TaxiGPS03').id,
+                   TrackerDevice.create(model: 'TaxiGPS03').id,
                year: 2012)
 v4 = Vehicle.create(model: 'Sentra',  
                plate: 'amj-0003',  
                vehicle_role_id: roleExecutive.id,  
                tracker_device_id: 
-                   TrackerDevice.create(description: 'TaxiGPS04').id,
+                   TrackerDevice.create(model: 'TaxiGPS04').id,
                year: 2012)
 
 # Drivers Vehicles - Log of asignations

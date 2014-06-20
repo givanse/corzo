@@ -176,7 +176,9 @@ es_MX:
         created_at: Registrado 
         updated_at: Actualizado
       tracker_device:
-        description: Descripción
+        model: Modelo 
+        uuid: UUID
+        imei: IMEI
       transport_service_location:
         comments: Comentarios
         latitude: Latitud

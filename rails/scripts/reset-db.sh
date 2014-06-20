@@ -37,7 +37,9 @@ rails g migration CreatePositionRecords daily_log:references \
                                         latitude:decimal{18.15} \
                                         longitude:decimal{18.15} --force
 rails g migration CreateUserRoles name:string{24} --force
-rails g migration CreateTrackerDevices description:string --force
+rails g migration CreateTrackerDevices model:string \
+                                       UDID:string \
+                                       IMEI:string --force
 rails g migration CreateTransportServices client:references \
                                           client_name:string{48} \
                                           comments:string \
