@@ -34,6 +34,38 @@ ActiveAdmin.register User do
     f.actions
   end
 
+  show :title => :name do |ad|
+    panel I18n.t('views.user.show.title') do
+      attributes_table_for user do
+        row :id
+        row :email
+        row :name
+        row :user_role
+        row :phone_number
+        row :active
+        row :created_at
+        row :update_at
+      end
+    end
+
+    panel I18n.t('views.user.show.sign_in') do
+      attributes_table_for user do
+        row :sign_in_count
+        row :current_sign_in_at
+        row :last_sign_in_at
+        row :current_sign_in_ip
+        row :last_sign_in_ip
+      end
+    end
+
+    panel I18n.t('views.user.show.remember') do
+      attributes_table_for user do
+        row :remember_created_at
+        row :remember_password_sent_at
+      end
+    end
+  end
+
   #sidebar "Users Details", only: [:show, :edit] do
   #  ul do
   #    li link_to("Drivers", admin_user_driver_path(user))

@@ -2,14 +2,14 @@ es_MX:
   project_name: 'Corzo'
   marketing_slogan: "Corzo ayuda a los sitios de taxis a mejorar la toma de solicitudes de servicio y el despacho de vehículos."
   static_pages:
-    home: 
+    home:
       title: 'Inicio'
       welcome: 'Bienvenido!'
-    features: 
+    features:
       title: 'Características'
-    help: 
+    help:
       title: 'Ayuda'
-    contact: 
+    contact:
       title: 'Contacto'
   layouts:
     shared:
@@ -39,6 +39,7 @@ es_MX:
         contact: 'Contacto'
 
   active_admin:
+    foobar: foobares
     index_list:
       table: "Tabla"
       block: "Lista"
@@ -116,13 +117,21 @@ es_MX:
       title_content: "Comentarios (%{count})"
       errors:
         empty_text: "El comentario no fue guardado, el texto estaba vacío."
+  # activeadmin end 
+
+  # views
   views:
       pagination:
-          truncate: "..."
-          first: "Inicio"
-          previous: "Anterior"
-          next: "Siguiente"
-          last: "Último"
+        truncate: "..."
+        first: "Inicio"
+        previous: "Anterior"
+        next: "Siguiente"
+        last: "Último"
+      user:
+        show:
+          title: Usuario
+          sign_in: Sesión
+          remember: Recordar password
   formtastic:
     yes: "Sí"
     no: "No"
@@ -132,23 +141,24 @@ es_MX:
     cancel: "Cancelar"
     reset: "Restablecer %{model}"
     required: "requerido"
+  # activerecord
   activerecord:
     models:
         client: Cliente
         driver: Conductor
         driver_status: Estados de Conductor
-        driver_vehicle_record: Conductor - Vehículo 
+        driver_vehicle_record: Conductor - Vehículo
         user_role: Role de Usuario
-        tracker_device: Dispositivo GPS        
-        location: Ubicaciones Predefinidas 
-        transport_service: Servicios de Traslado 
+        tracker_device: Dispositivo GPS
+        location: Ubicaciones Predefinidas
+        transport_service: Servicios de Traslado
         user: Usuario
         vehicle: Vehículo
         vehicle_role: Role de Vehículo
     attributes:
       client:
         tservice_location_orig_id: Dirección Default
-        user_id: Usuario 
+        user_id: Usuario
       daily_log:
         tracker_device_id: Dispositivo GPS
         date: Fecha
@@ -156,12 +166,12 @@ es_MX:
         license: Permiso de Conductor
         cellphone: Celular
         driver_status_id: Estado
-        user_id: Usuario 
-        created_at: Registrado 
+        user_id: Usuario
+        created_at: Registrado
         updated_at: Actualizado
       driver_status:
         name: Estado
-        created_at: Registrado 
+        created_at: Registrado
         updated_at: Actualizado
       driver_vehicle_record:
         driver_id: Conductor
@@ -172,11 +182,11 @@ es_MX:
         latitude: Latitud
         longitude: Longitud
       user_role:
-        name: Nombre 
-        created_at: Registrado 
+        name: Nombre
+        created_at: Registrado
         updated_at: Actualizado
       tracker_device:
-        model: Modelo 
+        model: Modelo
         uuid: UUID
         imei: IMEI
       transport_service_location:
@@ -185,7 +195,7 @@ es_MX:
         longitude: Longitud
         address: Dirección
       transport_service:
-        client: Cliente 
+        client: Cliente
         client_id: Cliente
         client_name: Nombre Cliente
         comments: Comentarios
@@ -198,19 +208,28 @@ es_MX:
         tservice_location_orig_id: Origen
         tservice_location_dest: Destino
         tservice_location_dest_id: Destino
-        created_at: Registrado 
+        created_at: Registrado
         updated_at: Actualizado
+      # activerecord attributes USER
       user:
         active: Activo
+        created_at: Registrado
+        current_sign_in_at: Fecha Sesión Actual 
+        current_sign_in_ip: IP Actual
         email: Email
+        last_sign_in_at: Fecha Última Sesión
+        last_sign_in_ip: Última IP
         name: Nombre
         phone_number: Teléfono
-        user_role_id: Role
         tracker_device_id: Dispositivo GPS
-        created_at: Registrado 
-        updated_at: Actualizado
+        update_at: Actualizado
+        user_role: Role
+        user_role_id: Role
+        remember_created_at: Fecha de Petición
+        remember_password_sent_at: Dirección
+        sign_in_count: Intentos de Ingreso
       vehicle:
-        created_at: Registrado 
+        created_at: Registrado
         model: Modelo
         plate: Placa
         tracker_device: Dispositivo GPS
@@ -219,10 +238,9 @@ es_MX:
         year: Año
       vehicle_role:
         name: Nombre
-
-    # activerecord.errors.models
+    # activerecord errors
     errors:
-      models: 
+      models:
         user:
           attributes:
             email:
@@ -232,8 +250,8 @@ es_MX:
               blank: vacío
               too_short: debe contener al menos 8 caracteres
             password_confirmation:
-              confirmation: no coincide 
-  # active_admin end
+              confirmation: no coincide
+  # activerecord end
 
   time:
     formats:
@@ -241,10 +259,10 @@ es_MX:
   date:
     formats:
       long: '%d / %m / %Y'
-    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio, 
-                     Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre] 
+    month_names: [~, Enero, Febrero, Marzo, Abril, Mayo, Junio,
+                     Julio, Agosto, Septiembre, Octubre, Noviembre, Diciembre]
 
- 
+
 # Devise locale
 # https://gist.github.com/albertopadilla/1330091
   errors:
@@ -269,7 +287,7 @@ es_MX:
       inactive: 'Tu cuenta aún no ha sido activada.'
       # devise.failure.user
       user:
-        not_found_in_database: 'Correo o contraseña inválidos.' 
+        not_found_in_database: 'Correo o contraseña inválidos.'
     sessions:
       signed_in: 'Ingreso exitoso.'
       signed_out: 'Has salido del sistema.'
@@ -305,3 +323,5 @@ es_MX:
         subject: 'Instrucciones de reinicio de contraseña'
       unlock_instructions:
         subject: 'Instrucciones de desbloqueo'
+  # devise end
+#EOF
