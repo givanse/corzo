@@ -225,11 +225,14 @@ es_MX:
       models: 
         user:
           attributes:
-            password_confirmation:
-              confirmation: "fallo"
+            email:
+              blank: vacío
+              invalid: no valido
             password:
-              blank: "vacío"
-              too_short: "debe contener al menos 8 caracteres"
+              blank: vacío
+              too_short: debe contener al menos 8 caracteres
+            password_confirmation:
+              confirmation: no coincide 
   # active_admin end
 
   time:

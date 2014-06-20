@@ -2,6 +2,9 @@ ActiveAdmin.register User do
 
   menu :parent => "Usuarios"
 
+  permit_params :user_role_id, :email, :name, :phone_number,
+                :password, :password_confirmation
+
   filter :email
   filter :name
   filter :phone_number
@@ -16,6 +19,19 @@ ActiveAdmin.register User do
     column :phone_number
     column :email
     actions
+  end
+
+  form do |f|
+    f.semantic_errors *f.object.errors.keys
+    f.inputs "User" do
+      f.input :user_role
+      f.input :email
+      f.input :name
+      f.input :phone_number
+      f.input :password
+      f.input :password_confirmation
+    end
+    f.actions
   end
 
   #sidebar "Users Details", only: [:show, :edit] do

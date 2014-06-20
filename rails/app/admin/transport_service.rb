@@ -2,6 +2,8 @@ ActiveAdmin.register TransportService do
   
   menu :parent => "Servicios"
 
+  config.clear_action_items!
+
   index do
     selectable_column
     column :client_name

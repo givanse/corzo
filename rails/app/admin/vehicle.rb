@@ -4,6 +4,8 @@ ActiveAdmin.register Vehicle do
 
   menu :parent => "Inventario"
 
+  permit_params :tracker_device_id, :vehicle_role_id, :model, :plate, :year
+
   index do
     selectable_column
       column :model
