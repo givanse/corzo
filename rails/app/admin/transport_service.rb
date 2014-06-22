@@ -1,6 +1,4 @@
 ActiveAdmin.register TransportService do
-  
-  menu :parent => "Servicios"
 
   config.clear_action_items!
 
@@ -13,6 +11,7 @@ ActiveAdmin.register TransportService do
 
     column :fare
     column :schedule_at
+    column :comments
     actions
   end
 

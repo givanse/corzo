@@ -1,5 +1,6 @@
 ActiveAdmin.register DriverVehicleRecord do
 
+  menu false
   menu :parent => "Bitacoras" 
   
   permit_params :driver_id, :vehicle_id, :assigned_at

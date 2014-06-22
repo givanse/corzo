@@ -1,6 +1,6 @@
 ActiveAdmin.register TrackerDevice do
 
-  menu :parent => "Inventario"  
+  menu :parent => "Inventario", :label => "Dispositivos GPS" 
 
   permit_params :model, :UDID, :IMEI
  

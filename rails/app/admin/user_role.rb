@@ -2,6 +2,7 @@ ActiveAdmin.register UserRole do
   
   permit_params :name
 
+  menu false
   menu :parent => "role"
 
   config.filters = false

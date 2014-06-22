@@ -20,25 +20,6 @@ ActiveAdmin.register Driver do
     actions
   end
 
-  show do
-    panel I18n.t('views.user.show.title') do
-      user = User.find params[:id]
-      attributes_table_for user do
-        row :id
-        row :email
-        row :name
-      end
-    end
-    panel I18n.t('views.client.show.title') do
-      attributes_table_for driver do
-        row :cellphone
-        row :driver_status
-        row :license
-        row :tracker_device
-      end
-    end
-  end
-
   # TODO change to POST
   member_action :set_status, :method => :get do
       #user = User.find(params[:id])
