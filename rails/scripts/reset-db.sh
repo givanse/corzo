@@ -20,15 +20,15 @@ rails g migration add_authentication_token_to_users authentication_token:string
 # In a bash shell, use dots for precision type fields
 # http://stackoverflow.com/a/14369874/7852
 echo 'Generate migrations.'
-rails g migration CreateClients default_location:references \
-                                user:references --force
+rails g migration CreateClients location:references \
+                                user:references:uniq --force
 rails g migration CreateDailyLogs tracker_device:references \
                                   date:date --force
 rails g migration CreateDrivers cellphone:string{16} \
                                 driver_status:references \
                                 license:string \
                                 tracker_device:references \
-                                user:references --skip
+                                user:references:uniq --skip
 rails g migration CreateDriverStatuses name:string{12} --force
 rails g migration CreateDriverVehicleRecord driver:references \
                                             vehicle:references \

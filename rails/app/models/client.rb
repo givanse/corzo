@@ -1,9 +1,15 @@
 class Client < ActiveRecord::Base
 
-  #self.primary_key = 'user_id'
+  self.primary_key = 'user_id'
 
+  belongs_to :location
   belongs_to :user
-  belongs_to :location, :foreign_key => 'default_location_id'
+
+  def self.get_user_details(user_id)
+    Client.where(user_id: user_id)
+          .select(:location_id)
+          .first
+  end
 
   def to_s                                                                       
     User.select(:name)                                                           

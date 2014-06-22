@@ -2,7 +2,8 @@ ActiveAdmin.register Client do
 
   active_admin_importable
 
-  menu :parent => "Usuarios" 
+  #menu :parent => "Usuarios" 
+  menu false
   
   index do
     selectable_column                                                            
@@ -15,4 +16,5 @@ ActiveAdmin.register Client do
     column :location
     actions
   end
+
 end

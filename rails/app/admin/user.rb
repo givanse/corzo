@@ -1,9 +1,11 @@
 ActiveAdmin.register User do
 
-  menu :parent => "Usuarios"
+  menu :label => "Usuarios"
 
   permit_params :user_role_id, :email, :name, :phone_number,
                 :password, :password_confirmation
+
+  active_admin_importable
 
   filter :email
   filter :name
@@ -45,6 +47,32 @@ ActiveAdmin.register User do
         row :active
         row :created_at
         row :update_at
+      end
+    end
+
+    user_role_name = user.user_role.name.capitalize
+    user_details = nil
+    case user.user_role_id 
+    when 0
+      user_details = Client.get_user_details user.id 
+    when 1
+      user_details = Driver.get_user_details user.id
+    when 2
+      # user_details = Operator.find user.id 
+    when 3
+      # user_details = Owner.find user.id 
+    else
+      user_role_name = 'error: no template for this user role'
+    end
+
+    if user_details    
+      panel "Role: " + user_role_name do
+        attributes_table_for user_details do
+          attributes = user_details.attributes.except('user_id')
+          attributes.each do |attr_name, attr_value|
+            row attr_name
+          end
+        end
       end
     end
 

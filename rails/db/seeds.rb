@@ -6,8 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+roleClient   = UserRole.create(id: 0, name: 'cliente')
+roleDriver   = UserRole.create(id: 1, name: 'conductor')
+roleOperator = UserRole.create(id: 2, name: 'operador')
+roleOwner    = UserRole.create(id: 3, name: 'propietario')
+
 # Owner
-roleOwner = UserRole.create(name: 'propietario')
 User.create(active: true,
             email: 'luke@mail.com', 
             name: 'Luke Skywalker', 
@@ -17,7 +21,6 @@ User.create(active: true,
             password: '12345678', password_confirmation: '12345678')
 
 # Operators
-roleOperator = UserRole.create(name: 'operador')
 User.create(active: true,
             email: 'jorge@mail.com', 
             name: 'Jorge', 
@@ -34,7 +37,6 @@ User.create(active: true,
             password: '12345678', password_confirmation: '12345678')
 
 # Clients
-roleClient = UserRole.create(name: 'cliente')
 tslMinerva = Location.create(latitude: 20.674387, 
                                       longitude: -103.387315, 
                                       address: 'calle sin nombre 200')
@@ -45,7 +47,7 @@ user = User.create(active: true,
                    user_role_id: roleClient.id, 
                    #tracker_device_id: NULL, 
                    password: '12345678', password_confirmation: '12345678')
-clientPiggy = Client.create(default_location_id: tslMinerva.id, 
+clientPiggy = Client.create(location_id: tslMinerva.id, 
                             user_id: user.id)
 user = User.create(active: true,
                    email: 'poogy@mail.com', 
@@ -54,12 +56,10 @@ user = User.create(active: true,
                    user_role_id: roleClient.id, 
                    #tracker_device_id: NULL, 
                    password: '12345678', password_confirmation: '12345678')
-clientPoogy = Client.create(default_location_id: tslMinerva.id, 
+clientPoogy = Client.create(location_id: tslMinerva.id, 
                             user_id: user.id)
 
 # Drivers
-roleDriver = UserRole.create(name: 'conductor')
-
 incomunicado = DriverStatus.create(id: 1, name: 'incomunicado')
 inactivo = DriverStatus.create(id: 2, name: 'inactivo')
 libre = DriverStatus.create(id: 3, name: 'libre')

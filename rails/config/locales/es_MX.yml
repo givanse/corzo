@@ -155,9 +155,11 @@ es_MX:
         user: Usuario
         vehicle: Vehículo
         vehicle_role: Role de Vehículo
+    # activerecord attributes
     attributes:
       client:
-        tservice_location_orig_id: Dirección Default
+        location: Dirección Default
+        location_id: Dirección Default
         user_id: Usuario
       daily_log:
         tracker_device_id: Dispositivo GPS
