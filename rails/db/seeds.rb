@@ -9,15 +9,14 @@
 roleClient   = UserRole.create(id: 0, name: 'cliente')
 roleDriver   = UserRole.create(id: 1, name: 'conductor')
 roleOperator = UserRole.create(id: 2, name: 'operador')
-roleOwner    = UserRole.create(id: 3, name: 'propietario')
+roleAdmin    = UserRole.create(id: 3, name: 'administrador')
 
-# Owner
+# Admin 
 User.create(active: true,
-            email: 'luke@mail.com', 
-            name: 'Luke Skywalker', 
+            email: 'martin@mail.com', 
+            name: 'Martin', 
             phone_number: '6666 7777', 
-            user_role_id: roleOwner.id, 
-            #tracker_device_id: NULL, 
+            user_role_id: roleAdmin.id, 
             password: '12345678', password_confirmation: '12345678')
 
 # Operators
@@ -26,38 +25,25 @@ User.create(active: true,
             name: 'Jorge', 
             phone_number: '33 0000 0000', 
             user_role_id: roleOperator.id, 
-            #tracker_device_id: NULL, 
             password: '12345678', password_confirmation: '12345678')
 User.create(active: true,
             email: 'claudia@mail.com', 
             name: 'Claudia', 
             phone_number: '33 0000 0000', 
             user_role_id: roleOperator.id, 
-            #tracker_device_id: NULL, 
             password: '12345678', password_confirmation: '12345678')
 
-# Clients
-tslMinerva = Location.create(latitude: 20.674387, 
-                                      longitude: -103.387315, 
-                                      address: 'calle sin nombre 200')
+# Client
 user = User.create(active: true,
-                   email: 'piggy@mail.com', 
-                   name: 'Miss Piggy', 
-                   phone_number: '7777 7777', 
-                   user_role_id: roleClient.id, 
-                   #tracker_device_id: NULL, 
-                   password: '12345678', password_confirmation: '12345678')
-clientPiggy = Client.create(location_id: tslMinerva.id, 
-                            user_id: user.id)
-user = User.create(active: true,
-                   email: 'poogy@mail.com', 
-                   name: 'Miss Poogy', 
+                   email: 'gaston@mail.com', 
+                   name: 'Gaston', 
                    phone_number: '8888 8888', 
                    user_role_id: roleClient.id, 
-                   #tracker_device_id: NULL, 
                    password: '12345678', password_confirmation: '12345678')
-clientPoogy = Client.create(location_id: tslMinerva.id, 
-                            user_id: user.id)
+client = Client.create(    user_id: user.id,
+                       location_id: Location.create(latitude: 20.674387, 
+                                                    longitude: -103.387315, 
+                                                    address: 'calle sin nombre 200').id)
 
 # Drivers
 incomunicado = DriverStatus.create(id: 1, name: 'incomunicado')
@@ -155,11 +141,12 @@ DriverVehicleRecord.create(driver_id: d4.user_id,
 
 # TODO: `block in trace_on': invalid byte sequence in US-ASCII
 # For: Eca Do Queirós
-TransportService.create(#client_id: NULL,
-               client_name: 'Martin Fierro',
+TransportService.create(
+               #client_id: NULL,
+               client_name: 'Enrique',
+               #comments
                fare: 50.0,
                driver_id: 1,
-               #client_id: NULL,
                schedule_at: DateTime.new(2013, 12, 30, 18, 30),
                tservice_location_orig_id: Location.create(
                    latitude: 20.69138, 
@@ -171,30 +158,36 @@ TransportService.create(#client_id: NULL,
                    longitude: -103.419641, 
                    address: 'Eca Do Queiros 5067, Jardines Universidad').id)
 
-TransportService.create(client_id: clientPiggy.user_id,
+TransportService.create(
+               client_id: client.user_id,
                #client_name: NULL,
                comments: 'Lopez cotilla cerrada por obra',
                fare: 50.0,
                #driver_id: NULL,
-               client_id: clientPiggy.id,
                schedule_at: DateTime.new(2015, 10, 01, 10, 00), # mes dia hora
-               #tservice_location_orig_id: NULL, 
+               tservice_location_orig_id: client.location_id, 
                tservice_location_dest_id: Location.create(
                    latitude: 20.658682, 
                    longitude: -103.30261, 
                    address: 'Delgadillo Araujo 158, San Andres').id)
 
-TransportService.create(client_id: clientPoogy.user_id,
+TransportService.create(
+               client_id: client.user_id,
                #client_name: NULL,
                comments: 'en la entrada de Liverpool',
                fare: 50.0,
                #driver_id: NULL,
-               #client_id: NULL,
                schedule_at: DateTime.new(2015, 8, 16, 7), # mes dia hora
-               #tservice_location_orig_id: NULL, 
+               tservice_location_orig_id: Location.create(
+                   latitude: 20.676766, 
+                   longitude: -103.430144
+                   #comments
+                   #address: NULL
+               ).id, 
                tservice_location_dest_id: Location.create(
                    latitude: 20.676736, 
-                   longitude: -103.430144, 
+                   longitude: -103.430144 
+                   #comments
                    #address: NULL
                ).id)
 
