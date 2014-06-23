@@ -26,4 +26,10 @@ ActiveAdmin.register Driver do
       render :json => "{\"repsonse\": \"empty\"}"
   end
 
+  controller do
+    def show
+      redirect_to admin_user_path
+    end
+  end
+
 end

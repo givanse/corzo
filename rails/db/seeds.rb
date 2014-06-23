@@ -146,7 +146,7 @@ TransportService.create(
                client_name: 'Enrique',
                #comments
                fare: 50.0,
-               driver_id: 1,
+               driver_id: d1.id,
                schedule_at: DateTime.new(2013, 12, 30, 18, 30),
                tservice_location_orig_id: Location.create(
                    latitude: 20.69138, 
@@ -163,7 +163,7 @@ TransportService.create(
                #client_name: NULL,
                comments: 'Lopez cotilla cerrada por obra',
                fare: 50.0,
-               #driver_id: NULL,
+               driver_id: d2.id,
                schedule_at: DateTime.new(2015, 10, 01, 10, 00), # mes dia hora
                tservice_location_orig_id: client.location_id, 
                tservice_location_dest_id: Location.create(

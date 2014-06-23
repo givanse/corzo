@@ -65,8 +65,8 @@ ActiveAdmin.register User do
       user_role_name = 'error: no template for this user role'
     end
 
-    if user_details    
-      panel "Role: " + user_role_name do
+    panel "Role: " + user_role_name do
+      if user_details    
         attributes_table_for user_details do
           attributes = user_details.attributes.except('user_id')
           attributes.each do |attr_name, attr_value|

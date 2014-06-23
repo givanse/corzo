@@ -17,4 +17,10 @@ ActiveAdmin.register Client do
     actions
   end
 
+  controller do
+    def show
+      redirect_to admin_user_path
+    end
+  end
+
 end
