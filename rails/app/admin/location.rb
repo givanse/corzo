@@ -1,6 +1,6 @@
 ActiveAdmin.register Location do
 
- menu :parent => "Inventario"  
+ menu :parent => "Inventario", :priority => 100  
 
  permit_params :comments, :latitude, :longitude, :address  
 
