@@ -9,15 +9,18 @@
 
     {{BASE_TAG}}
 
+    <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/gpsmonitor.css">
   </head>
   <body>
     <script>
-      window.ENV = {{ENV}};
+      window.GpsmonitorENV = {{ENV}};
+      window.EmberENV = window.CorzoENV.EmberENV;
     </script>
+    <script src="assets/vendor.js"></script>
     <script src="assets/gpsmonitor.js"></script>
     <script>
-      window.Gpsmonitor = require('gpsmonitor/app')['default'].create(ENV.APP);
+      window.Gpsmonitor = require('gpsmonitor/app')['default'].create(GpsmonitorENV.APP);
     </script>
   </body>
 </html>

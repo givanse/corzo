@@ -1,7 +1,7 @@
-var DriversRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
+import Ember from 'ember';
+
+export default Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
     model: function () {
-        return $.getJSON(ENV.api.drivers);
+        return Ember.$.getJSON(GpsmonitorENV.api.drivers);
     }
 });
-
-export default DriversRoute;

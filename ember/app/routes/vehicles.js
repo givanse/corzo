@@ -1,7 +1,7 @@
-var VehiclesRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
+import Ember from 'ember';
+
+export default Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin, {
     model: function () {
-        return $.getJSON(ENV.api.vehicles);
+        return Ember.$.getJSON(GpsmonitorENV.api.vehicles);
     }
 });
-
-export default VehiclesRoute;

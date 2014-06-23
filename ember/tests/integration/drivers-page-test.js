@@ -1,4 +1,5 @@
 import startApp from 'gpsmonitor/tests/helpers/start-app';
+import Pretender from 'vendor/pretender/pretender';
 
 var App, server;
 

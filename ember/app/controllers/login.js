@@ -1,5 +1,5 @@
-var LoginController = Ember.Controller.extend(Ember.SimpleAuth.LoginControllerMixin, {
+import Ember from 'ember';
+
+export default Ember.Controller.extend(Ember.SimpleAuth.LoginControllerMixin, {
   authenticatorFactory: 'ember-simple-auth-authenticator:devise'
 });
-
-export default LoginController;
