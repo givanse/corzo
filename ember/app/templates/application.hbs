@@ -1,16 +1,20 @@
-<h2 id='title'>GPS Monitor</h2>
+<header>
+    <h2 id='title'>GPS Monitor</h2>
 
-{{link-to 'Home' 'index'}}
-{{link-to 'About' 'about'}}
-{{link-to 'Drivers' 'drivers'}}
-{{link-to 'Vehicles' 'vehicles'}}
+    {{link-to 'Home' 'index'}}
+    {{link-to 'About' 'about'}}
+    {{link-to 'Drivers' 'drivers'}}
+    {{link-to 'Vehicles' 'vehicles'}}
+    {{link-to 'Monitor' 'monitor'}}
 
-{{#if session.isAuthenticated}}
-  <button {{ action 'invalidateSession' }}>Logout</button>
-{{else}}
-  {{#link-to 'login'}}Login{{/link-to}}
-{{/if}}
+    {{#if session.isAuthenticated}}
+        <button {{ action 'invalidateSession' }}>Logout</button>
+    {{else}}
+        {{#link-to 'login'}}Login{{/link-to}}
+    {{/if}}
 
-<hr>
-
-{{outlet}}
+    <hr>
+</header>
+<main>
+    {{outlet}}
+</main>

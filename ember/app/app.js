@@ -1,5 +1,6 @@
 import Resolver from 'ember/resolver';
 import loadInitializers from 'ember/load-initializers';
+import View from './external/view-reopen';
 import Ember from 'ember';
 
 Ember.MODEL_FACTORY_INJECTIONS = true;

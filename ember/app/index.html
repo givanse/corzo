@@ -5,17 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Gpsmonitor</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width. initial-scale=1.0, user-scalable=no" /> 
 
     {{BASE_TAG}}
 
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/gpsmonitor.css">
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBlGDVvFbD4gIC4l6G-E6bZVQlSi2GTic&sensor=false&libraries=places">
+    </script>
   </head>
   <body>
     <script>
       window.GpsmonitorENV = {{ENV}};
-      window.EmberENV = window.CorzoENV.EmberENV;
+      window.EmberENV = window.GpsmonitorENV.EmberENV;
     </script>
     <script src="assets/vendor.js"></script>
     <script src="assets/gpsmonitor.js"></script>
