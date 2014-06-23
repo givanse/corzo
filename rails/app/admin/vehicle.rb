@@ -1,10 +1,12 @@
 ActiveAdmin.register Vehicle do
-    
-  active_admin_importable
 
   menu :parent => "Inventario", :label => "Vehiculos"
 
+  active_admin_importable
+
   permit_params :tracker_device_id, :vehicle_role_id, :model, :plate, :year
+
+  actions :all, :except => [:destroy]
 
   index do
     selectable_column

@@ -6,6 +6,8 @@ ActiveAdmin.register TransportService do
                 :schedule_at, 
                 :tservice_location_orig_id, :tservice_location_dest_id 
 
+  actions :all, :except => [:destroy]
+
   index do
     selectable_column
     column :client_name

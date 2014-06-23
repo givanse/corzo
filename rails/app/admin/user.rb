@@ -7,6 +7,8 @@ ActiveAdmin.register User do
 
   active_admin_importable
 
+  actions :all, :except => [:destroy]
+
   filter :email
   filter :name
   filter :phone_number

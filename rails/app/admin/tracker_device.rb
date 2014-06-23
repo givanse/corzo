@@ -6,6 +6,8 @@ ActiveAdmin.register TrackerDevice do
  
   active_admin_importable
 
+  actions :all, :except => [:destroy]
+
   index do
     selectable_column                                                            
     column :model
