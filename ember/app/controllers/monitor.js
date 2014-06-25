@@ -38,12 +38,14 @@ export default Ember.Controller.extend({
      */
     var stc = $("#scheduled_tasks_control").get()[0];
     map.controls[google.maps.ControlPosition.TOP_RIGHT].push(stc);
+    $("#scheduled_tasks_control").attr("class", "");
 
     /**
      * Add new task panel.
      */
     var ntc = $("#new_task_control").get()[0];
     map.controls[google.maps.ControlPosition.TOP_CENTER].push(ntc);
+    $("#new_task_control").attr("class", "");
   }, /* initGoogleMapComponents */
 
   /*

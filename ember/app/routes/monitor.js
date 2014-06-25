@@ -13,5 +13,12 @@ export default Ember.Route.extend({
     this._super(controller, model);
     this.renderNestedTemplate('new-task');
     this.renderNestedTemplate('scheduled-tasks');
+  },
+
+  setupController: function(controller, model) {
+    this._super(controller, model);
+
+    var stModel = [];
+    this.controllerFor("scheduled-tasks").set("model", stModel);
   }
 });
