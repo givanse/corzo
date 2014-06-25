@@ -1,1 +1,53 @@
-New Task
+<div id="nsf-ui" class="ui">
+
+  <div class="map_panel_controls">
+     <img src="img/minimize_window16.png">
+  </div>
+
+  <div id="col1" class="nsf-col toggleable">
+     <label>Servicio No.</label><label id="tservice-id">0001</label>
+     <br>
+     <label>10 / Enero / 2014</label>
+     <br>
+     <label>No. Cliente: </label>
+     <select id="select-client">
+         <option value="N/A">N/A</option>
+     </select>
+     <br>
+     <input id="full-name" placeholder="Nombre Completo" size=26>
+  </div>
+
+  <div id="col2" class="nsf-col toggleable">
+     <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+     <input id="select-date" placeholder="Fecha" size=12 type="text">
+     &nbsp;
+     <input id="select-time" placeholder="Hora" size=10 type="text">
+     <br>
+     <br>
+     <label>A:</label>
+     <input id="search-box-a" type="text" placeholder="Origen" size=40>
+     <br>
+     &nbsp;&nbsp;&nbsp;&nbsp;
+     <label id="coords-a">00.000000000000000, 00.000000000000000</label>
+     <br>
+     <label>B:</label>
+     <input id="search-box-b" type="text" placeholder="Destino" size=40>
+     <br>
+     &nbsp;&nbsp;&nbsp;&nbsp;
+     <label id="coords-b">00.000000000000000, 00.000000000000000</label>
+  </div>
+  <div id="col3" class="nsf-col toggleable">
+     <textarea id="comments" placeholder="Referencias y Comentarios" cols=25 rows=4></textarea>
+     <br>
+     <br>
+     <label>$ </label>
+     <input id="select-rate" placeholder="00.00" value="" size=24>
+     <br>
+     <input id="select-driver" placeholder="Conductor" size=26 readonly>
+  </div>
+  <div id="col4" class="nsf-col toggleable">
+    <button>Borrar</button>
+    <button>Guardar y Copiar</button>
+    <button>Guardar</button>
+  </div>
+</div> 

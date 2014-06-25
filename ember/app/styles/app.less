@@ -64,34 +64,85 @@ body > .ember-view > main > .ember-view {
   padding: 2px;
 }
 
-/* Scheduled Service Panel */
+/* Scheduled Tasks Panel */
 
 #ssp {
   z-index: 1000;
   width: @ssp_width;
 }
-
 #ssp #ssp-ui {
   text-align: center;
 }
-
 #ssp-ui #ssp-list,
 #ssp-ui #clock,
-#ssp-ui .scheduled-service {
+#ssp-ui .scheduled_task{
   padding: 2px 5px;
   margin-top: 4px;
   padding: 1px 2px;
   overflow: auto;
 }
-
 #ssp-ui #clock {
   background-color: #A9A9FF;
 }
-
-#ssp-ui .scheduled-service {
+#ssp-ui .scheduled_task {
   background-color: #ffffff;
   border-radius: 3px;
   cursor: pointer;
+}
+
+/* New Task Form */
+
+#new_task_control{
+  text-align: center;
+  width: 850px;
+  overflow: hidden;
+}
+#nsf-ui .nsf-col {
+  padding: 7px;
+  text-align: left;
+}
+#nsf-ui #col1,
+#nsf-ui #col2,
+#nsf-ui #col3 {
+  border: 1px solid #A9A9FF;
+  border-radius: 3px;
+  margin: 5px;
+  display: table-cell;
+  float: left;
+  height: 200px;
+}
+#nsf-ui #col4 {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  clear: left;
+}
+#nsf-ui .nsf-col label {
+  padding-left: 3px;
+  margin-top: 4px;
+}
+#nsf-ui .nsf-col select {
+  width: 116px
+}
+#nsf-ui .nsf-col input,
+#nsf-ui .nsf-col select,
+#nsf-ui .nsf-col textarea {
+  padding-left: 3px;
+  margin-top: 5px;
+}
+input#select-driver {
+  text-align: center;
+  background-color: lightgray;
+}
+#coords-a,
+#coords-b {
+  text-align: center;
+  font-weight: normal;
+  color: #8F8F8F;
+}
+textarea#comments {
+  resize: none;
+  border: solid 2px lightgray;
 }
 
 /* EOF */
