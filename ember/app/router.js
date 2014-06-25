@@ -9,7 +9,7 @@ Router.map(function() {
 
     this.route('login');
 
-    this.route('monitor');
+    this.resource('monitor');
 
     this.resource('drivers');
 

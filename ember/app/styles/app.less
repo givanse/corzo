@@ -1,0 +1,97 @@
+
+html, body,
+header, main {
+  margin: 0px;
+  padding: 0px;
+  border-width: 0px;
+}
+
+html, body,
+body > .ember-view {
+  height: 100%;
+}
+
+body > .ember-view {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+}
+
+body > .ember-view > main, 
+body > .ember-view > main > .ember-view {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  flex: 1;
+}
+
+#map-canvas {
+  flex: 1;
+  background-color: #E0F6FF;
+  margin: 10px;
+}
+
+.d-none {
+  display: none;
+}
+
+@control_border_color: rgba(0, 0, 0, 0.4);
+@ui_background_color: #C2D5FF;
+@ssp_width: 175px;
+
+.gmap_control {
+  border: 5px solid @control_border_color;
+  border-radius: 10px;
+  font-size: 1.2em;
+  margin-top: 4px;
+  margin-right: 4px;
+}
+
+.gmap_control .ui {
+  background-color: @ui_background_color;
+  border-radius: 5px;
+}
+
+/* Map control's controls */
+
+.map_panel_controls {
+  text-align: right;
+}
+.map_panel_controls img {
+  cursor: pointer;
+  padding: 2px;
+}
+
+/* Scheduled Service Panel */
+
+#ssp {
+  z-index: 1000;
+  width: @ssp_width;
+}
+
+#ssp #ssp-ui {
+  text-align: center;
+}
+
+#ssp-ui #ssp-list,
+#ssp-ui #clock,
+#ssp-ui .scheduled-service {
+  padding: 2px 5px;
+  margin-top: 4px;
+  padding: 1px 2px;
+  overflow: auto;
+}
+
+#ssp-ui #clock {
+  background-color: #A9A9FF;
+}
+
+#ssp-ui .scheduled-service {
+  background-color: #ffffff;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+/* EOF */
